@@ -1,6 +1,9 @@
 package com.example.k2.d2.wifiscan;
 
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import android.app.Activity;
 import android.net.wifi.ScanResult;
@@ -12,6 +15,10 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.TextView;
+
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+
 
 /**
  * Smart Phone Sensing Example 4. Wifi received signal strength.
@@ -29,7 +36,7 @@ public class MainActivity extends Activity implements OnClickListener {
     /**
      * The button.
      */
-    private Button buttonRssi;
+    private Button buttonRssi, buttonSort;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -38,37 +45,85 @@ public class MainActivity extends Activity implements OnClickListener {
 
         // Create items.
         textRssi = (TextView) findViewById(R.id.textRSSI);
-        buttonRssi = (Button) findViewById(R.id.buttonRSSI);
-        // Set listener for the button.
-        buttonRssi.setOnClickListener(this);
         textRssi.setMovementMethod(new ScrollingMovementMethod());
-    }
 
-    // onResume() registers the accelerometer for listening the events
-    protected void onResume() {
-        super.onResume();
-    }
+        buttonRssi = (Button) findViewById(R.id.buttonRSSI);
+        buttonRssi.setOnClickListener(this);
 
-    // onPause() unregisters the accelerometer for stop listening the events
-    protected void onPause() {
-        super.onPause();
+        buttonSort = (Button) findViewById(R.id.sortwifi);
+        buttonSort.setOnClickListener(this);
+
+        // Set listener for the button.
+
+
     }
 
     @Override
     public void onClick(View v) {
-        // Set text.
-        textRssi.setText("\n\tScan all access points:");
-        // Set wifi manager.
-        wifiManager = (WifiManager) getApplicationContext().getSystemService(Context.WIFI_SERVICE);
-        // Start a wifi scan.
-        wifiManager.startScan();
-        // Store results in a list.
-        List<ScanResult> scanResults = wifiManager.getScanResults();
-        // Write results to a label
-        for (ScanResult scanResult : scanResults) {
-            textRssi.setText(textRssi.getText() + "\n\tBSSID = "
-                    + scanResult.BSSID + "    RSSI = "
-                    + scanResult.level + "dBm");
+        switch (v.getId()) {
+
+            case R.id.buttonRSSI:
+                // Set text.
+                textRssi.setText("\n\tScan all access points:");
+                // Set wifi manager.
+                wifiManager = (WifiManager) getApplicationContext().getSystemService(Context.WIFI_SERVICE);
+                // Start a wifi scan.
+                wifiManager.startScan();
+                // Store results in a list.
+                List<ScanResult> scanResults = wifiManager.getScanResults();
+                // Write results to a label
+                for (ScanResult scanResult : scanResults) {
+                    textRssi.setText(textRssi.getText() + "\n\tBSSID = " + scanResult.BSSID +
+                           "    level = " + scanResult.level);
+                }
+
+                break;
+            case R.id.sortwifi:
+
+//                // Set wifi manager.
+//                wifiManager = (WifiManager) getApplicationContext().getSystemService(Context.WIFI_SERVICE);
+//                // Start a wifi scan.
+//                wifiManager.startScan();
+//                // Store results in a list.
+//                scanResults = wifiManager.getScanResults();
+//                //sortArrayList(scanResults);
+//                // Write results to a label
+//                for (ScanResult scanResult : scanResults) {
+//                    textRssi.setText(textRssi.getText() + "\n\tBSSID = " + scanResult.BSSID +
+//                            "    level = " + scanResult.level);
+//                }
+                Gson gsonBuilder = new GsonBuilder().create();
+                // Convert Java Array into JSON
+                List languagesArrayList = new ArrayList();
+                languagesArrayList.add("Russian");
+                languagesArrayList.add("English");
+                languagesArrayList.add("French");
+
+                String jsonFromJavaArrayList = gsonBuilder.toJson(languagesArrayList);
+
+                System.out.println(jsonFromJavaArrayList);
+                break;
+
+
         }
+
     }
+
+//    public void sortedList() {
+//
+//        wifiManager = (WifiManager) getApplicationContext().getSystemService(Context.WIFI_SERVICE);
+//        // Start a wifi scan.
+//        wifiManager.startScan();
+//        // Store results in a list.
+//        List<ScanResult> scanResults = wifiManager.getScanResults();
+//
+//        Collections.sort(scanResults, new Comparator<ScanResult>() {
+//            @Override
+//            public int compare(ScanResult o1, ScanResult o2) {
+//                return o1.level.compareTo(o2.level);
+//            }
+//
+//        });
+//    }
+
 }
