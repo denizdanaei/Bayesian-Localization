@@ -1,0 +1,166 @@
+-- Merging decision tree log ---
+manifest
+ADDED from /home/deniz/Desktop/SPS/Bayesian-Localization/wifiscan/app/src/main/AndroidManifest.xml:2:1-26:12
+INJECTED from /home/deniz/Desktop/SPS/Bayesian-Localization/wifiscan/app/src/main/AndroidManifest.xml:2:1-26:12
+INJECTED from /home/deniz/Desktop/SPS/Bayesian-Localization/wifiscan/app/src/main/AndroidManifest.xml:2:1-26:12
+INJECTED from /home/deniz/Desktop/SPS/Bayesian-Localization/wifiscan/app/src/main/AndroidManifest.xml:2:1-26:12
+MERGED from [com.android.support:appcompat-v7:28.0.0] /home/deniz/.gradle/caches/transforms-2/files-2.1/b868deadd66df2b0b53090eb89a1d448/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support.constraint:constraint-layout:1.1.3] /home/deniz/.gradle/caches/transforms-2/files-2.1/f3e886b3b6684c82c4739c033ccfe618/AndroidManifest.xml:2:1-11:12
+MERGED from [com.android.support:support-fragment:28.0.0] /home/deniz/.gradle/caches/transforms-2/files-2.1/00a0ddeca584ac793993ea5b82ec0f05/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:animated-vector-drawable:28.0.0] /home/deniz/.gradle/caches/transforms-2/files-2.1/e367c6ab72d197f40d1ae4b030662be1/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:support-core-ui:28.0.0] /home/deniz/.gradle/caches/transforms-2/files-2.1/50599a4e8f646ac92305ac8301d3b21a/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:support-core-utils:28.0.0] /home/deniz/.gradle/caches/transforms-2/files-2.1/453840a17e9387da6542d5c8e5aad1ba/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:support-vector-drawable:28.0.0] /home/deniz/.gradle/caches/transforms-2/files-2.1/11e8cc0d1bfc49c90ffdc16a6c14394b/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:loader:28.0.0] /home/deniz/.gradle/caches/transforms-2/files-2.1/b6ef2009d28d98905c4a11dff47eea0f/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:viewpager:28.0.0] /home/deniz/.gradle/caches/transforms-2/files-2.1/2ce77030ac0650117c76a100f598a96e/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:coordinatorlayout:28.0.0] /home/deniz/.gradle/caches/transforms-2/files-2.1/85926b91b973fdaeacb048d2de10e0aa/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:drawerlayout:28.0.0] /home/deniz/.gradle/caches/transforms-2/files-2.1/f32737ee7a76e8dca3f10f4cd62561cd/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:slidingpanelayout:28.0.0] /home/deniz/.gradle/caches/transforms-2/files-2.1/539a39104e1dd2caa183e520cbbbb9f3/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:customview:28.0.0] /home/deniz/.gradle/caches/transforms-2/files-2.1/ba41653e480475b2790d2da0f58bbbb3/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:swiperefreshlayout:28.0.0] /home/deniz/.gradle/caches/transforms-2/files-2.1/f37e2e79c5b1e0c246fc3c63b2ecdcfb/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:asynclayoutinflater:28.0.0] /home/deniz/.gradle/caches/transforms-2/files-2.1/0ce320798698bc0329f7816a1faf1e4b/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:support-compat:28.0.0] /home/deniz/.gradle/caches/transforms-2/files-2.1/09157b9af51e47e8c59f696e2b48e89a/AndroidManifest.xml:17:1-24:12
+MERGED from [com.android.support:versionedparcelable:28.0.0] /home/deniz/.gradle/caches/transforms-2/files-2.1/96cb6adf96036d8ddbdfa879f7c65486/AndroidManifest.xml:17:1-25:12
+MERGED from [com.android.support:cursoradapter:28.0.0] /home/deniz/.gradle/caches/transforms-2/files-2.1/cec1584a1288924f2a6a28057361dcb2/AndroidManifest.xml:17:1-22:12
+MERGED from [android.arch.lifecycle:runtime:1.1.1] /home/deniz/.gradle/caches/transforms-2/files-2.1/2e4b407cb74f0d301111d078393d5405/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:documentfile:28.0.0] /home/deniz/.gradle/caches/transforms-2/files-2.1/f1236ed691fa11ace8185b3befcb563b/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:localbroadcastmanager:28.0.0] /home/deniz/.gradle/caches/transforms-2/files-2.1/74a6905600e0d2cf7a8ae601a88b8a20/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:print:28.0.0] /home/deniz/.gradle/caches/transforms-2/files-2.1/7f11e78b7cb53976f8aaa04fa38a465b/AndroidManifest.xml:17:1-22:12
+MERGED from [android.arch.lifecycle:viewmodel:1.1.1] /home/deniz/.gradle/caches/transforms-2/files-2.1/6db08b4bb428583529c876c3b8cc009b/AndroidManifest.xml:17:1-22:12
+MERGED from [android.arch.lifecycle:livedata:1.1.1] /home/deniz/.gradle/caches/transforms-2/files-2.1/dd34b545dff5ffd81b071176ed40180b/AndroidManifest.xml:17:1-22:12
+MERGED from [android.arch.lifecycle:livedata-core:1.1.1] /home/deniz/.gradle/caches/transforms-2/files-2.1/dec2c513965a877754be6b9ccfc90f0f/AndroidManifest.xml:17:1-22:12
+MERGED from [android.arch.core:runtime:1.1.1] /home/deniz/.gradle/caches/transforms-2/files-2.1/651e02a264c99421a47fd66fcfef2f73/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:interpolator:28.0.0] /home/deniz/.gradle/caches/transforms-2/files-2.1/0c6162724618470d0941f1aaad1f66fb/AndroidManifest.xml:17:1-22:12
+INJECTED from /home/deniz/Desktop/SPS/Bayesian-Localization/wifiscan/app/src/main/AndroidManifest.xml:2:1-26:12
+INJECTED from /home/deniz/Desktop/SPS/Bayesian-Localization/wifiscan/app/src/main/AndroidManifest.xml:2:1-26:12
+INJECTED from /home/deniz/Desktop/SPS/Bayesian-Localization/wifiscan/app/src/main/AndroidManifest.xml:2:1-26:12
+	package
+		ADDED from /home/deniz/Desktop/SPS/Bayesian-Localization/wifiscan/app/src/main/AndroidManifest.xml:3:5-41
+		INJECTED from /home/deniz/Desktop/SPS/Bayesian-Localization/wifiscan/app/src/main/AndroidManifest.xml
+		INJECTED from /home/deniz/Desktop/SPS/Bayesian-Localization/wifiscan/app/src/main/AndroidManifest.xml
+	android:versionName
+		INJECTED from /home/deniz/Desktop/SPS/Bayesian-Localization/wifiscan/app/src/main/AndroidManifest.xml
+		ADDED from /home/deniz/Desktop/SPS/Bayesian-Localization/wifiscan/app/src/main/AndroidManifest.xml:2:1-26:12
+		INJECTED from /home/deniz/Desktop/SPS/Bayesian-Localization/wifiscan/app/src/main/AndroidManifest.xml
+	android:versionCode
+		INJECTED from /home/deniz/Desktop/SPS/Bayesian-Localization/wifiscan/app/src/main/AndroidManifest.xml
+		ADDED from /home/deniz/Desktop/SPS/Bayesian-Localization/wifiscan/app/src/main/AndroidManifest.xml:2:1-26:12
+		INJECTED from /home/deniz/Desktop/SPS/Bayesian-Localization/wifiscan/app/src/main/AndroidManifest.xml
+	xmlns:android
+		ADDED from /home/deniz/Desktop/SPS/Bayesian-Localization/wifiscan/app/src/main/AndroidManifest.xml:2:11-69
+uses-permission#android.permission.ACCESS_WIFI_STATE
+ADDED from /home/deniz/Desktop/SPS/Bayesian-Localization/wifiscan/app/src/main/AndroidManifest.xml:5:5-76
+	android:name
+		ADDED from /home/deniz/Desktop/SPS/Bayesian-Localization/wifiscan/app/src/main/AndroidManifest.xml:5:22-73
+uses-permission#android.permission.CHANGE_WIFI_STATE
+ADDED from /home/deniz/Desktop/SPS/Bayesian-Localization/wifiscan/app/src/main/AndroidManifest.xml:6:5-76
+	android:name
+		ADDED from /home/deniz/Desktop/SPS/Bayesian-Localization/wifiscan/app/src/main/AndroidManifest.xml:6:22-73
+uses-permission#android.permission.ACCESS_COARSE_LOCATION
+ADDED from /home/deniz/Desktop/SPS/Bayesian-Localization/wifiscan/app/src/main/AndroidManifest.xml:7:5-81
+	android:name
+		ADDED from /home/deniz/Desktop/SPS/Bayesian-Localization/wifiscan/app/src/main/AndroidManifest.xml:7:22-78
+application
+ADDED from /home/deniz/Desktop/SPS/Bayesian-Localization/wifiscan/app/src/main/AndroidManifest.xml:10:5-24:19
+MERGED from [com.android.support.constraint:constraint-layout:1.1.3] /home/deniz/.gradle/caches/transforms-2/files-2.1/f3e886b3b6684c82c4739c033ccfe618/AndroidManifest.xml:9:5-20
+MERGED from [com.android.support.constraint:constraint-layout:1.1.3] /home/deniz/.gradle/caches/transforms-2/files-2.1/f3e886b3b6684c82c4739c033ccfe618/AndroidManifest.xml:9:5-20
+MERGED from [com.android.support:support-compat:28.0.0] /home/deniz/.gradle/caches/transforms-2/files-2.1/09157b9af51e47e8c59f696e2b48e89a/AndroidManifest.xml:22:5-94
+MERGED from [com.android.support:support-compat:28.0.0] /home/deniz/.gradle/caches/transforms-2/files-2.1/09157b9af51e47e8c59f696e2b48e89a/AndroidManifest.xml:22:5-94
+MERGED from [com.android.support:versionedparcelable:28.0.0] /home/deniz/.gradle/caches/transforms-2/files-2.1/96cb6adf96036d8ddbdfa879f7c65486/AndroidManifest.xml:22:5-23:19
+MERGED from [com.android.support:versionedparcelable:28.0.0] /home/deniz/.gradle/caches/transforms-2/files-2.1/96cb6adf96036d8ddbdfa879f7c65486/AndroidManifest.xml:22:5-23:19
+	android:appComponentFactory
+		ADDED from [com.android.support:support-compat:28.0.0] /home/deniz/.gradle/caches/transforms-2/files-2.1/09157b9af51e47e8c59f696e2b48e89a/AndroidManifest.xml:22:18-91
+	android:supportsRtl
+		ADDED from /home/deniz/Desktop/SPS/Bayesian-Localization/wifiscan/app/src/main/AndroidManifest.xml:15:9-35
+	android:label
+		ADDED from /home/deniz/Desktop/SPS/Bayesian-Localization/wifiscan/app/src/main/AndroidManifest.xml:13:9-41
+	android:roundIcon
+		ADDED from /home/deniz/Desktop/SPS/Bayesian-Localization/wifiscan/app/src/main/AndroidManifest.xml:14:9-54
+	android:icon
+		ADDED from /home/deniz/Desktop/SPS/Bayesian-Localization/wifiscan/app/src/main/AndroidManifest.xml:12:9-43
+	android:allowBackup
+		ADDED from /home/deniz/Desktop/SPS/Bayesian-Localization/wifiscan/app/src/main/AndroidManifest.xml:11:9-35
+	android:theme
+		ADDED from /home/deniz/Desktop/SPS/Bayesian-Localization/wifiscan/app/src/main/AndroidManifest.xml:16:9-40
+activity#com.example.k2.d2.wifiscan.MainActivity
+ADDED from /home/deniz/Desktop/SPS/Bayesian-Localization/wifiscan/app/src/main/AndroidManifest.xml:17:9-23:20
+	android:name
+		ADDED from /home/deniz/Desktop/SPS/Bayesian-Localization/wifiscan/app/src/main/AndroidManifest.xml:17:19-47
+intent-filter#action:name:android.intent.action.MAIN+category:name:android.intent.category.LAUNCHER
+ADDED from /home/deniz/Desktop/SPS/Bayesian-Localization/wifiscan/app/src/main/AndroidManifest.xml:18:13-22:29
+action#android.intent.action.MAIN
+ADDED from /home/deniz/Desktop/SPS/Bayesian-Localization/wifiscan/app/src/main/AndroidManifest.xml:19:17-69
+	android:name
+		ADDED from /home/deniz/Desktop/SPS/Bayesian-Localization/wifiscan/app/src/main/AndroidManifest.xml:19:25-66
+category#android.intent.category.LAUNCHER
+ADDED from /home/deniz/Desktop/SPS/Bayesian-Localization/wifiscan/app/src/main/AndroidManifest.xml:21:17-77
+	android:name
+		ADDED from /home/deniz/Desktop/SPS/Bayesian-Localization/wifiscan/app/src/main/AndroidManifest.xml:21:27-74
+uses-sdk
+INJECTED from /home/deniz/Desktop/SPS/Bayesian-Localization/wifiscan/app/src/main/AndroidManifest.xml reason: use-sdk injection requested
+INJECTED from /home/deniz/Desktop/SPS/Bayesian-Localization/wifiscan/app/src/main/AndroidManifest.xml
+INJECTED from /home/deniz/Desktop/SPS/Bayesian-Localization/wifiscan/app/src/main/AndroidManifest.xml
+MERGED from [com.android.support:appcompat-v7:28.0.0] /home/deniz/.gradle/caches/transforms-2/files-2.1/b868deadd66df2b0b53090eb89a1d448/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:appcompat-v7:28.0.0] /home/deniz/.gradle/caches/transforms-2/files-2.1/b868deadd66df2b0b53090eb89a1d448/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support.constraint:constraint-layout:1.1.3] /home/deniz/.gradle/caches/transforms-2/files-2.1/f3e886b3b6684c82c4739c033ccfe618/AndroidManifest.xml:5:5-7:41
+MERGED from [com.android.support.constraint:constraint-layout:1.1.3] /home/deniz/.gradle/caches/transforms-2/files-2.1/f3e886b3b6684c82c4739c033ccfe618/AndroidManifest.xml:5:5-7:41
+MERGED from [com.android.support:support-fragment:28.0.0] /home/deniz/.gradle/caches/transforms-2/files-2.1/00a0ddeca584ac793993ea5b82ec0f05/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-fragment:28.0.0] /home/deniz/.gradle/caches/transforms-2/files-2.1/00a0ddeca584ac793993ea5b82ec0f05/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:animated-vector-drawable:28.0.0] /home/deniz/.gradle/caches/transforms-2/files-2.1/e367c6ab72d197f40d1ae4b030662be1/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:animated-vector-drawable:28.0.0] /home/deniz/.gradle/caches/transforms-2/files-2.1/e367c6ab72d197f40d1ae4b030662be1/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-core-ui:28.0.0] /home/deniz/.gradle/caches/transforms-2/files-2.1/50599a4e8f646ac92305ac8301d3b21a/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-core-ui:28.0.0] /home/deniz/.gradle/caches/transforms-2/files-2.1/50599a4e8f646ac92305ac8301d3b21a/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-core-utils:28.0.0] /home/deniz/.gradle/caches/transforms-2/files-2.1/453840a17e9387da6542d5c8e5aad1ba/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-core-utils:28.0.0] /home/deniz/.gradle/caches/transforms-2/files-2.1/453840a17e9387da6542d5c8e5aad1ba/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-vector-drawable:28.0.0] /home/deniz/.gradle/caches/transforms-2/files-2.1/11e8cc0d1bfc49c90ffdc16a6c14394b/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-vector-drawable:28.0.0] /home/deniz/.gradle/caches/transforms-2/files-2.1/11e8cc0d1bfc49c90ffdc16a6c14394b/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:loader:28.0.0] /home/deniz/.gradle/caches/transforms-2/files-2.1/b6ef2009d28d98905c4a11dff47eea0f/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:loader:28.0.0] /home/deniz/.gradle/caches/transforms-2/files-2.1/b6ef2009d28d98905c4a11dff47eea0f/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:viewpager:28.0.0] /home/deniz/.gradle/caches/transforms-2/files-2.1/2ce77030ac0650117c76a100f598a96e/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:viewpager:28.0.0] /home/deniz/.gradle/caches/transforms-2/files-2.1/2ce77030ac0650117c76a100f598a96e/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:coordinatorlayout:28.0.0] /home/deniz/.gradle/caches/transforms-2/files-2.1/85926b91b973fdaeacb048d2de10e0aa/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:coordinatorlayout:28.0.0] /home/deniz/.gradle/caches/transforms-2/files-2.1/85926b91b973fdaeacb048d2de10e0aa/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:drawerlayout:28.0.0] /home/deniz/.gradle/caches/transforms-2/files-2.1/f32737ee7a76e8dca3f10f4cd62561cd/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:drawerlayout:28.0.0] /home/deniz/.gradle/caches/transforms-2/files-2.1/f32737ee7a76e8dca3f10f4cd62561cd/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:slidingpanelayout:28.0.0] /home/deniz/.gradle/caches/transforms-2/files-2.1/539a39104e1dd2caa183e520cbbbb9f3/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:slidingpanelayout:28.0.0] /home/deniz/.gradle/caches/transforms-2/files-2.1/539a39104e1dd2caa183e520cbbbb9f3/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:customview:28.0.0] /home/deniz/.gradle/caches/transforms-2/files-2.1/ba41653e480475b2790d2da0f58bbbb3/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:customview:28.0.0] /home/deniz/.gradle/caches/transforms-2/files-2.1/ba41653e480475b2790d2da0f58bbbb3/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:swiperefreshlayout:28.0.0] /home/deniz/.gradle/caches/transforms-2/files-2.1/f37e2e79c5b1e0c246fc3c63b2ecdcfb/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:swiperefreshlayout:28.0.0] /home/deniz/.gradle/caches/transforms-2/files-2.1/f37e2e79c5b1e0c246fc3c63b2ecdcfb/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:asynclayoutinflater:28.0.0] /home/deniz/.gradle/caches/transforms-2/files-2.1/0ce320798698bc0329f7816a1faf1e4b/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:asynclayoutinflater:28.0.0] /home/deniz/.gradle/caches/transforms-2/files-2.1/0ce320798698bc0329f7816a1faf1e4b/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-compat:28.0.0] /home/deniz/.gradle/caches/transforms-2/files-2.1/09157b9af51e47e8c59f696e2b48e89a/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-compat:28.0.0] /home/deniz/.gradle/caches/transforms-2/files-2.1/09157b9af51e47e8c59f696e2b48e89a/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:versionedparcelable:28.0.0] /home/deniz/.gradle/caches/transforms-2/files-2.1/96cb6adf96036d8ddbdfa879f7c65486/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:versionedparcelable:28.0.0] /home/deniz/.gradle/caches/transforms-2/files-2.1/96cb6adf96036d8ddbdfa879f7c65486/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:cursoradapter:28.0.0] /home/deniz/.gradle/caches/transforms-2/files-2.1/cec1584a1288924f2a6a28057361dcb2/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:cursoradapter:28.0.0] /home/deniz/.gradle/caches/transforms-2/files-2.1/cec1584a1288924f2a6a28057361dcb2/AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:runtime:1.1.1] /home/deniz/.gradle/caches/transforms-2/files-2.1/2e4b407cb74f0d301111d078393d5405/AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:runtime:1.1.1] /home/deniz/.gradle/caches/transforms-2/files-2.1/2e4b407cb74f0d301111d078393d5405/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:documentfile:28.0.0] /home/deniz/.gradle/caches/transforms-2/files-2.1/f1236ed691fa11ace8185b3befcb563b/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:documentfile:28.0.0] /home/deniz/.gradle/caches/transforms-2/files-2.1/f1236ed691fa11ace8185b3befcb563b/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:localbroadcastmanager:28.0.0] /home/deniz/.gradle/caches/transforms-2/files-2.1/74a6905600e0d2cf7a8ae601a88b8a20/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:localbroadcastmanager:28.0.0] /home/deniz/.gradle/caches/transforms-2/files-2.1/74a6905600e0d2cf7a8ae601a88b8a20/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:print:28.0.0] /home/deniz/.gradle/caches/transforms-2/files-2.1/7f11e78b7cb53976f8aaa04fa38a465b/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:print:28.0.0] /home/deniz/.gradle/caches/transforms-2/files-2.1/7f11e78b7cb53976f8aaa04fa38a465b/AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:viewmodel:1.1.1] /home/deniz/.gradle/caches/transforms-2/files-2.1/6db08b4bb428583529c876c3b8cc009b/AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:viewmodel:1.1.1] /home/deniz/.gradle/caches/transforms-2/files-2.1/6db08b4bb428583529c876c3b8cc009b/AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:livedata:1.1.1] /home/deniz/.gradle/caches/transforms-2/files-2.1/dd34b545dff5ffd81b071176ed40180b/AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:livedata:1.1.1] /home/deniz/.gradle/caches/transforms-2/files-2.1/dd34b545dff5ffd81b071176ed40180b/AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:livedata-core:1.1.1] /home/deniz/.gradle/caches/transforms-2/files-2.1/dec2c513965a877754be6b9ccfc90f0f/AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:livedata-core:1.1.1] /home/deniz/.gradle/caches/transforms-2/files-2.1/dec2c513965a877754be6b9ccfc90f0f/AndroidManifest.xml:20:5-44
+MERGED from [android.arch.core:runtime:1.1.1] /home/deniz/.gradle/caches/transforms-2/files-2.1/651e02a264c99421a47fd66fcfef2f73/AndroidManifest.xml:20:5-44
+MERGED from [android.arch.core:runtime:1.1.1] /home/deniz/.gradle/caches/transforms-2/files-2.1/651e02a264c99421a47fd66fcfef2f73/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:interpolator:28.0.0] /home/deniz/.gradle/caches/transforms-2/files-2.1/0c6162724618470d0941f1aaad1f66fb/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:interpolator:28.0.0] /home/deniz/.gradle/caches/transforms-2/files-2.1/0c6162724618470d0941f1aaad1f66fb/AndroidManifest.xml:20:5-44
+INJECTED from /home/deniz/Desktop/SPS/Bayesian-Localization/wifiscan/app/src/main/AndroidManifest.xml
+INJECTED from /home/deniz/Desktop/SPS/Bayesian-Localization/wifiscan/app/src/main/AndroidManifest.xml
+	android:targetSdkVersion
+		INJECTED from /home/deniz/Desktop/SPS/Bayesian-Localization/wifiscan/app/src/main/AndroidManifest.xml
+		ADDED from /home/deniz/Desktop/SPS/Bayesian-Localization/wifiscan/app/src/main/AndroidManifest.xml
+		INJECTED from /home/deniz/Desktop/SPS/Bayesian-Localization/wifiscan/app/src/main/AndroidManifest.xml
+	android:minSdkVersion
+		INJECTED from /home/deniz/Desktop/SPS/Bayesian-Localization/wifiscan/app/src/main/AndroidManifest.xml
+		ADDED from /home/deniz/Desktop/SPS/Bayesian-Localization/wifiscan/app/src/main/AndroidManifest.xml
+		INJECTED from /home/deniz/Desktop/SPS/Bayesian-Localization/wifiscan/app/src/main/AndroidManifest.xml

@@ -1,0 +1,154 @@
+-- Merging decision tree log ---
+manifest
+ADDED from /home/deniz/Desktop/SPS/Bayesian-Localization/K2D2/app/src/main/AndroidManifest.xml:2:1-21:12
+INJECTED from /home/deniz/Desktop/SPS/Bayesian-Localization/K2D2/app/src/main/AndroidManifest.xml:2:1-21:12
+INJECTED from /home/deniz/Desktop/SPS/Bayesian-Localization/K2D2/app/src/main/AndroidManifest.xml:2:1-21:12
+INJECTED from /home/deniz/Desktop/SPS/Bayesian-Localization/K2D2/app/src/main/AndroidManifest.xml:2:1-21:12
+MERGED from [com.android.support:appcompat-v7:28.0.0] /home/deniz/.gradle/caches/transforms-2/files-2.1/63985de5942797e626e7ef3d7507b542/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support.constraint:constraint-layout:1.1.3] /home/deniz/.gradle/caches/transforms-2/files-2.1/8c6fa6ecd25fc2d5047fcec9ab6719f1/AndroidManifest.xml:2:1-11:12
+MERGED from [com.android.support:support-fragment:28.0.0] /home/deniz/.gradle/caches/transforms-2/files-2.1/e63b4d3a22c54599766b8b06c2598c19/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:animated-vector-drawable:28.0.0] /home/deniz/.gradle/caches/transforms-2/files-2.1/0a3aca89074c23eb7b9e671600bbd3ed/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:support-core-ui:28.0.0] /home/deniz/.gradle/caches/transforms-2/files-2.1/2d9deaf43d22d593e401b7af5a6999f5/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:support-core-utils:28.0.0] /home/deniz/.gradle/caches/transforms-2/files-2.1/34f60a19df291a03d6a34aa0b3577368/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:support-vector-drawable:28.0.0] /home/deniz/.gradle/caches/transforms-2/files-2.1/6cd0f15761afe4eca7c2b2e8a010083f/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:loader:28.0.0] /home/deniz/.gradle/caches/transforms-2/files-2.1/d2c21ab322f7b674e6afec1d06f017a8/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:viewpager:28.0.0] /home/deniz/.gradle/caches/transforms-2/files-2.1/c41fa2485a99af77b581a5fa5b1d8409/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:coordinatorlayout:28.0.0] /home/deniz/.gradle/caches/transforms-2/files-2.1/d9b1647f5f881154586164ebf80b9355/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:drawerlayout:28.0.0] /home/deniz/.gradle/caches/transforms-2/files-2.1/3df37e17cf5535bf56afcb9a9c69124b/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:slidingpanelayout:28.0.0] /home/deniz/.gradle/caches/transforms-2/files-2.1/31d3021f21f01c14c824f79077cdda9f/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:customview:28.0.0] /home/deniz/.gradle/caches/transforms-2/files-2.1/4555311a4f703515ad9a243e9ba81771/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:swiperefreshlayout:28.0.0] /home/deniz/.gradle/caches/transforms-2/files-2.1/039ab7584baf40571c6dc11f147d6c3a/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:asynclayoutinflater:28.0.0] /home/deniz/.gradle/caches/transforms-2/files-2.1/0f2443fffcef7ffc22fbc59f8e4e29dd/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:support-compat:28.0.0] /home/deniz/.gradle/caches/transforms-2/files-2.1/3a426c066ebc128e8f24451e72c6c44b/AndroidManifest.xml:17:1-24:12
+MERGED from [com.android.support:versionedparcelable:28.0.0] /home/deniz/.gradle/caches/transforms-2/files-2.1/f55bfb22e7a9360160614bb2ff85b4a5/AndroidManifest.xml:17:1-25:12
+MERGED from [com.android.support:cursoradapter:28.0.0] /home/deniz/.gradle/caches/transforms-2/files-2.1/3cdd5c5a184d7c60cc905bace9560279/AndroidManifest.xml:17:1-22:12
+MERGED from [android.arch.lifecycle:runtime:1.1.1] /home/deniz/.gradle/caches/transforms-2/files-2.1/3e7ed7eef7912f04613bf854fe792086/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:documentfile:28.0.0] /home/deniz/.gradle/caches/transforms-2/files-2.1/f25c824bb58a25ed3ad01561c0a14883/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:localbroadcastmanager:28.0.0] /home/deniz/.gradle/caches/transforms-2/files-2.1/e6cf26cfa7a9a2b24bd8c7983bb15eef/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:print:28.0.0] /home/deniz/.gradle/caches/transforms-2/files-2.1/a4b033ce7553652970535757b91d737f/AndroidManifest.xml:17:1-22:12
+MERGED from [android.arch.lifecycle:viewmodel:1.1.1] /home/deniz/.gradle/caches/transforms-2/files-2.1/15f540682390a08e9df27e6553176e0f/AndroidManifest.xml:17:1-22:12
+MERGED from [android.arch.lifecycle:livedata:1.1.1] /home/deniz/.gradle/caches/transforms-2/files-2.1/97679950b6ff8e09bba9d10d09f77dad/AndroidManifest.xml:17:1-22:12
+MERGED from [android.arch.lifecycle:livedata-core:1.1.1] /home/deniz/.gradle/caches/transforms-2/files-2.1/6a5ff34c6e21afca39c3c08306777d04/AndroidManifest.xml:17:1-22:12
+MERGED from [android.arch.core:runtime:1.1.1] /home/deniz/.gradle/caches/transforms-2/files-2.1/821eacac2bfafaae7e2048ab4b2ebfb4/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:interpolator:28.0.0] /home/deniz/.gradle/caches/transforms-2/files-2.1/a8297a69c2a5e054e6eedab867c3391c/AndroidManifest.xml:17:1-22:12
+INJECTED from /home/deniz/Desktop/SPS/Bayesian-Localization/K2D2/app/src/main/AndroidManifest.xml:2:1-21:12
+INJECTED from /home/deniz/Desktop/SPS/Bayesian-Localization/K2D2/app/src/main/AndroidManifest.xml:2:1-21:12
+INJECTED from /home/deniz/Desktop/SPS/Bayesian-Localization/K2D2/app/src/main/AndroidManifest.xml:2:1-21:12
+	package
+		ADDED from /home/deniz/Desktop/SPS/Bayesian-Localization/K2D2/app/src/main/AndroidManifest.xml:3:5-37
+		INJECTED from /home/deniz/Desktop/SPS/Bayesian-Localization/K2D2/app/src/main/AndroidManifest.xml
+		INJECTED from /home/deniz/Desktop/SPS/Bayesian-Localization/K2D2/app/src/main/AndroidManifest.xml
+	android:versionName
+		INJECTED from /home/deniz/Desktop/SPS/Bayesian-Localization/K2D2/app/src/main/AndroidManifest.xml
+		ADDED from /home/deniz/Desktop/SPS/Bayesian-Localization/K2D2/app/src/main/AndroidManifest.xml:2:1-21:12
+		INJECTED from /home/deniz/Desktop/SPS/Bayesian-Localization/K2D2/app/src/main/AndroidManifest.xml
+	android:versionCode
+		INJECTED from /home/deniz/Desktop/SPS/Bayesian-Localization/K2D2/app/src/main/AndroidManifest.xml
+		ADDED from /home/deniz/Desktop/SPS/Bayesian-Localization/K2D2/app/src/main/AndroidManifest.xml:2:1-21:12
+		INJECTED from /home/deniz/Desktop/SPS/Bayesian-Localization/K2D2/app/src/main/AndroidManifest.xml
+	xmlns:android
+		ADDED from /home/deniz/Desktop/SPS/Bayesian-Localization/K2D2/app/src/main/AndroidManifest.xml:2:11-69
+application
+ADDED from /home/deniz/Desktop/SPS/Bayesian-Localization/K2D2/app/src/main/AndroidManifest.xml:5:5-19:19
+MERGED from [com.android.support.constraint:constraint-layout:1.1.3] /home/deniz/.gradle/caches/transforms-2/files-2.1/8c6fa6ecd25fc2d5047fcec9ab6719f1/AndroidManifest.xml:9:5-20
+MERGED from [com.android.support.constraint:constraint-layout:1.1.3] /home/deniz/.gradle/caches/transforms-2/files-2.1/8c6fa6ecd25fc2d5047fcec9ab6719f1/AndroidManifest.xml:9:5-20
+MERGED from [com.android.support:support-compat:28.0.0] /home/deniz/.gradle/caches/transforms-2/files-2.1/3a426c066ebc128e8f24451e72c6c44b/AndroidManifest.xml:22:5-94
+MERGED from [com.android.support:support-compat:28.0.0] /home/deniz/.gradle/caches/transforms-2/files-2.1/3a426c066ebc128e8f24451e72c6c44b/AndroidManifest.xml:22:5-94
+MERGED from [com.android.support:versionedparcelable:28.0.0] /home/deniz/.gradle/caches/transforms-2/files-2.1/f55bfb22e7a9360160614bb2ff85b4a5/AndroidManifest.xml:22:5-23:19
+MERGED from [com.android.support:versionedparcelable:28.0.0] /home/deniz/.gradle/caches/transforms-2/files-2.1/f55bfb22e7a9360160614bb2ff85b4a5/AndroidManifest.xml:22:5-23:19
+	android:appComponentFactory
+		ADDED from [com.android.support:support-compat:28.0.0] /home/deniz/.gradle/caches/transforms-2/files-2.1/3a426c066ebc128e8f24451e72c6c44b/AndroidManifest.xml:22:18-91
+	android:supportsRtl
+		ADDED from /home/deniz/Desktop/SPS/Bayesian-Localization/K2D2/app/src/main/AndroidManifest.xml:10:9-35
+	android:label
+		ADDED from /home/deniz/Desktop/SPS/Bayesian-Localization/K2D2/app/src/main/AndroidManifest.xml:8:9-41
+	android:roundIcon
+		ADDED from /home/deniz/Desktop/SPS/Bayesian-Localization/K2D2/app/src/main/AndroidManifest.xml:9:9-54
+	android:icon
+		ADDED from /home/deniz/Desktop/SPS/Bayesian-Localization/K2D2/app/src/main/AndroidManifest.xml:7:9-43
+	android:allowBackup
+		ADDED from /home/deniz/Desktop/SPS/Bayesian-Localization/K2D2/app/src/main/AndroidManifest.xml:6:9-35
+	android:theme
+		ADDED from /home/deniz/Desktop/SPS/Bayesian-Localization/K2D2/app/src/main/AndroidManifest.xml:11:9-40
+activity#com.example.k2.d2.k2d2.MainActivity
+ADDED from /home/deniz/Desktop/SPS/Bayesian-Localization/K2D2/app/src/main/AndroidManifest.xml:12:9-18:20
+	android:name
+		ADDED from /home/deniz/Desktop/SPS/Bayesian-Localization/K2D2/app/src/main/AndroidManifest.xml:12:19-47
+intent-filter#action:name:android.intent.action.MAIN+category:name:android.intent.category.LAUNCHER
+ADDED from /home/deniz/Desktop/SPS/Bayesian-Localization/K2D2/app/src/main/AndroidManifest.xml:13:13-17:29
+action#android.intent.action.MAIN
+ADDED from /home/deniz/Desktop/SPS/Bayesian-Localization/K2D2/app/src/main/AndroidManifest.xml:14:17-69
+	android:name
+		ADDED from /home/deniz/Desktop/SPS/Bayesian-Localization/K2D2/app/src/main/AndroidManifest.xml:14:25-66
+category#android.intent.category.LAUNCHER
+ADDED from /home/deniz/Desktop/SPS/Bayesian-Localization/K2D2/app/src/main/AndroidManifest.xml:16:17-77
+	android:name
+		ADDED from /home/deniz/Desktop/SPS/Bayesian-Localization/K2D2/app/src/main/AndroidManifest.xml:16:27-74
+uses-sdk
+INJECTED from /home/deniz/Desktop/SPS/Bayesian-Localization/K2D2/app/src/main/AndroidManifest.xml reason: use-sdk injection requested
+INJECTED from /home/deniz/Desktop/SPS/Bayesian-Localization/K2D2/app/src/main/AndroidManifest.xml
+INJECTED from /home/deniz/Desktop/SPS/Bayesian-Localization/K2D2/app/src/main/AndroidManifest.xml
+MERGED from [com.android.support:appcompat-v7:28.0.0] /home/deniz/.gradle/caches/transforms-2/files-2.1/63985de5942797e626e7ef3d7507b542/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:appcompat-v7:28.0.0] /home/deniz/.gradle/caches/transforms-2/files-2.1/63985de5942797e626e7ef3d7507b542/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support.constraint:constraint-layout:1.1.3] /home/deniz/.gradle/caches/transforms-2/files-2.1/8c6fa6ecd25fc2d5047fcec9ab6719f1/AndroidManifest.xml:5:5-7:41
+MERGED from [com.android.support.constraint:constraint-layout:1.1.3] /home/deniz/.gradle/caches/transforms-2/files-2.1/8c6fa6ecd25fc2d5047fcec9ab6719f1/AndroidManifest.xml:5:5-7:41
+MERGED from [com.android.support:support-fragment:28.0.0] /home/deniz/.gradle/caches/transforms-2/files-2.1/e63b4d3a22c54599766b8b06c2598c19/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-fragment:28.0.0] /home/deniz/.gradle/caches/transforms-2/files-2.1/e63b4d3a22c54599766b8b06c2598c19/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:animated-vector-drawable:28.0.0] /home/deniz/.gradle/caches/transforms-2/files-2.1/0a3aca89074c23eb7b9e671600bbd3ed/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:animated-vector-drawable:28.0.0] /home/deniz/.gradle/caches/transforms-2/files-2.1/0a3aca89074c23eb7b9e671600bbd3ed/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-core-ui:28.0.0] /home/deniz/.gradle/caches/transforms-2/files-2.1/2d9deaf43d22d593e401b7af5a6999f5/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-core-ui:28.0.0] /home/deniz/.gradle/caches/transforms-2/files-2.1/2d9deaf43d22d593e401b7af5a6999f5/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-core-utils:28.0.0] /home/deniz/.gradle/caches/transforms-2/files-2.1/34f60a19df291a03d6a34aa0b3577368/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-core-utils:28.0.0] /home/deniz/.gradle/caches/transforms-2/files-2.1/34f60a19df291a03d6a34aa0b3577368/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-vector-drawable:28.0.0] /home/deniz/.gradle/caches/transforms-2/files-2.1/6cd0f15761afe4eca7c2b2e8a010083f/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-vector-drawable:28.0.0] /home/deniz/.gradle/caches/transforms-2/files-2.1/6cd0f15761afe4eca7c2b2e8a010083f/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:loader:28.0.0] /home/deniz/.gradle/caches/transforms-2/files-2.1/d2c21ab322f7b674e6afec1d06f017a8/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:loader:28.0.0] /home/deniz/.gradle/caches/transforms-2/files-2.1/d2c21ab322f7b674e6afec1d06f017a8/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:viewpager:28.0.0] /home/deniz/.gradle/caches/transforms-2/files-2.1/c41fa2485a99af77b581a5fa5b1d8409/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:viewpager:28.0.0] /home/deniz/.gradle/caches/transforms-2/files-2.1/c41fa2485a99af77b581a5fa5b1d8409/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:coordinatorlayout:28.0.0] /home/deniz/.gradle/caches/transforms-2/files-2.1/d9b1647f5f881154586164ebf80b9355/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:coordinatorlayout:28.0.0] /home/deniz/.gradle/caches/transforms-2/files-2.1/d9b1647f5f881154586164ebf80b9355/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:drawerlayout:28.0.0] /home/deniz/.gradle/caches/transforms-2/files-2.1/3df37e17cf5535bf56afcb9a9c69124b/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:drawerlayout:28.0.0] /home/deniz/.gradle/caches/transforms-2/files-2.1/3df37e17cf5535bf56afcb9a9c69124b/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:slidingpanelayout:28.0.0] /home/deniz/.gradle/caches/transforms-2/files-2.1/31d3021f21f01c14c824f79077cdda9f/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:slidingpanelayout:28.0.0] /home/deniz/.gradle/caches/transforms-2/files-2.1/31d3021f21f01c14c824f79077cdda9f/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:customview:28.0.0] /home/deniz/.gradle/caches/transforms-2/files-2.1/4555311a4f703515ad9a243e9ba81771/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:customview:28.0.0] /home/deniz/.gradle/caches/transforms-2/files-2.1/4555311a4f703515ad9a243e9ba81771/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:swiperefreshlayout:28.0.0] /home/deniz/.gradle/caches/transforms-2/files-2.1/039ab7584baf40571c6dc11f147d6c3a/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:swiperefreshlayout:28.0.0] /home/deniz/.gradle/caches/transforms-2/files-2.1/039ab7584baf40571c6dc11f147d6c3a/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:asynclayoutinflater:28.0.0] /home/deniz/.gradle/caches/transforms-2/files-2.1/0f2443fffcef7ffc22fbc59f8e4e29dd/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:asynclayoutinflater:28.0.0] /home/deniz/.gradle/caches/transforms-2/files-2.1/0f2443fffcef7ffc22fbc59f8e4e29dd/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-compat:28.0.0] /home/deniz/.gradle/caches/transforms-2/files-2.1/3a426c066ebc128e8f24451e72c6c44b/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-compat:28.0.0] /home/deniz/.gradle/caches/transforms-2/files-2.1/3a426c066ebc128e8f24451e72c6c44b/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:versionedparcelable:28.0.0] /home/deniz/.gradle/caches/transforms-2/files-2.1/f55bfb22e7a9360160614bb2ff85b4a5/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:versionedparcelable:28.0.0] /home/deniz/.gradle/caches/transforms-2/files-2.1/f55bfb22e7a9360160614bb2ff85b4a5/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:cursoradapter:28.0.0] /home/deniz/.gradle/caches/transforms-2/files-2.1/3cdd5c5a184d7c60cc905bace9560279/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:cursoradapter:28.0.0] /home/deniz/.gradle/caches/transforms-2/files-2.1/3cdd5c5a184d7c60cc905bace9560279/AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:runtime:1.1.1] /home/deniz/.gradle/caches/transforms-2/files-2.1/3e7ed7eef7912f04613bf854fe792086/AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:runtime:1.1.1] /home/deniz/.gradle/caches/transforms-2/files-2.1/3e7ed7eef7912f04613bf854fe792086/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:documentfile:28.0.0] /home/deniz/.gradle/caches/transforms-2/files-2.1/f25c824bb58a25ed3ad01561c0a14883/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:documentfile:28.0.0] /home/deniz/.gradle/caches/transforms-2/files-2.1/f25c824bb58a25ed3ad01561c0a14883/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:localbroadcastmanager:28.0.0] /home/deniz/.gradle/caches/transforms-2/files-2.1/e6cf26cfa7a9a2b24bd8c7983bb15eef/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:localbroadcastmanager:28.0.0] /home/deniz/.gradle/caches/transforms-2/files-2.1/e6cf26cfa7a9a2b24bd8c7983bb15eef/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:print:28.0.0] /home/deniz/.gradle/caches/transforms-2/files-2.1/a4b033ce7553652970535757b91d737f/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:print:28.0.0] /home/deniz/.gradle/caches/transforms-2/files-2.1/a4b033ce7553652970535757b91d737f/AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:viewmodel:1.1.1] /home/deniz/.gradle/caches/transforms-2/files-2.1/15f540682390a08e9df27e6553176e0f/AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:viewmodel:1.1.1] /home/deniz/.gradle/caches/transforms-2/files-2.1/15f540682390a08e9df27e6553176e0f/AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:livedata:1.1.1] /home/deniz/.gradle/caches/transforms-2/files-2.1/97679950b6ff8e09bba9d10d09f77dad/AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:livedata:1.1.1] /home/deniz/.gradle/caches/transforms-2/files-2.1/97679950b6ff8e09bba9d10d09f77dad/AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:livedata-core:1.1.1] /home/deniz/.gradle/caches/transforms-2/files-2.1/6a5ff34c6e21afca39c3c08306777d04/AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:livedata-core:1.1.1] /home/deniz/.gradle/caches/transforms-2/files-2.1/6a5ff34c6e21afca39c3c08306777d04/AndroidManifest.xml:20:5-44
+MERGED from [android.arch.core:runtime:1.1.1] /home/deniz/.gradle/caches/transforms-2/files-2.1/821eacac2bfafaae7e2048ab4b2ebfb4/AndroidManifest.xml:20:5-44
+MERGED from [android.arch.core:runtime:1.1.1] /home/deniz/.gradle/caches/transforms-2/files-2.1/821eacac2bfafaae7e2048ab4b2ebfb4/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:interpolator:28.0.0] /home/deniz/.gradle/caches/transforms-2/files-2.1/a8297a69c2a5e054e6eedab867c3391c/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:interpolator:28.0.0] /home/deniz/.gradle/caches/transforms-2/files-2.1/a8297a69c2a5e054e6eedab867c3391c/AndroidManifest.xml:20:5-44
+INJECTED from /home/deniz/Desktop/SPS/Bayesian-Localization/K2D2/app/src/main/AndroidManifest.xml
+INJECTED from /home/deniz/Desktop/SPS/Bayesian-Localization/K2D2/app/src/main/AndroidManifest.xml
+	android:targetSdkVersion
+		INJECTED from /home/deniz/Desktop/SPS/Bayesian-Localization/K2D2/app/src/main/AndroidManifest.xml
+		ADDED from /home/deniz/Desktop/SPS/Bayesian-Localization/K2D2/app/src/main/AndroidManifest.xml
+		INJECTED from /home/deniz/Desktop/SPS/Bayesian-Localization/K2D2/app/src/main/AndroidManifest.xml
+	android:minSdkVersion
+		INJECTED from /home/deniz/Desktop/SPS/Bayesian-Localization/K2D2/app/src/main/AndroidManifest.xml
+		ADDED from /home/deniz/Desktop/SPS/Bayesian-Localization/K2D2/app/src/main/AndroidManifest.xml
+		INJECTED from /home/deniz/Desktop/SPS/Bayesian-Localization/K2D2/app/src/main/AndroidManifest.xml
