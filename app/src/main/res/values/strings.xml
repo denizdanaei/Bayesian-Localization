@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">My Application</string>
+    <string name="action_settings">Settings</string>
+    <string name="scan_me">Scan for Training</string>
+    <string name="wifi_data">TextView</string>
+    <string name="training_done">Write JSON File</string>
+    <string name="read_json_file">Read JSON File</string>
+</resources>
