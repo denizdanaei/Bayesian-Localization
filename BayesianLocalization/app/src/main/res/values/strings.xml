@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">K2.D2</string>
+    <string name="tab_text_1">Localization</string>
+    <string name="tab_text_2">Training Data</string>
+    <string-array name="cells">
+        <item>Cell 1</item>
+        <item>Cell 2</item>
+        <item>Cell 3</item>
+
+    </string-array>
+</resources>
