@@ -24,6 +24,8 @@ import com.example.k2.d2.k2d2.ui.main.SectionsPagerAdapter;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import android.content.Context;
+import android.widget.Toast;
+
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -50,8 +52,8 @@ public class Tab_training extends Fragment implements View.OnClickListener {
     static Float[] prior ;
     static Float[] posterior ;
 
-    static int rowsize = 3; //  row size for training data
-    static int columnsize = 30; // column size for training data
+    static int rowsize = 8; //  row size for training data
+    static int columnsize = 50; // column size for training data
 
 
     @Override
@@ -103,12 +105,13 @@ public class Tab_training extends Fragment implements View.OnClickListener {
                 wifiManager.startScan();
                 List<ScanResult> scanResults = wifiManager.getScanResults();
                 for (ScanResult scanResult : scanResults) {
-                    allItems.add(new gsonParser(scanResult.BSSID, WifiManager.calculateSignalLevel(scanResult.level,30), cellNumber));
+                    allItems.add(new gsonParser(scanResult.BSSID, WifiManager.calculateSignalLevel(scanResult.level,50), cellNumber));
                 }
                 for (ScanResult scanResult : scanResults) {
                     scan_results.setText(scan_results.getText() + "\n\tBSSID = " + scanResult.BSSID +
                             "    level = " + scanResult.level);
                 }
+                Toast.makeText(getActivity().getApplicationContext(), "Cell Scanned", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.write_JSON:
                 writeFile(0); // refer function for the passing of the parameter. Writes to a JSON file based on the argument.

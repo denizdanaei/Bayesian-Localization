@@ -37,7 +37,7 @@ public class bayesianLocalization {
     public static Float[][] updateTables(gsonParser[] items, Float[][] pmf_table, String bssi){
         for(gsonParser item : items){
             if(item.getBSSI().equals(bssi)){
-                pmf_table[(item.getCellNumber())][item.getRSSi()] += (float) 10.0; // TODO : check if + 10 is too much or if it is sufficient.
+                pmf_table[(item.getCellNumber())][item.getRSSi()] += (float) 7.0; // TODO : check if + 7 is too much or if it is sufficient.
             }
         }
 
@@ -55,9 +55,9 @@ public class bayesianLocalization {
 
     // Localizing using the current scan.
     public static int localize(List<ScanResult> scanResults){
-        prior = new Float[]{(float)1/3,(float)1/3,(float)1/3};
-        posterior = new Float[]{(float)1/3,(float)1/3,(float)1/3};
-        Float[] pulled_data  = new Float[3] ; // variable used to pull out our required data off of the offline table.
+        prior = new Float[]{(float)1/8,(float)1/8,(float)1/8,(float)1/8,(float)1/8,(float)1/8,(float)1/8,(float)1/8};
+        posterior = new Float[]{(float)1/8,(float)1/8,(float)1/8,(float)1/8,(float)1/8,(float)1/8,(float)1/8,(float)1/8};
+        Float[] pulled_data  = new Float[8] ; // variable used to pull out our required data off of the offline table.
         Set<String> bssi = new HashSet<>();
         /*
         // This step is added since we need to make sure there are no null pointer exceptions for any new bssi id's that might pop up during demo.
@@ -69,7 +69,7 @@ public class bayesianLocalization {
             if (bssi.contains(scanResult.BSSID)) {
                 Float[][] pmf_table = pmf_data.get(scanResult.BSSID);
                 for (int i = 0; i < pulled_data.length; i++) {
-                    pulled_data[i] = pmf_table[i][WifiManager.calculateSignalLevel(scanResult.level, 30)];
+                    pulled_data[i] = pmf_table[i][WifiManager.calculateSignalLevel(scanResult.level, 50)];
                 }
                 float prior_sum = 0;
                 for (int ii = 0; ii < pulled_data.length; ii++) {
