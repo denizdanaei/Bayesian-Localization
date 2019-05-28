@@ -25,14 +25,18 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
 import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+
+import static android.content.Context.MODE_PRIVATE;
 import static com.example.k2.d2.k2d2.Tab_training.pmf_data;
 
 import static com.example.k2.d2.k2d2.bayesianLocalization.localize;
+import static com.example.k2.d2.k2d2.bayesianLocalization.training_Setup;
 
 public class Tab_localization extends Fragment implements View.OnClickListener {
 
@@ -57,32 +61,71 @@ public class Tab_localization extends Fragment implements View.OnClickListener {
 
     @Override
     public void onClick(View v) {
+        cellnumber.setText("Loading...");
+        gsonParser[] items = readFile(0);  // refer function for passing the parameter. Reads a JSON file based on the argument.
+        training_Setup(items); // Main function to update the tables.
 
-        readFile(); // for debug purpose i have set this to one to read pmf_data from pmf_json file locally.
         wifiManager = (WifiManager) getActivity().getApplicationContext().getSystemService(Context.WIFI_SERVICE);
         wifiManager.startScan();
+
+        writeFile(); // refer function for the passing of the parameter. Writes to a JSON file based on the argument.
+        cellnumber.setText("Offline tables are set. Localization can be done from now on.");
+        readFile(1); // for debug purpose i have set this to one to read pmf_data from pmf_json file locally.
+
         List<ScanResult> localize_scanResults = wifiManager.getScanResults();
         int location =localize(localize_scanResults); // for localization purposes.
+        cellnumber.setText("Loading...");
         location = location +1; // adding one since this takes cell 1 as zero.
         cellnumber.setText("You are in cell "+ location);
     }
-    public gsonParser[] readFile(){
+
+
+    public void writeFile(){
+        try {
+            FileOutputStream fos ;
+            String json;
+             //for writing the pmf hashmap with key -> BSSi , value -> pmf_tables.
+                fos = getContext().openFileOutput("pmf_data.json", MODE_PRIVATE);
+                json = new Gson().toJson(pmf_data);
+
+            fos.write(json.getBytes());
+            fos.close();
+        }
+        catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    /*
+        Function to read JSON files.
+        Input 0 reads the scan results
+        Input !=0 reads the pmf data --> used for offline storage. This will be used for localization.
+        So that we don't have to create/store tables every time for localization.
+     */
+    public gsonParser[] readFile(int i){
         gsonParser[] items = new gsonParser[0];
         try {
             FileInputStream fos1;
             int size;
-
-            fos1 = getContext().openFileInput("pmf_data.json"); // offline tables
-
+            if (i == 0) {
+                fos1 = getContext().openFileInput("test.json"); // scan results.
+            }
+            else{
+                fos1 = getContext().openFileInput("pmf_data.json"); // offline tables
+            }
             size = fos1.available();
             byte[] buffer = new byte[size];
             fos1.read(buffer);
             String text = new String(buffer);
-
-            Type type = new TypeToken<HashMap<String, Float[][]>>(){}.getType();
-            pmf_data = new Gson().fromJson(text,type);
-            return items;
-
+            if(i ==0){
+                items = new Gson().fromJson(text, gsonParser[].class);
+//                textRssi.setText(text);
+                return items;
+            }
+            else{
+                Type type = new TypeToken<HashMap<String, Float[][]>>(){}.getType();
+                pmf_data = new Gson().fromJson(text,type);
+                return items;
+            }
 
 
         }catch (IOException e){
@@ -90,4 +133,6 @@ public class Tab_localization extends Fragment implements View.OnClickListener {
         }
         return items;
     }
+
+
 }

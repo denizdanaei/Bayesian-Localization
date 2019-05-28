@@ -54,6 +54,8 @@ public class Tab_training extends Fragment implements View.OnClickListener {
     static int numberOfLevels = 50;
     static int rowsize = 8; //  row size for training data
     static int columnsize = numberOfLevels; // column size for training data
+    static int cellnum=10;
+
 
 
     @Override
