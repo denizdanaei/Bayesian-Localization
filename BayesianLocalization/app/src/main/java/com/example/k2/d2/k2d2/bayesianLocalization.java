@@ -10,6 +10,7 @@ import java.util.Map;
 import java.util.Set;
 
 import static com.example.k2.d2.k2d2.Tab_training.columnsize;
+import static com.example.k2.d2.k2d2.Tab_training.numberOfLevels;
 import static com.example.k2.d2.k2d2.Tab_training.pmf_data;
 import static com.example.k2.d2.k2d2.Tab_training.posterior;
 import static com.example.k2.d2.k2d2.Tab_training.prior;
@@ -69,7 +70,7 @@ public class bayesianLocalization {
             if (bssi.contains(scanResult.BSSID)) {
                 Float[][] pmf_table = pmf_data.get(scanResult.BSSID);
                 for (int i = 0; i < pulled_data.length; i++) {
-                    pulled_data[i] = pmf_table[i][WifiManager.calculateSignalLevel(scanResult.level, 50)];
+                    pulled_data[i] = pmf_table[i][WifiManager.calculateSignalLevel(scanResult.level, numberOfLevels)];
                 }
                 float prior_sum = 0;
                 for (int ii = 0; ii < pulled_data.length; ii++) {

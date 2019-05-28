@@ -51,9 +51,9 @@ public class Tab_training extends Fragment implements View.OnClickListener {
 
     static Float[] prior ;
     static Float[] posterior ;
-
+    static int numberOfLevels = 50;
     static int rowsize = 8; //  row size for training data
-    static int columnsize = 50; // column size for training data
+    static int columnsize = numberOfLevels; // column size for training data
 
 
     @Override
@@ -102,15 +102,21 @@ public class Tab_training extends Fragment implements View.OnClickListener {
             case R.id.cellscan:
 
                 wifiManager = (WifiManager) getActivity().getApplicationContext().getSystemService(Context.WIFI_SERVICE);
+                scan_results.setText("Scan started");
                 wifiManager.startScan();
                 List<ScanResult> scanResults = wifiManager.getScanResults();
+
                 for (ScanResult scanResult : scanResults) {
-                    allItems.add(new gsonParser(scanResult.BSSID, WifiManager.calculateSignalLevel(scanResult.level,50), cellNumber));
+                    int scanLevel = WifiManager.calculateSignalLevel(scanResult.level,numberOfLevels);
+                    if(scanLevel>25) {
+                        allItems.add(new gsonParser(scanResult.BSSID, scanLevel, cellNumber));
+                    }
                 }
-                for (ScanResult scanResult : scanResults) {
-                    scan_results.setText(scan_results.getText() + "\n\tBSSID = " + scanResult.BSSID +
-                            "    level = " + scanResult.level);
-                }
+                scan_results.setText("Scan over");
+//                for (gsonParser item : allItems) {
+//                    scan_results.setText(scan_results.getText() + "\n\tBSSID = " + item.getBSSI() +
+//                            "    level = " + item.getRSSi() + "   cellNumber = "+ item.getCellNumber());
+//                }
                 Toast.makeText(getActivity().getApplicationContext(), "Cell Scanned", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.write_JSON:
