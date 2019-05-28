@@ -52,9 +52,9 @@ public class Tab_training extends Fragment implements View.OnClickListener {
     static Float[] prior ;
     static Float[] posterior ;
     static int numberOfLevels = 50;
-    static int rowsize = 8; //  row size for training data
+    static int rowsize = 10; //  row size for training data
     static int columnsize = numberOfLevels; // column size for training data
-    static int cellnum=10;
+    static int cellnum = rowsize;
 
 
 
