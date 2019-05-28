@@ -14,6 +14,7 @@ import static com.example.k2.d2.k2d2.Tab_training.pmf_data;
 import static com.example.k2.d2.k2d2.Tab_training.posterior;
 import static com.example.k2.d2.k2d2.Tab_training.prior;
 import static com.example.k2.d2.k2d2.Tab_training.rowsize;
+import static com.example.k2.d2.k2d2.Tab_training.cellnum;
 
 public class bayesianLocalization {
 
@@ -55,9 +56,11 @@ public class bayesianLocalization {
 
     // Localizing using the current scan.
     public static int localize(List<ScanResult> scanResults){
-        prior = new Float[]{(float)1/8,(float)1/8,(float)1/8,(float)1/8,(float)1/8,(float)1/8,(float)1/8,(float)1/8};
-        posterior = new Float[]{(float)1/8,(float)1/8,(float)1/8,(float)1/8,(float)1/8,(float)1/8,(float)1/8,(float)1/8};
-        Float[] pulled_data  = new Float[8] ; // variable used to pull out our required data off of the offline table.
+        prior = new Float[]{(float)1/cellnum, (float)1/cellnum, (float)1/cellnum, (float)1/cellnum, (float)1/cellnum, (float)1/cellnum,
+                (float)1/cellnum, (float)1/cellnum, (float)1/cellnum, (float)1/cellnum};
+        posterior = new Float[]{(float)1/cellnum, (float)1/cellnum, (float)1/cellnum, (float)1/cellnum, (float)1/cellnum, (float)1/cellnum,
+                (float)1/cellnum, (float)1/cellnum, (float)1/cellnum, (float)1/cellnum};
+        Float[] pulled_data  = new Float[cellnum] ; // variable used to pull out our required data off of the offline table.
         Set<String> bssi = new HashSet<>();
         /*
         // This step is added since we need to make sure there are no null pointer exceptions for any new bssi id's that might pop up during demo.
@@ -69,7 +72,7 @@ public class bayesianLocalization {
             if (bssi.contains(scanResult.BSSID)) {
                 Float[][] pmf_table = pmf_data.get(scanResult.BSSID);
                 for (int i = 0; i < pulled_data.length; i++) {
-                    pulled_data[i] = pmf_table[i][WifiManager.calculateSignalLevel(scanResult.level, 50)];
+                    pulled_data[i] = pmf_table[i][WifiManager.calculateSignalLevel(scanResult.level, columnsize)];
                 }
                 float prior_sum = 0;
                 for (int ii = 0; ii < pulled_data.length; ii++) {

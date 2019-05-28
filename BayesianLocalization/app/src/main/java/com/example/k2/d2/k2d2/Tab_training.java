@@ -52,8 +52,9 @@ public class Tab_training extends Fragment implements View.OnClickListener {
     static Float[] prior ;
     static Float[] posterior ;
 
-    static int rowsize = 8; //  row size for training data
-    static int columnsize = 50; // column size for training data
+    static int cellnum=10;
+    static int rowsize = cellnum; //  row size for training data
+    static int columnsize = 10; // column size for training data
 
 
     @Override
@@ -105,12 +106,15 @@ public class Tab_training extends Fragment implements View.OnClickListener {
                 wifiManager.startScan();
                 List<ScanResult> scanResults = wifiManager.getScanResults();
                 for (ScanResult scanResult : scanResults) {
-                    allItems.add(new gsonParser(scanResult.BSSID, WifiManager.calculateSignalLevel(scanResult.level,50), cellNumber));
+                    allItems.add(new gsonParser(scanResult.BSSID, WifiManager.calculateSignalLevel(scanResult.level,columnsize), cellNumber));
+                    scan_results.setText(scan_results.getText() + "Cell=" + cellNumber +"\tBSSID = " + scanResult.BSSID +
+                            "\tlevel = " + WifiManager.calculateSignalLevel(scanResult.level,columnsize) + "\n");
                 }
-                for (ScanResult scanResult : scanResults) {
-                    scan_results.setText(scan_results.getText() + "\n\tBSSID = " + scanResult.BSSID +
-                            "    level = " + scanResult.level);
-                }
+
+
+
+
+
                 Toast.makeText(getActivity().getApplicationContext(), "Cell Scanned", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.write_JSON:
