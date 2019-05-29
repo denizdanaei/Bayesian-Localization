@@ -62,38 +62,15 @@ public class Tab_localization extends Fragment implements View.OnClickListener {
     @Override
     public void onClick(View v) {
         cellnumber.setText("Loading...");
-        gsonParser[] items = readFile(0);  // refer function for passing the parameter. Reads a JSON file based on the argument.
-        training_Setup(items); // Main function to update the tables.
-
         wifiManager = (WifiManager) getActivity().getApplicationContext().getSystemService(Context.WIFI_SERVICE);
         wifiManager.startScan();
-
-        writeFile(); // refer function for the passing of the parameter. Writes to a JSON file based on the argument.
-        cellnumber.setText("Offline tables are set. Localization can be done from now on.");
         readFile(1); // for debug purpose i have set this to one to read pmf_data from pmf_json file locally.
 
         List<ScanResult> localize_scanResults = wifiManager.getScanResults();
-        int location =localize(localize_scanResults); // for localization purposes.
         cellnumber.setText("Loading...");
+        int location =localize(localize_scanResults); // for localization purposes.
         location = location +1; // adding one since this takes cell 1 as zero.
         cellnumber.setText("You are in cell "+ location);
-    }
-
-
-    public void writeFile(){
-        try {
-            FileOutputStream fos ;
-            String json;
-             //for writing the pmf hashmap with key -> BSSi , value -> pmf_tables.
-                fos = getContext().openFileOutput("pmf_data.json", MODE_PRIVATE);
-                json = new Gson().toJson(pmf_data);
-
-            fos.write(json.getBytes());
-            fos.close();
-        }
-        catch (IOException e) {
-            e.printStackTrace();
-        }
     }
     /*
         Function to read JSON files.

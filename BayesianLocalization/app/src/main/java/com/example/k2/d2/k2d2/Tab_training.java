@@ -104,17 +104,20 @@ public class Tab_training extends Fragment implements View.OnClickListener {
             case R.id.cellscan:
 
                 wifiManager = (WifiManager) getActivity().getApplicationContext().getSystemService(Context.WIFI_SERVICE);
-                scan_results.setText("Scan started");
-                wifiManager.startScan();
-                List<ScanResult> scanResults = wifiManager.getScanResults();
+                for(int count = 1; count<=10; count++) {
+                    scan_results.setText("Scan "+ count +" started");
+                    wifiManager.startScan();
+                    List<ScanResult> scanResults = wifiManager.getScanResults();
 
-                for (ScanResult scanResult : scanResults) {
-                    int scanLevel = WifiManager.calculateSignalLevel(scanResult.level,numberOfLevels);
-                    if(scanLevel>25) {
-                        allItems.add(new gsonParser(scanResult.BSSID, scanLevel, cellNumber));
+                    for (ScanResult scanResult : scanResults) {
+                        int scanLevel = WifiManager.calculateSignalLevel(scanResult.level, numberOfLevels);
+                        if (scanLevel > 25) {
+                            allItems.add(new gsonParser(scanResult.BSSID, scanLevel, cellNumber));
+                        }
                     }
+                    scan_results.setText("Scan "+ count +" over");
                 }
-                scan_results.setText("Scan over");
+
 //                for (gsonParser item : allItems) {
 //                    scan_results.setText(scan_results.getText() + "\n\tBSSID = " + item.getBSSI() +
 //                            "    level = " + item.getRSSi() + "   cellNumber = "+ item.getCellNumber());

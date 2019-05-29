@@ -5,8 +5,10 @@ import android.net.wifi.ScanResult;
 import android.net.wifi.WifiManager;
 
 import java.util.HashSet;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.Queue;
 import java.util.Set;
 
 import static com.example.k2.d2.k2d2.Tab_training.columnsize;
@@ -39,17 +41,37 @@ public class bayesianLocalization {
     public static Float[][] updateTables(gsonParser[] items, Float[][] pmf_table, String bssi){
         for(gsonParser item : items){
             if(item.getBSSI().equals(bssi)){
-                pmf_table[(item.getCellNumber())][item.getRSSi()] += (float) 7.0; // TODO : check if + 7 is too much or if it is sufficient.
+                pmf_table[(item.getCellNumber())][item.getRSSi()] += (float) 10.0; // TODO : check if + 7 is too much or if it is sufficient.
             }
         }
-
+        /**
+         * The Below part is included as part of a Moving average filter. This gives us a smooth transition rather than the peaks that we have in the original data.
+         * */
+        int windowSize = 3; // The frame length for the taking the average.
+        for(int i = 0;i <pmf_table.length;i++){
+            Queue<Float> movingAverageFilterQueue = new LinkedList<>();
+            for(int init =0 ; init<windowSize-1; init++){
+                (movingAverageFilterQueue).add(pmf_table[i][0]);  // initializing the first two values
+            }
+            for(int j =0; j<pmf_table[i].length;j++){
+                if(j+1 >= pmf_table[i].length) break;
+                (movingAverageFilterQueue).add(pmf_table[i][j+1]); // adding the new value as a tail
+                float row_sum = 0;
+                for(int k =0; k<movingAverageFilterQueue.size(); k++){
+                    row_sum += ((LinkedList<Float>) movingAverageFilterQueue).get(k); // sum
+                }
+                pmf_table[i][j] = row_sum/windowSize; // average
+                ((LinkedList<Float>) movingAverageFilterQueue).set(windowSize%2,pmf_table[i][j]); // updating the existing queue value
+                movingAverageFilterQueue.remove(); // removing the head of the queue so that we can push in the tail value in the next iteration.
+            }
+        }
         for(int i = 0 ; i< pmf_table.length; i++){
             float row_sum = 0;
             for(int j = 0; j < pmf_table[i].length ; j++){
                 row_sum += pmf_table[i][j];
             }
             for(int j = 0; j < pmf_table[i].length ; j++){
-                pmf_table[i][j] = pmf_table[i][j]/row_sum;
+                pmf_table[i][j] = pmf_table[i][j]/row_sum;  //normalizing
             }
         }
         return pmf_table;
@@ -82,9 +104,13 @@ public class bayesianLocalization {
                 }
                 for (int j = 0; j < pulled_data.length; j++) { // normalizing each row.
                     prior[j] = prior[j] / prior_sum;
-//                    if(prior[j]> 0.94) break; // since we have reached a very high probability that this is the cell. TODO: Check if this condition is needed.
                 }
                 posterior = prior;
+                for(int i =0; i< posterior.length;i++){
+                    if(posterior[i]>0.95){ //since we have reached a very high probability that this is the cell.
+                        break;
+                    }
+                }
             }
         }
         int location = 0; //stores the location that needs to be sent.
@@ -103,7 +129,7 @@ public class bayesianLocalization {
         Float[][] pmf_table = new Float[rowsize][columnsize+1] ;
         for(int i = 0;i<pmf_table.length;i++){
             for(int j =0; j<pmf_table[i].length;j++){
-                pmf_table[i][j] = (float) 0.1;
+                pmf_table[i][j] = (float) 1;
             }
         }
         return pmf_table;
