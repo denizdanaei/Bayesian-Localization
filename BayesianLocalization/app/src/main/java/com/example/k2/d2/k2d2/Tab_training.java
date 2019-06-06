@@ -97,17 +97,27 @@ public class Tab_training extends Fragment implements View.OnClickListener {
 
                 wifiManager = (WifiManager) getActivity().getApplicationContext().getSystemService(Context.WIFI_SERVICE);
                 for(int count = 1; count<=10; count++) {
-                    scan_results.setText("Scan "+ count +" started");
+                    scan_results.setText(scan_results.getText() +"\nScan "+ count +" started");
                     wifiManager.startScan();
                     List<ScanResult> scanResults = wifiManager.getScanResults();
 
+
+
                     for (ScanResult scanResult : scanResults) {
-                        int scanLevel = WifiManager.calculateSignalLevel(scanResult.level, numberOfLevels);
-                        if (scanLevel > 25) {
-                            allItems.add(new gsonParser(scanResult.BSSID, scanLevel, cellNumber));
+                        scan_results.setText(scan_results.getText() + "\n\tBSSID = "
+                                + scanResult.BSSID +"\tlevel="+scanResult.level);
+
+                        if(validAP(scanResult.BSSID))
+                        {
+                            scan_results.setText(scan_results.getText() +"\nvalid");
+                            int scanLevel = WifiManager.calculateSignalLevel(scanResult.level, numberOfLevels);
+                            if (scanLevel > 25) {
+                                allItems.add(new gsonParser(scanResult.BSSID, scanLevel, cellNumber));
+                            }
                         }
                     }
-                    scan_results.setText("Scan "+ count +" over");
+
+//                    scan_results.setText(scan_results.getText() +"Scan "+ count +" over");
                 }
 
 //                for (gsonParser item : allItems) {
@@ -188,5 +198,19 @@ public class Tab_training extends Fragment implements View.OnClickListener {
         return items;
     }
 
+    public boolean validAP(String BSSID){
+
+        String first_4B= BSSID.substring(0,5);
+        String[] BSS_enb={"50:1c","24:01","54:4a","00:3a","2c:33","b4:e9"};
+
+        for(String enable: BSS_enb)
+        {
+            if ( first_4B.compareTo( enable)==0) {
+
+                return true;
+            }
+        }
+        return false;
+    }
 
 }
