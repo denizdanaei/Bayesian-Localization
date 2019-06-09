@@ -19,7 +19,6 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -43,6 +42,8 @@ public class MainActivity extends Activity implements OnClickListener {
 
     private  Random random =new Random();
     private int Particles=100, displaced_Particals=0, Replaced_Particles =Particles- displaced_Particals;
+    public int width=0,height = 0;
+    private int User_speed =40, Partical_movement=50;
 
     /*******************************************************/
     @Override
@@ -73,19 +74,19 @@ public class MainActivity extends Activity implements OnClickListener {
         Display display = getWindowManager().getDefaultDisplay();
         Point size = new Point();
         display.getSize(size);
-        int width = size.x;
-        int height = size.y;
+        width = size.x;
+        height = size.y;
 
         /* create a user object */
         user = new ShapeDrawable(new OvalShape());
         user.getPaint().setColor(Color.BLUE);
-        user.setBounds(width/30, width/20, width/30+40, width/20+40);
+        user.setBounds(width/30, width/20, width/30+30, width/20+30);
 
     /*********************Drawing The Walls**************************/
-        walls = build_walls(width);
+        walls = build_walls();
 
     /*********************Drawing The Dots**************************/
-        FP = Particle_filters(width,walls);
+        FP = Particle_filters(walls);
 
     /***************************Creating a Canvas************************************/
 
@@ -130,8 +131,6 @@ public class MainActivity extends Activity implements OnClickListener {
         // - The text in the center of the buttons
         // - The margins
         // - The text that shows the margin
-        Point size = new Point();
-        int width = size.x;
 
 //        fp.setBounds(ranX, ranY, ranX + 20, ranY + 20);
 
@@ -140,14 +139,8 @@ public class MainActivity extends Activity implements OnClickListener {
             case R.id.button1: {
 //                Toast.makeText(getApplication(), "UP", Toast.LENGTH_SHORT).show();
                 Rect r = user.getBounds();
-                user.setBounds(r.left,r.top-20,r.right,r.bottom-20);
-                for(ShapeDrawable fp: FP)
-                {
-//                    int ranX = random.nextInt(width);
-                    int ranY = random.nextInt(width / 5);
-                    Rect R = fp.getBounds();
-                    fp.setBounds(R.left,R.top-ranY,R.right,R.bottom-ranY);
-                }
+                user.setBounds(r.left,r.top- User_speed,r.right,r.bottom- User_speed);
+                fp_movement("up");
                 motion_detail.setText("\n\tMove Up" + "\n\tTop Margin = "
                         + user.getBounds().top);
                 break;
@@ -156,12 +149,8 @@ public class MainActivity extends Activity implements OnClickListener {
             case R.id.button4: {
 //                Toast.makeText(getApplication(), "DOWN", Toast.LENGTH_SHORT).show();
                 Rect r = user.getBounds();
-                user.setBounds(r.left,r.top+20,r.right,r.bottom+20);
-                for(ShapeDrawable fp: FP)
-                {
-                    Rect R = fp.getBounds();
-                    fp.setBounds(R.left,R.top+20,R.right,R.bottom+20);
-                }
+                user.setBounds(r.left,r.top+ User_speed,r.right,r.bottom+ User_speed);
+                fp_movement("down");
                 motion_detail.setText("\n\tMove Down" + "\n\tTop Margin = "
                         + user.getBounds().top);
                 break;
@@ -170,12 +159,8 @@ public class MainActivity extends Activity implements OnClickListener {
             case R.id.button2: {
 //                Toast.makeText(getApplication(), "LEFT", Toast.LENGTH_SHORT).show();
                 Rect r = user.getBounds();
-                user.setBounds(r.left-20,r.top,r.right-20,r.bottom);
-                for(ShapeDrawable fp: FP)
-                {
-                    Rect R = fp.getBounds();
-                    fp.setBounds(R.left-20,R.top,R.right-20,R.bottom);
-                }
+                user.setBounds(r.left- User_speed,r.top,r.right- User_speed,r.bottom);
+                fp_movement("left");
                 motion_detail.setText("\n\tMove Left" + "\n\tLeft Margin = "
                         + user.getBounds().left);
                 break;
@@ -184,12 +169,8 @@ public class MainActivity extends Activity implements OnClickListener {
             case R.id.button3: {
 //                Toast.makeText(getApplication(), "RIGHT", Toast.LENGTH_SHORT).show();
                 Rect r = user.getBounds();
-                user.setBounds(r.left+20,r.top,r.right+20,r.bottom);
-                for(ShapeDrawable fp: FP)
-                {
-                    Rect R = fp.getBounds();
-                    fp.setBounds(R.left+20,R.top,R.right+20,R.bottom);
-                }
+                user.setBounds(r.left+ User_speed,r.top,r.right+ User_speed,r.bottom);
+                fp_movement("right");
                 motion_detail.setText("\n\tMove Right" + "\n\tLeft Margin = "
                         + user.getBounds().left);
                 break;
@@ -198,11 +179,6 @@ public class MainActivity extends Activity implements OnClickListener {
         // if there is a collision between the dot and any of the walls
         if(isCollision()) {
             // reset dot to center of canvas
-            Display display = getWindowManager().getDefaultDisplay();
-
-            display.getSize(size);
-//            int width = size.x;
-//            int height = size.y;
             user.setBounds(width/30, width/20, width/30+40, width/20+40);
         }
 
@@ -223,6 +199,12 @@ public class MainActivity extends Activity implements OnClickListener {
             fp.draw(canvas);
     }
 
+
+
+
+
+
+    /****************user & walls**********************************/
     /**
      * Determines if the user dot intersects with any of the walls.
      * @return True if that's true, false otherwise.
@@ -245,8 +227,9 @@ public class MainActivity extends Activity implements OnClickListener {
         Rect firstRect = new Rect(first.getBounds());
         return firstRect.intersect(second.getBounds());
     }
+    /*************************************************************/
 
-    private List<ShapeDrawable> build_walls(int width){
+    private List<ShapeDrawable> build_walls(){
         walls = new ArrayList<>();
         //outerlayer: Windows wall of EWI
         ShapeDrawable outerlayer = new ShapeDrawable(new RectShape());
@@ -308,7 +291,7 @@ public class MainActivity extends Activity implements OnClickListener {
         return walls;
     }
 
-    public List<ShapeDrawable> Particle_filters (int width, List<ShapeDrawable> walls)
+    public List<ShapeDrawable> Particle_filters (List<ShapeDrawable> walls)
     {
         FP= new ArrayList<>();
 
@@ -330,6 +313,8 @@ public class MainActivity extends Activity implements OnClickListener {
         }
         return FP;
     }
+
+    /****************fp & walls**********************************/
     private boolean detect_Collision() {
         boolean collision=false;
         for(ShapeDrawable fp : FP) {
@@ -374,4 +359,48 @@ public class MainActivity extends Activity implements OnClickListener {
 
     }
 
+    private void fp_movement(String button){
+
+        int ranX=0,ranY=0;
+
+        switch (button) {
+            case "up": {
+                for (ShapeDrawable fp : FP) {
+                    ranY = random.nextInt(Partical_movement);
+                    ranX = random.nextInt(Partical_movement)*(random .nextBoolean() ? -1 : 1);
+                    Rect R = fp.getBounds();
+                    fp.setBounds(R.left +ranX, R.top -ranY, R.right +ranX, R.bottom -ranY);
+                }
+                break;
+            }
+            case "down": {
+                for (ShapeDrawable fp : FP) {
+                    ranY = random.nextInt(Partical_movement);
+                    Rect R = fp.getBounds();
+                    fp.setBounds(R.left, R.top+ranY, R.right, R.bottom+ranY);
+                }
+                break;
+            }
+            case "right": {
+                for (ShapeDrawable fp : FP) {
+                    ranX = random.nextInt(Partical_movement);
+                    Rect R = fp.getBounds();
+                    fp.setBounds(R.left +ranX, R.top, R.right +ranX, R.bottom);
+                }
+                break;
+            }
+            case "left": {
+                for (ShapeDrawable fp : FP) {
+                    ranX = random.nextInt(Partical_movement);
+                    Rect R = fp.getBounds();
+                    fp.setBounds(R.left -ranX, R.top, R.right -ranX, R.bottom);
+                }
+                break;
+            }
+            default: break;
+        }
+
+
+
+    }
 }
