@@ -11,6 +11,7 @@ import android.graphics.drawable.ShapeDrawable;
 import android.graphics.drawable.shapes.OvalShape;
 import android.graphics.drawable.shapes.RectShape;
 import android.os.Bundle;
+import android.text.method.ScrollingMovementMethod;
 import android.view.Display;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -30,7 +31,7 @@ import java.util.Random;
 public class MainActivity extends Activity implements OnClickListener {
 
 
-    private Button up, left, right, down;
+    private Button up, left, right, down, reset;
 
     private TextView motion_detail;
 
@@ -41,9 +42,9 @@ public class MainActivity extends Activity implements OnClickListener {
     private List<ShapeDrawable> walls, FP;
 
     private  Random random =new Random();
-    private int Particles=100, displaced_Particals=0, Replaced_Particles =Particles- displaced_Particals;
+    private int Particles=10, displaced_Particals=0, Replaced_Particles =Particles- displaced_Particals;
     public int width=0,height = 0;
-    private int User_speed =40, Partical_movement=50;
+    private int User_speed =40, Partical_movement=5;
 
     /*******************************************************/
     @Override
@@ -67,15 +68,30 @@ public class MainActivity extends Activity implements OnClickListener {
         down = (Button) findViewById(R.id.button4);
         down.setOnClickListener(this);
 
+        reset = (Button) findViewById(R.id.reset);
+        reset.setOnClickListener(this);
+
         motion_detail = (TextView) findViewById(R.id.textView1);
+        motion_detail.setMovementMethod(new ScrollingMovementMethod());
 
     /*****************get the screen dimensions********************/
+
+//        final ImageView canvass = (ImageView)findViewById(R.id.canvas);
 
         Display display = getWindowManager().getDefaultDisplay();
         Point size = new Point();
         display.getSize(size);
-        width = size.x;
         height = size.y;
+        width= size.x;
+//        width = canvass.getDrawable().getIntrinsicWidth();;
+
+        ImageView canvasView = (ImageView) findViewById(R.id.canvas);
+
+        Bitmap blankBitmap = Bitmap.createBitmap(width,height, Bitmap.Config.ARGB_8888);
+        canvas = new Canvas(blankBitmap);
+        canvasView.setImageBitmap(blankBitmap);
+        width=canvasView.getDrawable().getIntrinsicWidth();
+        height=canvas.getHeight();
 
         /* create a user object */
         user = new ShapeDrawable(new OvalShape());
@@ -90,10 +106,7 @@ public class MainActivity extends Activity implements OnClickListener {
 
     /***************************Creating a Canvas************************************/
 
-        ImageView canvasView = (ImageView) findViewById(R.id.canvas);
-        Bitmap blankBitmap = Bitmap.createBitmap(width,height, Bitmap.Config.ARGB_8888);
-        canvas = new Canvas(blankBitmap);
-        canvasView.setImageBitmap(blankBitmap);
+
 
         // draw the objects
         user.draw(canvas);
@@ -102,7 +115,7 @@ public class MainActivity extends Activity implements OnClickListener {
         for(ShapeDrawable fp: FP)
             fp.draw(canvas);
 
-        motion_detail.setText("FP.size"+ FP.size()+"\nReplaced_Particles"+ Replaced_Particles +"\ndisplaced_Particals"+ displaced_Particals);
+//        motion_detail.setText("FP.size"+ FP.size()+"\nReplaced_Particles"+ Replaced_Particles +"\ndisplaced_Particals"+ displaced_Particals);
     }
 
     @Override
@@ -141,8 +154,8 @@ public class MainActivity extends Activity implements OnClickListener {
                 Rect r = user.getBounds();
                 user.setBounds(r.left,r.top- User_speed,r.right,r.bottom- User_speed);
                 fp_movement("up");
-                motion_detail.setText("\n\tMove Up" + "\n\tTop Margin = "
-                        + user.getBounds().top);
+                motion_detail.setText(motion_detail.getText()+"\nuser=" + r.left +","+ r.top +","+ r.right +","+ r.bottom);
+
                 break;
             }
             // DOWN BUTTON
@@ -151,8 +164,8 @@ public class MainActivity extends Activity implements OnClickListener {
                 Rect r = user.getBounds();
                 user.setBounds(r.left,r.top+ User_speed,r.right,r.bottom+ User_speed);
                 fp_movement("down");
-                motion_detail.setText("\n\tMove Down" + "\n\tTop Margin = "
-                        + user.getBounds().top);
+//                motion_detail.setText("\n\tMove Down" + "\n\tTop Margin = "
+//                        + user.getBounds().top);
                 break;
             }
             // LEFT BUTTON
@@ -161,8 +174,8 @@ public class MainActivity extends Activity implements OnClickListener {
                 Rect r = user.getBounds();
                 user.setBounds(r.left- User_speed,r.top,r.right- User_speed,r.bottom);
                 fp_movement("left");
-                motion_detail.setText("\n\tMove Left" + "\n\tLeft Margin = "
-                        + user.getBounds().left);
+//                motion_detail.setText("\n\tMove Left" + "\n\tLeft Margin = "
+//                        + user.getBounds().left);
                 break;
             }
             // RIGHT BUTTON
@@ -171,22 +184,26 @@ public class MainActivity extends Activity implements OnClickListener {
                 Rect r = user.getBounds();
                 user.setBounds(r.left+ User_speed,r.top,r.right+ User_speed,r.bottom);
                 fp_movement("right");
-                motion_detail.setText("\n\tMove Right" + "\n\tLeft Margin = "
-                        + user.getBounds().left);
+//                motion_detail.setText("\n\tMove Right" + "\n\tLeft Margin = "
+//                        + user.getBounds().left);
+                break;
+            }
+            case R.id.reset: {
+                Particle_filters(walls);
                 break;
             }
         }
         // if there is a collision between the dot and any of the walls
         if(isCollision()) {
             // reset dot to center of canvas
-            user.setBounds(width/30, width/20, width/30+40, width/20+40);
+            user.setBounds(width/30, width/20, width/30+30, width/20+30);
         }
 
         if(detect_Collision()) {
             for (ShapeDrawable fp : FP) {
                 correct_Collision();
             }
-            motion_detail.setText("FP.size"+ FP.size()+"\nReplaced_Particles"+ Replaced_Particles +"\ndisplaced_Particals"+ displaced_Particals);
+//            motion_detail.setText("FP.size"+ FP.size()+"\nReplaced_Particles"+ Replaced_Particles +"\ndisplaced_Particals"+ displaced_Particals);
 
         }
 //            Toast.makeText(getApplication(), " pf collision", Toast.LENGTH_SHORT).show();
@@ -233,43 +250,39 @@ public class MainActivity extends Activity implements OnClickListener {
         walls = new ArrayList<>();
         //outerlayer: Windows wall of EWI
         ShapeDrawable outerlayer = new ShapeDrawable(new RectShape());
-        outerlayer.setBounds(5, 5, width,10 );
+        outerlayer.setBounds(0, 0, width,5 );
         walls.add(outerlayer);
 
         //wall 16: Left wall of cell 16
         ShapeDrawable wall_16 = new ShapeDrawable(new RectShape());
-        wall_16.setBounds(5, 5, 10, width/10);
+        wall_16.setBounds(0, 0, 5, height);
         walls.add(wall_16);
 
         //wall 13: Left wall of cell 13
         ShapeDrawable wall_13 = new ShapeDrawable(new RectShape());
-        wall_13.setBounds(5+width/15, 5, 10+width/15, width/10);
+        wall_13.setBounds(width/15, 0, 5+width/15, height/3);
         walls.add(wall_13);
 
         //wall 11: Left wall of cell 11
         ShapeDrawable wall_11 = new ShapeDrawable(new RectShape());
-        wall_11.setBounds(5+2*width/15, 5, 10+2*width/15, width/10);
+        wall_11.setBounds(2*width/15, 0, 5+2*width/15, height/3);
         walls.add(wall_11);
 
 
         //wall 11 to 3: Black area between cell 11 to cell 3
         ShapeDrawable wall_11to3 = new ShapeDrawable(new RectShape());
-        wall_11to3.setBounds(5+3*width/15, 5, 10+9*width/15, width/10);
+        wall_11to3.setBounds(3*width/15, 0, 5+9*width/15, height/3);
         walls.add(wall_11to3);
 
-        //wall 3: Right wall of cell 3
-        ShapeDrawable wall_3 = new ShapeDrawable(new RectShape());
-        wall_3.setBounds(5+10*width/15, 5, 10+width, width/10);
-        walls.add(wall_3);
 
-        //wall 1: Right wall of cell 1
-        ShapeDrawable wall_1 = new ShapeDrawable(new RectShape());
-        wall_1.setBounds(5+10*width/15, width/30+width/10, 10+width, 5+width/30+2*width/10);
-        walls.add(wall_1);
+        //wall 1 to 3: Black area between cell 1 to cell 3
+        ShapeDrawable wall_1to3 = new ShapeDrawable(new RectShape());
+        wall_1to3.setBounds(10*width/15, 0, 5+width, height);
+        walls.add(wall_1to3);
 
         //wall 1 to 14: Black area between cell 1 to cell 14
         ShapeDrawable wall_1to14 = new ShapeDrawable(new RectShape());
-        wall_1to14.setBounds(5+width/15, width/30+width/10, 10+9*width/15, 5+width/30+2*width/10);
+        wall_1to14.setBounds(width/15, height/2, 10+9*width/15, height);
         walls.add(wall_1to14);
 
 
@@ -347,7 +360,7 @@ public class MainActivity extends Activity implements OnClickListener {
                     collision=true;
                     /*should be fixed: displaced_Particals in the 2 for loop not a good result*/
                     Rect vector = crct_FP.get(random.nextInt(fixed_pf)).getBounds();
-                    fp.setBounds(vector.left, vector.top, vector.left, vector.top);
+                    fp.setBounds(vector.left+10, vector.top+10, vector.left+10, vector.top+10);
                 }
 
             }
@@ -365,40 +378,62 @@ public class MainActivity extends Activity implements OnClickListener {
 
         switch (button) {
             case "up": {
+                motion_detail.setText(null);
+
                 for (ShapeDrawable fp : FP) {
-                    ranY = random.nextInt(Partical_movement);
-                    ranX = random.nextInt(Partical_movement)*(random .nextBoolean() ? -1 : 1);
+                    ranY = Partical_movement+ random.nextInt(15);
+                    ranX = Partical_movement+ random.nextInt(15)*(random .nextBoolean() ? -1 : 1);
                     Rect R = fp.getBounds();
                     fp.setBounds(R.left +ranX, R.top -ranY, R.right +ranX, R.bottom -ranY);
+
+                    R = fp.getBounds();
+                    motion_detail.setText(motion_detail.getText()+"\n" + R.left +","+ R.top +","+ R.right +","+ R.bottom);
+
                 }
                 break;
             }
             case "down": {
                 for (ShapeDrawable fp : FP) {
-                    ranY = random.nextInt(Partical_movement);
+                    ranY = Partical_movement+ random.nextInt(15);
+                    ranX = Partical_movement+ random.nextInt(15)*(random .nextBoolean() ? -1 : 1);
                     Rect R = fp.getBounds();
-                    fp.setBounds(R.left, R.top+ranY, R.right, R.bottom+ranY);
+                    fp.setBounds(R.left+ranX, R.top+ranY, R.right+ranX, R.bottom+ranY);
+
+                    R = fp.getBounds();
+                    motion_detail.setText(R.left +","+ R.top +","+ R.right +","+ R.bottom +"\n");
+
                 }
                 break;
             }
             case "right": {
                 for (ShapeDrawable fp : FP) {
-                    ranX = random.nextInt(Partical_movement);
+                    ranX = Partical_movement+ random.nextInt(15);
+                    ranY = Partical_movement+ random.nextInt(15)*(random .nextBoolean() ? -1 : 1);
                     Rect R = fp.getBounds();
-                    fp.setBounds(R.left +ranX, R.top, R.right +ranX, R.bottom);
+                    fp.setBounds(R.left +ranX, R.top +ranY, R.right +ranX, R.bottom +ranY);
+
+                    R = fp.getBounds();
+                    motion_detail.setText(R.left +","+ R.top +","+ R.right +","+ R.bottom +"\n");
+
                 }
                 break;
             }
             case "left": {
                 for (ShapeDrawable fp : FP) {
-                    ranX = random.nextInt(Partical_movement);
+                    ranX = Partical_movement+ random.nextInt(15);
+                    ranY = Partical_movement+ random.nextInt(15)*(random .nextBoolean() ? -1 : 1);
                     Rect R = fp.getBounds();
-                    fp.setBounds(R.left -ranX, R.top, R.right -ranX, R.bottom);
+                    fp.setBounds(R.left -ranX, R.top +ranY, R.right -ranX, R.bottom +ranY);
+
+
+                    R = fp.getBounds();
+                    motion_detail.setText(R.left +","+ R.top +","+ R.right +","+ R.bottom +"\n");
                 }
                 break;
             }
             default: break;
         }
+
 
 
 

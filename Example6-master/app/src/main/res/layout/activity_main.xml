@@ -12,16 +12,43 @@
         android:id="@+id/canvas"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/white"
-        />
+        android:background="@color/white" />
+
+
+    <Button
+        android:id="@+id/reset"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+
+        android:layout_alignStart="@+id/canvas"
+        android:layout_alignLeft="@+id/canvas"
+        android:layout_alignEnd="@+id/canvas"
+
+        android:layout_alignRight="@+id/canvas"
+        android:layout_alignBottom="@+id/canvas"
+        android:layout_marginStart="599dp"
+        android:layout_marginLeft="599dp"
+        android:layout_marginEnd="0dp"
+        android:layout_marginRight="0dp"
+        android:layout_marginBottom="-1dp"
+        android:text="Reset" />
 
 
     <Button
         android:id="@+id/button4"
         android:layout_width="100dp"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/button1"
-        android:layout_alignParentBottom="true"
+
+        android:layout_alignStart="@+id/canvas"
+        android:layout_alignLeft="@+id/canvas"
+        android:layout_alignEnd="@+id/canvas"
+        android:layout_alignRight="@+id/canvas"
+        android:layout_alignBottom="@+id/canvas"
+        android:layout_marginStart="446dp"
+        android:layout_marginLeft="446dp"
+        android:layout_marginEnd="152dp"
+        android:layout_marginRight="152dp"
+        android:layout_marginBottom="-1dp"
         android:text="Down" />
 
     <Button
@@ -29,31 +56,63 @@
         android:layout_width="100dp"
         android:layout_height="wrap_content"
         android:layout_above="@+id/button4"
-        android:layout_toLeftOf="@+id/button4"
+        android:layout_alignStart="@+id/canvas"
+        android:layout_alignLeft="@+id/canvas"
+        android:layout_alignEnd="@+id/canvas"
+        android:layout_alignRight="@+id/canvas"
+        android:layout_alignBottom="@+id/canvas"
+        android:layout_marginStart="0dp"
+        android:layout_marginLeft="0dp"
+        android:layout_marginEnd="600dp"
+        android:layout_marginRight="600dp"
+        android:layout_marginBottom="2dp"
         android:text="Left" />
 
     <Button
         android:id="@+id/button3"
         android:layout_width="100dp"
         android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/button2"
-        android:layout_alignBottom="@+id/button2"
-        android:layout_toRightOf="@+id/button1"
+
+        android:layout_alignStart="@+id/canvas"
+        android:layout_alignLeft="@+id/canvas"
+        android:layout_alignEnd="@+id/canvas"
+        android:layout_alignRight="@+id/canvas"
+        android:layout_alignBottom="@+id/canvas"
+        android:layout_marginStart="143dp"
+        android:layout_marginLeft="143dp"
+        android:layout_marginEnd="455dp"
+        android:layout_marginRight="455dp"
+        android:layout_marginBottom="1dp"
         android:text="Right" />
 
     <Button
         android:id="@+id/button1"
         android:layout_width="100dp"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/button3"
-        android:layout_centerHorizontal="true"
+
+        android:layout_alignStart="@+id/canvas"
+        android:layout_alignLeft="@+id/canvas"
+        android:layout_alignEnd="@+id/canvas"
+        android:layout_alignRight="@+id/canvas"
+        android:layout_alignBottom="@+id/canvas"
+        android:layout_marginStart="286dp"
+        android:layout_marginLeft="286dp"
+        android:layout_marginEnd="313dp"
+        android:layout_marginRight="313dp"
+        android:layout_marginBottom="0dp"
         android:text="Up" />
 
     <TextView
         android:id="@+id/textView1"
-        android:layout_width="200dp"
-        android:layout_height="60dp"
+        android:layout_width="197dp"
+        android:layout_height="41dp"
+
+        android:layout_alignEnd="@+id/canvas"
+        android:layout_alignRight="@+id/canvas"
         android:layout_alignBottom="@+id/canvas"
         android:layout_marginTop="10dp"
+        android:layout_marginEnd="-6dp"
+        android:layout_marginRight="-6dp"
+        android:layout_marginBottom="48dp"
         android:text="" />
 </RelativeLayout>
