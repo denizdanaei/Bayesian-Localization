@@ -7,71 +7,130 @@ import java.io.BufferedReader;
         import java.io.IOException;
         import java.util.*;
 
+import static com.example.k2.d2.k2d2pf.FullscreenActivity.motion_detail;
+
 public class Kmean{
 
-    public static void kmeans() {
-        int arr[] = {2, 4, 10, 12, 3, 20, 30, 11, 25};    // initial data
-        int i, m1, m2, a, b, n = 0;
-        boolean flag;
-        float sum1, sum2;
-        a = arr[0];
-        b = arr[1];
-        m1 = a;
-        m2 = b;
-        int cluster1[] = new int[arr.length], cluster2[] = new int[arr.length];
-        do {
-            sum1 = 0;
-            sum2 = 0;
-            cluster1 = new int[arr.length];
-            cluster2 = new int[arr.length];
-            n++;
-            int k = 0, j = 0;
-            for (i = 0; i < arr.length; i++) {
-                if (Math.abs(arr[i] - m1) <= Math.abs(arr[i] - m2)) {
-                    cluster1[k] = arr[i];
-                    k++;
-                } else {
-                    cluster2[j] = arr[i];
-                    j++;
+
+
+    public static List<PF> KMean( List<PF> Particals){
+
+        int size=Particals.size();
+        PF pf1, pf2,pf3, mean1,mean2, mean3;
+        int sumx1=0,sumy1=0, sumx2=0,sumy2=0, sumx3=0,sumy3=0;
+
+        pf1=Particals.get(0);       mean1=pf1;
+        pf2=Particals.get(1);       mean2=pf2;
+        pf3=Particals.get(2);       mean3=pf3;
+
+        List<PF> cluster1, cluster2, cluster3;
+        boolean stopflag=true;
+        int k = 0, j = 0, l= 0;
+
+        while (stopflag){
+
+            sumx1=0;sumy1=0;    sumx2=0;sumy2=0;   sumx3=0;sumy3=0;
+            cluster1 = new ArrayList<>();
+            cluster2 = new ArrayList<>();
+            cluster3 = new ArrayList<>();
+
+            for (int i = 0; i < size; i++) {
+
+                String distance=distance(Particals.get(i),mean1,mean2,mean3);
+                switch (distance){
+
+                    case ("cluster1"):
+
+                        cluster1.add(Particals.get(i));
+                        k++;
+                        break;
+
+                    case ("cluster2"):
+                        cluster2.add(Particals.get(i));
+                        j++;
+                        break;
+
+                    case ("cluster3"):
+                        cluster3.add(Particals.get(i));
+                        l++;
+                        break;
+                    default:
+                        break;
                 }
             }
-            System.out.println();
-            for (i = 0; i < k; i++) {
-                sum1 = sum1 + cluster1[i];
-            }
-            for (i = 0; i < j; i++) {
-                sum2 = sum2 + cluster2[i];
-            }
-            //printing Centroids/Means\
-            System.out.println("m1=" + m1 + "   m2=" + m2);
-            a = m1;
-            b = m2;
-            m1 = Math.round(sum1 / k);
-            m2 = Math.round(sum2 / j);
-            flag = !(m1 == a && m2 == b);
 
-            System.out.println("After iteration " + n + " , cluster 1 :\n");    //printing the clusters of each iteration
-            for (i = 0; i < cluster1.length; i++) {
-                System.out.print(cluster1[i] + "\t");
+
+            for (PF partical: cluster1) {
+                sumx1+=partical.x;
+                sumy1+=partical.y;
             }
 
-            System.out.println("\n");
-            System.out.println("After iteration " + n + " , cluster 2 :\n");
-            for (i = 0; i < cluster2.length; i++) {
-                System.out.print(cluster2[i] + "\t");
+            for (PF partical: cluster2) {
+                sumx2+=partical.x;
+                sumy2+=partical.y;
             }
 
-        } while (flag);
+            for (PF partical: cluster3) {
+                sumx3+=partical.x;
+                sumy3+=partical.y;
+            }
 
-        System.out.println("Final cluster 1 :\n");            // final clusters
-        for (i = 0; i < cluster1.length; i++) {
-            System.out.print(cluster1[i] + "\t");
+            pf1.x = mean1.x;    pf1.y=mean1.y;
+            pf2.x=  mean2.x;    pf2.y=mean2.y;
+            pf3.x = mean3.x;    pf3.y=mean3.y;
+
+            mean1.x = Math.round(sumx1 / k);
+            mean1.y = Math.round(sumy1 / k);
+
+            mean2.x = Math.round(sumx2 / j);
+            mean2.y = Math.round(sumy2 / j);
+
+
+            mean3.x = Math.round(sumx2 / l);
+            mean3.y = Math.round(sumy2 / l);
+
+            stopflag = !(mean1.x == pf1.x || mean1.y == pf1.y || mean2.y == pf2.y || mean2.x == pf2.x || mean3.y == pf3.y || mean3.x == pf3.x);
         }
+        motion_detail.setText(motion_detail.getText()+"\nk="+k+"  ,j="+j +"mean1=("+mean1.x+","+mean1.y+")\tmean2=("+mean2.x+","+mean2.y+")");
 
-        System.out.println();
-        System.out.println("Final cluster 2 :\n");
-        for (i = 0; i < cluster2.length; i++) {
-            System.out.print(cluster2[i] + "\t");
-        }
+        mean1.setBounds(mean1);
+        mean2.setBounds(mean2);
+        mean3.setBounds(mean3);
+
+        List<PF> kmeans=new ArrayList<>();
+        kmeans.add(mean1);kmeans.add(mean2); kmeans.add(mean3);
+        return kmeans;
+    }
+    private static int length(PF pf1, PF pf2){
+        double x=(double) (pf1.x- pf2.x);
+        double y=(double) (pf1.y- pf2.y);
+
+        int length =(int)Math.sqrt((Math.pow(x,2))+(Math.pow(y,2)));
+        return length;
+    }
+    private static String distance(PF pf, PF pf1, PF pf2, PF pf3) {
+
+        int length_pf_pf1=length(pf,pf1);
+        int length_pf_pf2=length(pf,pf2);
+        int length_pf_pf3=length(pf,pf3);
+        int distance= Math.min(length_pf_pf1, Math.min(length_pf_pf2,length_pf_pf3));
+
+
+        if(distance==length_pf_pf1){return "cluster1";}
+
+        else if(distance==length_pf_pf2){return "cluster2";}
+
+        else{return "cluster3";}
+
+    }
+
+    private void incircle(PF pf1, PF pf2, PF pf3){
+
+        int pf1_2= length(pf1,pf2);
+        int pf1_3= length(pf1,pf3);
+        int pf2_3= length(pf2,pf3);
+        int p=pf1_2+pf1_3+pf2_3;
+        int incircle_x= ((pf1.x*pf2_3)+(pf2.x*pf1_3)+(pf3.x*pf1_2))/p;
+        int incircle_y= ((pf1.y*pf2_3)+(pf2.y*pf1_3)+(pf3.y*pf1_2))/p;
     }
 }
