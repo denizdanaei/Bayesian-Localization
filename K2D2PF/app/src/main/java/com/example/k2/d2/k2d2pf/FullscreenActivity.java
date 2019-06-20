@@ -9,6 +9,7 @@ import android.graphics.Point;
 import android.graphics.Rect;
 import android.graphics.drawable.ShapeDrawable;
 import android.graphics.drawable.shapes.OvalShape;
+import android.graphics.drawable.shapes.RectShape;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.ActionBar;
@@ -38,7 +39,7 @@ public class FullscreenActivity extends AppCompatActivity implements View.OnClic
 
     private Canvas canvas;
 
-    private List<ShapeDrawable> walls;
+    private List<ShapeDrawable> walls, cells;
 
     public int width=0,height = 0;
     private int stepsize =80;
@@ -170,6 +171,7 @@ public class FullscreenActivity extends AppCompatActivity implements View.OnClic
         height = size.x;
         width= size.y;
 
+//        height=(int)(14/40)*width;
         ImageView canvasView = findViewById(R.id.canvas);
 
         Bitmap blankBitmap = Bitmap.createBitmap(width,height, Bitmap.Config.ARGB_8888);
@@ -177,6 +179,7 @@ public class FullscreenActivity extends AppCompatActivity implements View.OnClic
         canvasView.setImageBitmap(blankBitmap);
 
         walls = Walls.build_walls(width,height);
+        cells=Walls.cells(width,height);
 
         /* create Particals */
         for (int i=0; i<number; i++){
@@ -189,6 +192,9 @@ public class FullscreenActivity extends AppCompatActivity implements View.OnClic
         canvas.drawColor(Color.WHITE);
         for(ShapeDrawable wall : walls)
             wall.draw(canvas);
+
+//        for(ShapeDrawable cell : cells)
+//            cell.draw(canvas);
         drawing(canvas,Particals);
     }
 
@@ -248,18 +254,19 @@ public class FullscreenActivity extends AppCompatActivity implements View.OnClic
 
     @Override
     public void onClick(View v) {
+        motion_detail.setText(null);
         switch (v.getId()) {
             // UP BUTTON
             case R.id.button1: {
 //                Toast.makeText(getApplication(), "UP", Toast.LENGTH_SHORT).show();
-                fp_movement(width,height,"up",Particals, stepsize);
+                fp_movement(width,height,"up",Particals, height/20);
 //                motion_detail.setText(motion_detail.getText() + "\nuser=" + r.left + "," + r.top + "," + r.right + "," + r.bottom);
                 break;
             }
             // DOWN BUTTON
             case R.id.button4: {
 //                Toast.makeText(getApplication(), "DOWN", Toast.LENGTH_SHORT).show();
-                fp_movement(width,height,"down",Particals, stepsize);
+                fp_movement(width,height,"down",Particals, height/20);
 //                motion_detail.setText("\n\tMove Down" + "\n\tTop Margin = "
 //                        + user.getBounds().top);
                 break;
@@ -268,7 +275,7 @@ public class FullscreenActivity extends AppCompatActivity implements View.OnClic
             case R.id.button2: {
 //                Toast.makeText(getApplication(), "LEFT", Toast.LENGTH_SHORT).show();
 
-                fp_movement(width,height,"left",Particals, stepsize);
+                fp_movement(width,height,"left",Particals, 7*width/400);
 //                motion_detail.setText("\n\tMove Left" + "\n\tLeft Margin = "
 //                        + user.getBounds().left);
                 break;
@@ -276,7 +283,7 @@ public class FullscreenActivity extends AppCompatActivity implements View.OnClic
             // RIGHT BUTTON
             case R.id.button3: {
 //                Toast.makeText(getApplication(), "RIGHT", Toast.LENGTH_SHORT).show();
-                fp_movement(width,height,"right",Particals, stepsize);
+                fp_movement(width,height,"right",Particals, 7*width/400);
 //                motion_detail.setText("\n\tMove Right" + "\n\tLeft Margin = "
 //                        + user.getBounds().left);
                 break;
@@ -288,11 +295,39 @@ public class FullscreenActivity extends AppCompatActivity implements View.OnClic
             }
         }
 
+        List<PF> kmeans=PF.KMean(Particals);
+
+        kmeans.get(0).color=Color.RED; //k
+        kmeans.get(1).color=Color.BLUE; //j
+        kmeans.get(2).color=Color.YELLOW; //l
+
+        for (PF pf: kmeans){
+            pf.size=40;
+            pf.setBounds(pf);
+        }
+
+
+        ShapeDrawable cell =new ShapeDrawable(new RectShape());
+        cell.getPaint().setColor(Color.rgb(240, 204, 194));
+        cell.setBounds(0, 0, 0,0);
+
+
+
+        PF centroid=PF.CheckConvergence(Particals);
+        if (convergence){cell=Walls.check_cells(centroid, width,height);}
+
         canvas.drawColor(Color.WHITE);
         for(ShapeDrawable wall : walls)
             wall.draw(canvas);
-
+        cell.draw(canvas);
         drawing(canvas,Particals);
+        drawing(canvas, kmeans);
+        centroid.shapeDrawable.draw(canvas);
+
+
+//        motion_detail.setText(motion_detail.getText()+"\ncluster1("+kmeans.get(0).x+","+kmeans.get(0).y
+//                                +")\ncluster2=("+kmeans.get(1).x+","+kmeans.get(1).y
+//                                +")\ncluster3=("+kmeans.get(0).x+","+kmeans.get(0).x+")");
 
     }
 }
