@@ -1,6 +1,7 @@
 package com.example.k2.d2.k2d2pf;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.pm.ActivityInfo;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
@@ -9,17 +10,22 @@ import android.graphics.Point;
 import android.graphics.Rect;
 import android.graphics.drawable.ShapeDrawable;
 import android.graphics.drawable.shapes.OvalShape;
+import android.hardware.SensorEvent;
+import android.hardware.SensorManager;
+import android.hardware.Sensor;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.text.method.ScrollingMovementMethod;
+import android.hardware.SensorEventListener;
 import android.view.Display;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -30,11 +36,23 @@ import java.util.ListIterator;
 import static com.example.k2.d2.k2d2pf.PF.*;
 
 
-public class FullscreenActivity extends AppCompatActivity implements View.OnClickListener {
+public class FullscreenActivity extends AppCompatActivity implements View.OnClickListener,SensorEventListener {
 
     private Button up, left, right, down, reset;
 
+    private float aX,aY,aZ =0;
+
+    private int steps = 0;
+
     public static TextView motion_detail;
+
+    private float azimuth ;
+
+    private SensorManager sensorManager;
+
+    private Sensor accelerometer,mRotationSensor;
+
+    public boolean activityRunning ;
 
     private Canvas canvas;
 
@@ -123,6 +141,27 @@ public class FullscreenActivity extends AppCompatActivity implements View.OnClic
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        sensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
+        if (sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER) != null) {
+            // set accelerometer
+            accelerometer = sensorManager
+                    .getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
+            // register 'this' as a listener that updates values. Each time a sensor value changes,
+            // the method 'onSensorChanged()' is called.
+            sensorManager.registerListener(this, accelerometer,
+                    SensorManager.SENSOR_DELAY_NORMAL);
+        } else {
+            Toast.makeText(this, "Hardware compatibility issue", Toast.LENGTH_LONG).show();
+        }
+        if(sensorManager.getDefaultSensor(Sensor.TYPE_ROTATION_VECTOR) != null){
+            mRotationSensor = sensorManager
+                    .getDefaultSensor(Sensor.TYPE_ROTATION_VECTOR);
+            sensorManager.registerListener(this, mRotationSensor,
+                    SensorManager.SENSOR_DELAY_NORMAL);
+        }else
+        {
+            Toast.makeText(this, "Hardware compatibility issue", Toast.LENGTH_LONG).show();
+        }
 
         setContentView(R.layout.activity_fullscreen);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
@@ -294,5 +333,62 @@ public class FullscreenActivity extends AppCompatActivity implements View.OnClic
 
         drawing(canvas,Particals);
 
+    }
+    // onResume() registers the accelerometer for listening the events
+    protected void onResume() {
+        super.onResume();
+        activityRunning = true;
+        sensorManager.registerListener(this, accelerometer,
+                SensorManager.SENSOR_DELAY_NORMAL);
+        Sensor countSensor = sensorManager.getDefaultSensor(Sensor.TYPE_STEP_COUNTER);
+        if (countSensor != null) {
+            sensorManager.registerListener(this, countSensor, SensorManager.SENSOR_DELAY_UI);
+        } else {
+            Toast.makeText(this, "Count sensor not available!", Toast.LENGTH_LONG).show();
+        }
+    }
+
+    // onPause() unregisters the accelerometer for stop listening the events
+    protected void onPause() {
+        super.onPause();
+        sensorManager.unregisterListener(this);
+        activityRunning = false;
+    }
+
+    @Override
+    public void onAccuracyChanged(Sensor sensor, int accuracy) {
+        // Do nothing.
+    }
+
+    @Override
+    public void onSensorChanged(SensorEvent event) {
+        boolean check = false;
+
+        if(Sensor.TYPE_ACCELEROMETER == (event.sensor.getType())) {
+            motion_detail.setText("0.0");
+
+            // get the the x,y,z values of the accelerometer
+            aX = event.values[0];
+            aY = event.values[1];
+            aZ = event.values[2];
+
+            if (aX > 2.00 && aX < 2.500 && aZ >= 10.5)
+                steps++;
+        }else if(Sensor.TYPE_STEP_DETECTOR == (event.sensor.getType())) {
+            if (activityRunning) {
+                check = true;
+            }
+        }else if(Sensor.TYPE_ROTATION_VECTOR == (event.sensor.getType())){
+            float rotationMatrix[] = new float[16];
+            SensorManager.getRotationMatrixFromVector(rotationMatrix, event.values);
+            SensorManager.remapCoordinateSystem(rotationMatrix, SensorManager.AXIS_X, SensorManager.AXIS_Y, rotationMatrix);
+            float rotationValues[] = new float[16];
+            SensorManager.getOrientation(rotationMatrix, rotationValues);
+            azimuth = (float) Math.toDegrees(rotationValues[0])+180;
+        }
+
+
+        // display the current x,y,z accelerometer values
+        motion_detail.setText(" steps"+ steps + "dir " + azimuth);
     }
 }
