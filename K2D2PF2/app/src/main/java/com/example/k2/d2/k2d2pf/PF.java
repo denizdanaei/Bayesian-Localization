@@ -146,7 +146,7 @@ public class PF extends Walls {
         switch (direction) {
             case "up": {
                 for (PF partical : Particals) {
-                    int movement = random.nextInt(stepsize) * 2;
+                    int movement = random.nextInt(stepsize);
                     partical.x += (int) random.nextGaussian() * (movement / 3) * (random.nextBoolean() ? -1 : 1);
                     partical.y -= movement;
                     partical.setBounds(partical);
@@ -155,7 +155,7 @@ public class PF extends Walls {
             }
             case "down": {
                 for (PF partical : Particals) {
-                    int movement = random.nextInt(stepsize) * 2;
+                    int movement = random.nextInt(stepsize);
                     partical.x += (int) random.nextGaussian() * (movement / 3) * (random.nextBoolean() ? -1 : 1);
                     partical.y += movement;
                     partical.setBounds(partical);
@@ -164,7 +164,7 @@ public class PF extends Walls {
             }
             case "right": {
                 for (PF partical : Particals) {
-                    int movement = random.nextInt(stepsize) * 2;
+                    int movement = random.nextInt(stepsize);
                     partical.x += movement;
                     partical.y += (int) random.nextGaussian() * (movement / 3) * (random.nextBoolean() ? -1 : 1);
                     partical.setBounds(partical);
@@ -173,7 +173,7 @@ public class PF extends Walls {
             }
             case "left": {
                 for (PF partical : Particals) {
-                    int movement = random.nextInt(stepsize) * 2;
+                    int movement = random.nextInt(stepsize);
                     partical.x -= movement;
                     partical.y += (int) random.nextGaussian() * (movement / 3) * (random.nextBoolean() ? -1 : 1);
                     partical.setBounds(partical);
@@ -345,7 +345,7 @@ public class PF extends Walls {
         int biggest_cluster = Math.max(cluster1_size, Math.max(cluster2_size, cluster3_size));
 
 //        if ((length_pf_pf1<200 && length_pf_pf2<200 && length_pf_pf3<100))
-        if ((biggest_cluster > 900 && distance < 300) || (length_pf_pf1 < 200 && length_pf_pf2 < 200 && length_pf_pf3 < 100)) {
+        if ((biggest_cluster > 900) || (length_pf_pf1 < 200 && length_pf_pf2 < 200 && length_pf_pf3 < 100)) {
             return true;
         } else {
             return false;

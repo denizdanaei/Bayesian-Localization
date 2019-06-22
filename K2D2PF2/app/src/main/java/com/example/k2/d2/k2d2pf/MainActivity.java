@@ -31,7 +31,7 @@ import static com.example.k2.d2.k2d2pf.PF.convergence;
 import static com.example.k2.d2.k2d2pf.PF.drawing;
 import static com.example.k2.d2.k2d2pf.PF.fp_movement;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener, SensorEventListener {
+public class MainActivity extends AppCompatActivity implements SensorEventListener {
 
     private Button up, left, right, down, reset, calibration;
     private List<ShapeDrawable> walls;
@@ -71,7 +71,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         walls = Walls.build_walls(width,height);
         for (int i = 0; i < number; i++) {
-            PF pf = new PF(width / 10, height / 5, 1, Color.BLACK, new ShapeDrawable(new OvalShape()), 5);
+            PF pf = new PF(width / 10, height / 5, 1, Color.BLACK, new ShapeDrawable(new OvalShape()), 2);
             Particles.add(pf);
         }
         /* Initial Placement*/
@@ -88,23 +88,56 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         motion_detail.setMovementMethod(new ScrollingMovementMethod());
 
         up = findViewById(R.id.button1);
-        up.setOnClickListener(this);
+        up.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                fp_movement(width,height,"up", Particles, height/20);
+            }
+        });
 
         left = findViewById(R.id.button2);
-        left.setOnClickListener(this);
+        left.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
 
+                fp_movement(width,height,"left", Particles, 7*width/400);
+            }
+        });
         right = findViewById(R.id.button3);
-        right.setOnClickListener(this);
+        right.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
 
+                fp_movement(width,height,"right", Particles, 7*width/400);
+            }
+        });
         down = findViewById(R.id.button4);
-        down.setOnClickListener(this);
+        down.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
 
+                fp_movement(width,height,"down", Particles, height/20);
+            }
+        });
         reset = findViewById(R.id.reset);
-        reset.setOnClickListener(this);
+        reset.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
 
+                Particles =InitPF(width,height, Particles);
+            }
+        });
         calibration = findViewById(R.id.calibration);
-        calibration.setOnClickListener(this);
+        calibration.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
 
+                azimuthOffset();
+                calibration_done = true;
+                aZBias = aZ;
+            }
+        });
     }
     private void Initialize_Sensors(){ sensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
         if (sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER) != null) {
@@ -135,7 +168,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         offset = azimuth;
     }
 
-    @Override
+
     public void onClick(View v) {
         motion_detail.setText(null);
         switch (v.getId()) {
@@ -242,10 +275,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 for(int i = 0 ; i<azArray.size();i++){
                     if(azArray.get(i) >= aZBias +2){
                         steps = true;
-                        step++;
+
                     }
                 }
                 azArray.clear();
+
             }
         } else if (Sensor.TYPE_ROTATION_VECTOR == (event.sensor.getType())) {
             float rotationMatrix[] = new float[16];
@@ -275,6 +309,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         if (steps && calibration_done) {
             steps = false;
+            step++;
             switch (direction) {
                 // UP BUTTON
                 case "West": {
@@ -314,36 +349,37 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 }
             }
 
-            List<PF> kmeans = PF.KMean(Particles);
 
-            kmeans.get(0).color = Color.RED; //k
-            kmeans.get(1).color = Color.BLUE; //j
-            kmeans.get(2).color = Color.YELLOW; //l
-
-            for (PF pf : kmeans) {
-                pf.size = 10;
-                pf.setBounds(pf);
-            }
-
-
-            ShapeDrawable cell = new ShapeDrawable(new RectShape());
-            cell.getPaint().setColor(Color.rgb(240, 204, 194));
-            cell.setBounds(0, 0, 0, 0);
-
-
-            PF centroid = PF.CheckConvergence(Particles);
-            if (convergence) {
-                cell = Walls.check_cells(centroid, width, height);
-            }
-
-            canvas.drawColor(Color.WHITE);
-            for (ShapeDrawable wall : walls)
-                wall.draw(canvas);
-            cell.draw(canvas);
-            drawing(canvas, Particles);
-            drawing(canvas, kmeans);
-            centroid.shapeDrawable.draw(canvas);
         }
+        List<PF> kmeans = PF.KMean(Particles);
+
+        kmeans.get(0).color = Color.RED; //k
+        kmeans.get(1).color = Color.BLUE; //j
+        kmeans.get(2).color = Color.YELLOW; //l
+
+        for (PF pf : kmeans) {
+            pf.size = 10;
+            pf.setBounds(pf);
+        }
+
+
+        ShapeDrawable cell = new ShapeDrawable(new RectShape());
+        cell.getPaint().setColor(Color.rgb(240, 204, 194));
+        cell.setBounds(0, 0, 0, 0);
+
+
+        PF centroid = PF.CheckConvergence(Particles);
+        if (convergence) {
+            cell = Walls.check_cells(centroid, width, height);
+        }
+
+        canvas.drawColor(Color.WHITE);
+        for (ShapeDrawable wall : walls)
+            wall.draw(canvas);
+        cell.draw(canvas);
+        drawing(canvas, Particles);
+        drawing(canvas, kmeans);
+        centroid.shapeDrawable.draw(canvas);
     }
 
 
