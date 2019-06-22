@@ -43,7 +43,11 @@ public class FullscreenActivity extends AppCompatActivity implements View.OnClic
 
     private float aX,aY,aZ =0;
 
-    private int steps = 0;
+    private boolean steps;
+
+    private int step;
+
+    public String direction;
 
     public static TextView motion_detail;
 
@@ -399,7 +403,7 @@ public class FullscreenActivity extends AppCompatActivity implements View.OnClic
     public void onSensorChanged(SensorEvent event) {
         boolean check = false;
 
-        if(Sensor.TYPE_ACCELEROMETER == (event.sensor.getType())) {
+        if (Sensor.TYPE_ACCELEROMETER == (event.sensor.getType())) {
             motion_detail.setText("0.0");
 
             // get the the x,y,z values of the accelerometer
@@ -407,23 +411,108 @@ public class FullscreenActivity extends AppCompatActivity implements View.OnClic
             aY = event.values[1];
             aZ = event.values[2];
 
-            if (aX > 2.00 && aX < 2.500 && aZ >= 10.5)
-                steps++;
-        }else if(Sensor.TYPE_STEP_DETECTOR == (event.sensor.getType())) {
+            if (aZ >= 10.5){
+                steps = true;
+                step++;
+            }
+
+        } else if (Sensor.TYPE_STEP_DETECTOR == (event.sensor.getType())) {
             if (activityRunning) {
                 check = true;
             }
-        }else if(Sensor.TYPE_ROTATION_VECTOR == (event.sensor.getType())){
+        } else if (Sensor.TYPE_ROTATION_VECTOR == (event.sensor.getType())) {
             float rotationMatrix[] = new float[16];
             SensorManager.getRotationMatrixFromVector(rotationMatrix, event.values);
             SensorManager.remapCoordinateSystem(rotationMatrix, SensorManager.AXIS_X, SensorManager.AXIS_Y, rotationMatrix);
             float rotationValues[] = new float[16];
             SensorManager.getOrientation(rotationMatrix, rotationValues);
-            azimuth = (float) Math.toDegrees(rotationValues[0])+180;
+            azimuth = (float) Math.toDegrees(rotationValues[0]) + 180;
         }
 
 
         // display the current x,y,z accelerometer values
-        motion_detail.setText(" steps"+ steps + "dir " + azimuth);
+        motion_detail.setText(" steps" + steps + "dir " + azimuth+"\n aX"+aX +"\n aZ"+aZ );
+
+        if (azimuth >= 45 && azimuth <= 150) {
+            direction = "North";
+        } else if (azimuth <= 330 || azimuth >= 240) {
+            direction = "South";
+        } else if (azimuth >= 150 && azimuth <= 240) {
+            direction = "East";
+        } else {
+            direction = "West";
+        }
+
+        if (steps) {
+            steps = false;
+            switch (direction) {
+                // UP BUTTON
+                case "North": {
+//                Toast.makeText(getApplication(), "UP", Toast.LENGTH_SHORT).show();
+                    fp_movement(width, height, "up", Particals, height / 20);
+//                motion_detail.setText(motion_detail.getText() + "\nuser=" + r.left + "," + r.top + "," + r.right + "," + r.bottom);
+                    break;
+                }
+                // DOWN BUTTON
+                case "South": {
+//                Toast.makeText(getApplication(), "DOWN", Toast.LENGTH_SHORT).show();
+                    fp_movement(width, height, "down", Particals, height / 20);
+//                motion_detail.setText("\n\tMove Down" + "\n\tTop Margin = "
+//                        + user.getBounds().top);
+                    break;
+                }
+                // LEFT BUTTON
+                case "West": {
+//                Toast.makeText(getApplication(), "LEFT", Toast.LENGTH_SHORT).show();
+
+                    fp_movement(width, height, "left", Particals, 7 * width / 400);
+//                motion_detail.setText("\n\tMove Left" + "\n\tLeft Margin = "
+//                        + user.getBounds().left);
+                    break;
+                }
+                // RIGHT BUTTON
+                case "East": {
+//                Toast.makeText(getApplication(), "RIGHT", Toast.LENGTH_SHORT).show();
+                    fp_movement(width, height, "right", Particals, 7 * width / 400);
+//                motion_detail.setText("\n\tMove Right" + "\n\tLeft Margin = "
+//                        + user.getBounds().left);
+                    break;
+                }
+                default: {
+                    //do nothing
+                    break;
+                }
+            }
+
+            List<PF> kmeans = PF.KMean(Particals);
+
+            kmeans.get(0).color = Color.RED; //k
+            kmeans.get(1).color = Color.BLUE; //j
+            kmeans.get(2).color = Color.YELLOW; //l
+
+            for (PF pf : kmeans) {
+                pf.size = 40;
+                pf.setBounds(pf);
+            }
+
+
+            ShapeDrawable cell = new ShapeDrawable(new RectShape());
+            cell.getPaint().setColor(Color.rgb(240, 204, 194));
+            cell.setBounds(0, 0, 0, 0);
+
+
+            PF centroid = PF.CheckConvergence(Particals);
+            if (convergence) {
+                cell = Walls.check_cells(centroid, width, height);
+            }
+
+            canvas.drawColor(Color.WHITE);
+            for (ShapeDrawable wall : walls)
+                wall.draw(canvas);
+            cell.draw(canvas);
+            drawing(canvas, Particals);
+            drawing(canvas, kmeans);
+            centroid.shapeDrawable.draw(canvas);
+        }
     }
 }
