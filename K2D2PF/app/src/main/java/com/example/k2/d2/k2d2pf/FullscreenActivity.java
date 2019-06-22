@@ -38,7 +38,7 @@ public class FullscreenActivity extends AppCompatActivity implements View.OnClic
 
     private Button up, left, right, down, reset, calibration;
 
-    private float aX,aY,aZ =0;
+    private float aX,aY,aZ,aZBias =0;
     private boolean steps;
     private int step;
     public String direction;
@@ -226,6 +226,7 @@ public class FullscreenActivity extends AppCompatActivity implements View.OnClic
     }
 
     public void azimuthOffset(){
+        aZBias = aZ;
         offset = azimuth;
     }
 
@@ -320,7 +321,6 @@ public class FullscreenActivity extends AppCompatActivity implements View.OnClic
     ArrayList<Float> azArray = new ArrayList<>();
     @Override
     public void onSensorChanged(SensorEvent event) {
-        boolean check = false;
 
         if (Sensor.TYPE_ACCELEROMETER == (event.sensor.getType())) {
             motion_detail.setText("0.0");
@@ -331,19 +331,15 @@ public class FullscreenActivity extends AppCompatActivity implements View.OnClic
             aZ = event.values[2];
             azArray.add(aZ);
 
-            if (azArray.size() >=20){
+            if (azArray.size() >=30 && calibration_done){
                 for(int i = 0 ; i<azArray.size();i++){
-                    if(azArray.get(i) >=11){
+                    if(azArray.get(i) >= aZBias +2){
                         steps = true;
                         step++;
                         azArray.clear();
+                        break;
                     }
                 }
-            }
-
-        } else if (Sensor.TYPE_STEP_DETECTOR == (event.sensor.getType())) {
-            if (activityRunning) {
-                check = true;
             }
         } else if (Sensor.TYPE_ROTATION_VECTOR == (event.sensor.getType())) {
             float rotationMatrix[] = new float[16];
