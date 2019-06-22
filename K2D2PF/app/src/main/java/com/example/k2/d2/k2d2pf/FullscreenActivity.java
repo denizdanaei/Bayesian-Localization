@@ -399,6 +399,7 @@ public class FullscreenActivity extends AppCompatActivity implements View.OnClic
         // Do nothing.
     }
 
+    ArrayList<Float> azArray = new ArrayList<>();
     @Override
     public void onSensorChanged(SensorEvent event) {
         boolean check = false;
@@ -410,10 +411,16 @@ public class FullscreenActivity extends AppCompatActivity implements View.OnClic
             aX = event.values[0];
             aY = event.values[1];
             aZ = event.values[2];
+            azArray.add(aZ);
 
-            if (aZ >= 10.5){
-                steps = true;
-                step++;
+            if (azArray.size() >=20){
+                for(int i = 0 ; i<azArray.size();i++){
+                    if(azArray.get(i) >=11){
+                        steps = true;
+                        step++;
+                        azArray.clear();
+                    }
+                }
             }
 
         } else if (Sensor.TYPE_STEP_DETECTOR == (event.sensor.getType())) {
@@ -431,7 +438,7 @@ public class FullscreenActivity extends AppCompatActivity implements View.OnClic
 
 
         // display the current x,y,z accelerometer values
-        motion_detail.setText(" steps" + steps + "dir " + azimuth+"\n aX"+aX +"\n aZ"+aZ );
+        motion_detail.setText( "Number : " + step + " steps" + steps + "dir " + azimuth+"\n aX"+aX +"\n aZ"+aZ );
 
         if (azimuth >= 45 && azimuth <= 150) {
             direction = "North";
