@@ -13,7 +13,6 @@
       <change beforePath="$PROJECT_DIR$/../../BayesianLocalization/app/src/main/java/com/example/k2/d2/k2d2/Tab_localization.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../BayesianLocalization/app/src/main/java/com/example/k2/d2/k2d2/Tab_localization.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../BayesianLocalization/app/src/main/java/com/example/k2/d2/k2d2/Tab_training.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../BayesianLocalization/app/src/main/java/com/example/k2/d2/k2d2/Tab_training.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../BayesianLocalization/app/src/main/res/layout/tab_localization.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../BayesianLocalization/app/src/main/res/layout/tab_localization.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/k2/d2/k2d2pf/FullscreenActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/k2/d2/k2d2pf/FullscreenActivity.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -34,13 +33,33 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/example/k2/d2/k2d2pf/FullscreenActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="222">
-              <caret line="420" column="40" selection-start-line="420" selection-start-column="40" selection-end-line="420" selection-end-column="40" />
+            <state relative-caret-position="221">
+              <caret line="55" column="52" selection-start-line="55" selection-start-column="52" selection-end-line="55" selection-end-column="52" />
               <folding>
                 <element signature="imports" expanded="true" />
+                <element signature="e#2588#3364#0" expanded="true" />
+                <element signature="e#3363#3364#0" expanded="true" />
+                <element signature="e#3446#3767#0" expanded="true" />
+                <element signature="e#3766#3767#0" expanded="true" />
+                <element signature="e#3842#3940#0" expanded="true" />
+                <element signature="e#3939#3940#0" expanded="true" />
+                <element signature="e#4222#4475#0" expanded="true" />
+                <element signature="e#4474#4475#0" expanded="true" />
+                <element signature="e#4992#5137#0" expanded="true" />
+                <element signature="e#5136#5137#0" expanded="true" />
               </folding>
             </state>
           </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/res/layout/activity_fullscreen.xml">
+          <provider editor-type-id="text-editor">
+            <state relative-caret-position="918">
+              <caret line="54" column="12" selection-start-line="54" selection-start-column="12" selection-end-line="54" selection-end-column="12" />
+            </state>
+          </provider>
+          <provider selected="true" editor-type-id="android-designer2" />
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
@@ -72,8 +91,8 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/main/res/layout/activity_fullscreen.xml" />
         <option value="$PROJECT_DIR$/src/main/AndroidManifest.xml" />
+        <option value="$PROJECT_DIR$/src/main/res/layout/activity_fullscreen.xml" />
         <option value="$PROJECT_DIR$/src/main/java/com/example/k2/d2/k2d2pf/FullscreenActivity.java" />
       </list>
     </option>
@@ -107,6 +126,12 @@
               <item name="K2D2PF" type="1abcf292:AndroidViewProjectNode" />
               <item name="app" type="feadf853:AndroidModuleNode" />
               <item name="res" type="d4f16f75:AndroidResFolderNode" />
+            </path>
+            <path>
+              <item name="K2D2PF" type="1abcf292:AndroidViewProjectNode" />
+              <item name="app" type="feadf853:AndroidModuleNode" />
+              <item name="res" type="d4f16f75:AndroidResFolderNode" />
+              <item name="layout" type="ddeffd01:AndroidResFolderTypeNode" />
             </path>
             <path>
               <item name="K2D2PF" type="1abcf292:AndroidViewProjectNode" />
@@ -230,9 +255,9 @@
       <window_info anchor="bottom" id="TODO" order="2" />
       <window_info anchor="bottom" id="Terminal" order="3" weight="0.3286119" />
       <window_info anchor="bottom" id="Event Log" order="4" side_tool="true" />
-      <window_info anchor="bottom" id="Build" order="5" weight="0.30311614" />
+      <window_info active="true" anchor="bottom" id="Build" order="5" visible="true" weight="0.30311614" />
       <window_info anchor="bottom" id="Android Profiler" order="6" weight="0.3286119" />
-      <window_info active="true" anchor="bottom" id="Run" order="7" visible="true" weight="0.3286119" />
+      <window_info anchor="bottom" id="Run" order="7" weight="0.3286119" />
       <window_info anchor="bottom" id="Debug" order="8" weight="0.3286119" />
       <window_info anchor="right" id="Device File Explorer" order="0" side_tool="true" />
       <window_info anchor="right" id="Capture Analysis" order="1" />
@@ -247,7 +272,7 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/com/example/k2/d2/k2d2pf/FullscreenActivity.java</url>
-          <line>147</line>
+          <line>143</line>
           <properties />
           <option name="timeStamp" value="2" />
         </line-breakpoint>
@@ -265,14 +290,6 @@
           </folding>
         </state>
       </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/res/layout/activity_fullscreen.xml">
-      <provider editor-type-id="text-editor">
-        <state relative-caret-position="799">
-          <caret line="47" column="12" selection-start-line="47" selection-start-column="12" selection-end-line="47" selection-end-column="12" />
-        </state>
-      </provider>
-      <provider selected="true" editor-type-id="android-designer2" />
     </entry>
     <entry file="file://$USER_HOME$/AppData/Local/Android/Sdk/sources/android-28/android/hardware/SensorManager.java">
       <provider selected="true" editor-type-id="text-editor">
@@ -328,12 +345,30 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/res/layout/activity_fullscreen.xml">
+      <provider editor-type-id="text-editor">
+        <state relative-caret-position="918">
+          <caret line="54" column="12" selection-start-line="54" selection-start-column="12" selection-end-line="54" selection-end-column="12" />
+        </state>
+      </provider>
+      <provider selected="true" editor-type-id="android-designer2" />
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/example/k2/d2/k2d2pf/FullscreenActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="222">
-          <caret line="420" column="40" selection-start-line="420" selection-start-column="40" selection-end-line="420" selection-end-column="40" />
+        <state relative-caret-position="221">
+          <caret line="55" column="52" selection-start-line="55" selection-start-column="52" selection-end-line="55" selection-end-column="52" />
           <folding>
             <element signature="imports" expanded="true" />
+            <element signature="e#2588#3364#0" expanded="true" />
+            <element signature="e#3363#3364#0" expanded="true" />
+            <element signature="e#3446#3767#0" expanded="true" />
+            <element signature="e#3766#3767#0" expanded="true" />
+            <element signature="e#3842#3940#0" expanded="true" />
+            <element signature="e#3939#3940#0" expanded="true" />
+            <element signature="e#4222#4475#0" expanded="true" />
+            <element signature="e#4474#4475#0" expanded="true" />
+            <element signature="e#4992#5137#0" expanded="true" />
+            <element signature="e#5136#5137#0" expanded="true" />
           </folding>
         </state>
       </provider>

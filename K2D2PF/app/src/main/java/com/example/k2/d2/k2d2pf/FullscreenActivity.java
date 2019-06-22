@@ -35,7 +35,7 @@ import static com.example.k2.d2.k2d2pf.PF.*;
 
 public class FullscreenActivity extends AppCompatActivity implements View.OnClickListener,SensorEventListener {
 
-    private Button up, left, right, down, reset;
+    private Button up, left, right, down, reset, calibration;
 
     private float aX,aY,aZ =0;
 
@@ -47,13 +47,13 @@ public class FullscreenActivity extends AppCompatActivity implements View.OnClic
 
     public static TextView motion_detail;
 
-    private float azimuth ;
+    private float azimuth, offset ;
 
     private SensorManager sensorManager;
 
     private Sensor accelerometer,mRotationSensor;
 
-    public boolean activityRunning ;
+    public boolean activityRunning, calibration_done ;
 
     private Canvas canvas;
 
@@ -182,6 +182,9 @@ public class FullscreenActivity extends AppCompatActivity implements View.OnClic
         reset = findViewById(R.id.reset);
         reset.setOnClickListener(this);
 
+        calibration = findViewById(R.id.calibration);
+        calibration.setOnClickListener(this);
+
         /*****************get the screen dimensions********************/
 
         Display display = getWindowManager().getDefaultDisplay();
@@ -284,6 +287,10 @@ public class FullscreenActivity extends AppCompatActivity implements View.OnClic
         mHideHandler.postDelayed(mHideRunnable, delayMillis);
     }
 
+    public void azimuthOffset(int value){
+        offset = azimuth;
+    }
+
     @Override
     public void onClick(View v) {
         motion_detail.setText(null);
@@ -312,6 +319,10 @@ public class FullscreenActivity extends AppCompatActivity implements View.OnClic
             case R.id.reset: {
 
                 Particles =InitPF(width,height, Particles);
+                break;
+            }
+            case R.id.calibration: {
+
                 break;
             }
         }
