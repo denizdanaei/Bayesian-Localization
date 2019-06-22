@@ -7,7 +7,6 @@ import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Point;
-import android.graphics.Rect;
 import android.graphics.drawable.ShapeDrawable;
 import android.graphics.drawable.shapes.OvalShape;
 import android.hardware.SensorEvent;
@@ -29,10 +28,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Iterator;
 import java.util.List;
-import java.util.ListIterator;
 
 import static com.example.k2.d2.k2d2pf.PF.*;
 
@@ -68,7 +64,7 @@ public class FullscreenActivity extends AppCompatActivity implements View.OnClic
 
     int number=2000;
     PF pf;
-    public List<PF> Particals=new ArrayList<>();
+    public List<PF> Particles =new ArrayList<>();
 
 
     /*******************************************************/
@@ -146,27 +142,7 @@ public class FullscreenActivity extends AppCompatActivity implements View.OnClic
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        sensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
-        if (sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER) != null) {
-            // set accelerometer
-            accelerometer = sensorManager
-                    .getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
-            // register 'this' as a listener that updates values. Each time a sensor value changes,
-            // the method 'onSensorChanged()' is called.
-            sensorManager.registerListener(this, accelerometer,
-                    SensorManager.SENSOR_DELAY_NORMAL);
-        } else {
-            Toast.makeText(this, "Hardware compatibility issue", Toast.LENGTH_LONG).show();
-        }
-        if(sensorManager.getDefaultSensor(Sensor.TYPE_ROTATION_VECTOR) != null){
-            mRotationSensor = sensorManager
-                    .getDefaultSensor(Sensor.TYPE_ROTATION_VECTOR);
-            sensorManager.registerListener(this, mRotationSensor,
-                    SensorManager.SENSOR_DELAY_NORMAL);
-        }else
-        {
-            Toast.makeText(this, "Hardware compatibility issue", Toast.LENGTH_LONG).show();
-        }
+
 
         setContentView(R.layout.activity_fullscreen);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
@@ -213,10 +189,9 @@ public class FullscreenActivity extends AppCompatActivity implements View.OnClic
         display.getSize(size);
         height = size.x;
         width= size.y;
+        /*****************Draw walls & particles********************/
 
-//        height=(int)(14/40)*width;
         ImageView canvasView = findViewById(R.id.canvas);
-
         Bitmap blankBitmap = Bitmap.createBitmap(width,height, Bitmap.Config.ARGB_8888);
         canvas = new Canvas(blankBitmap);
         canvasView.setImageBitmap(blankBitmap);
@@ -224,30 +199,45 @@ public class FullscreenActivity extends AppCompatActivity implements View.OnClic
         walls = Walls.build_walls(width,height);
         cells=Walls.cells(width,height);
 
-        /* create Particals */
+        /* create Particles */
         for (int i=0; i<number; i++){
             pf= new PF(width/10, height/5,1,Color.BLACK,  new ShapeDrawable(new OvalShape()),10);
-            Particals.add(pf);
+            Particles.add(pf);
         }
         /* Initial Placement*/
-        Particals=InitPF(width,height, Particals);
+        Particles =InitPF(width,height, Particles);
 
         canvas.drawColor(Color.WHITE);
         for(ShapeDrawable wall : walls)
             wall.draw(canvas);
-
-//        for(ShapeDrawable cell : cells)
-//            cell.draw(canvas);
-        drawing(canvas,Particals);
+        drawing(canvas, Particles);
+        /*****************Initialize Sensors********************/
+        sensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
+        if (sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER) != null) {
+            // set accelerometer
+            accelerometer = sensorManager
+                    .getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
+            // register 'this' as a listener that updates values. Each time a sensor value changes,
+            // the method 'onSensorChanged()' is called.
+            sensorManager.registerListener(this, accelerometer,
+                    SensorManager.SENSOR_DELAY_NORMAL);
+        } else {
+            Toast.makeText(this, "Hardware compatibility issue", Toast.LENGTH_LONG).show();
+        }
+        if(sensorManager.getDefaultSensor(Sensor.TYPE_ROTATION_VECTOR) != null){
+            mRotationSensor = sensorManager
+                    .getDefaultSensor(Sensor.TYPE_ROTATION_VECTOR);
+            sensorManager.registerListener(this, mRotationSensor,
+                    SensorManager.SENSOR_DELAY_NORMAL);
+        }else
+        {
+            Toast.makeText(this, "Hardware compatibility issue", Toast.LENGTH_LONG).show();
+        }
     }
 
     @Override
     protected void onPostCreate(Bundle savedInstanceState) {
         super.onPostCreate(savedInstanceState);
-
-        // Trigger the initial hide() shortly after the activity has been
-        // created, to briefly hint to the user that UI controls
-        // are available.
         delayedHide(100);
     }
 
@@ -283,7 +273,6 @@ public class FullscreenActivity extends AppCompatActivity implements View.OnClic
         // Schedule a runnable to display UI elements after a delay
         mHideHandler.removeCallbacks(mHidePart2Runnable);
         mHideHandler.postDelayed(mShowPart2Runnable, UI_ANIMATION_DELAY);
-
     }
 
     /**
@@ -301,76 +290,55 @@ public class FullscreenActivity extends AppCompatActivity implements View.OnClic
         switch (v.getId()) {
             // UP BUTTON
             case R.id.button1: {
-//                Toast.makeText(getApplication(), "UP", Toast.LENGTH_SHORT).show();
-                fp_movement(width,height,"up",Particals, height/20);
-//                motion_detail.setText(motion_detail.getText() + "\nuser=" + r.left + "," + r.top + "," + r.right + "," + r.bottom);
+                fp_movement(width,height,"up", Particles, height/20);
                 break;
             }
             // DOWN BUTTON
             case R.id.button4: {
-//                Toast.makeText(getApplication(), "DOWN", Toast.LENGTH_SHORT).show();
-                fp_movement(width,height,"down",Particals, height/20);
-//                motion_detail.setText("\n\tMove Down" + "\n\tTop Margin = "
-//                        + user.getBounds().top);
+                fp_movement(width,height,"down", Particles, height/20);
                 break;
             }
             // LEFT BUTTON
             case R.id.button2: {
-//                Toast.makeText(getApplication(), "LEFT", Toast.LENGTH_SHORT).show();
 
-                fp_movement(width,height,"left",Particals, 7*width/400);
-//                motion_detail.setText("\n\tMove Left" + "\n\tLeft Margin = "
-//                        + user.getBounds().left);
+                fp_movement(width,height,"left", Particles, 7*width/400);
                 break;
             }
             // RIGHT BUTTON
             case R.id.button3: {
-//                Toast.makeText(getApplication(), "RIGHT", Toast.LENGTH_SHORT).show();
-                fp_movement(width,height,"right",Particals, 7*width/400);
-//                motion_detail.setText("\n\tMove Right" + "\n\tLeft Margin = "
-//                        + user.getBounds().left);
+                fp_movement(width,height,"right", Particles, 7*width/400);
                 break;
             }
             case R.id.reset: {
 
-                Particals=InitPF(width,height, Particals);
+                Particles =InitPF(width,height, Particles);
                 break;
             }
         }
 
-        List<PF> kmeans=PF.KMean(Particals);
-
+        List<PF> kmeans=PF.KMean(Particles);
         kmeans.get(0).color=Color.RED; //k
         kmeans.get(1).color=Color.BLUE; //j
         kmeans.get(2).color=Color.YELLOW; //l
-
         for (PF pf: kmeans){
             pf.size=40;
             pf.setBounds(pf);
         }
 
-
         ShapeDrawable cell =new ShapeDrawable(new RectShape());
         cell.getPaint().setColor(Color.rgb(240, 204, 194));
         cell.setBounds(0, 0, 0,0);
 
-
-
-        PF centroid=PF.CheckConvergence(Particals);
+        PF centroid=PF.CheckConvergence(Particles);
         if (convergence){cell=Walls.check_cells(centroid, width,height);}
 
         canvas.drawColor(Color.WHITE);
         for(ShapeDrawable wall : walls)
             wall.draw(canvas);
         cell.draw(canvas);
-        drawing(canvas,Particals);
+        drawing(canvas, Particles);
         drawing(canvas, kmeans);
         centroid.shapeDrawable.draw(canvas);
-
-
-//        motion_detail.setText(motion_detail.getText()+"\ncluster1("+kmeans.get(0).x+","+kmeans.get(0).y
-//                                +")\ncluster2=("+kmeans.get(1).x+","+kmeans.get(1).y
-//                                +")\ncluster3=("+kmeans.get(0).x+","+kmeans.get(0).x+")");
 
     }
     // onResume() registers the accelerometer for listening the events
@@ -436,7 +404,6 @@ public class FullscreenActivity extends AppCompatActivity implements View.OnClic
             azimuth = (float) Math.toDegrees(rotationValues[0]) + 180;
         }
 
-
         // display the current x,y,z accelerometer values
         motion_detail.setText( "Number : " + step + " steps" + steps + "dir " + azimuth+"\n aX"+aX +"\n aZ"+aZ );
 
@@ -456,14 +423,14 @@ public class FullscreenActivity extends AppCompatActivity implements View.OnClic
                 // UP BUTTON
                 case "North": {
 //                Toast.makeText(getApplication(), "UP", Toast.LENGTH_SHORT).show();
-                    fp_movement(width, height, "up", Particals, height / 20);
+                    fp_movement(width, height, "up", Particles, height / 20);
 //                motion_detail.setText(motion_detail.getText() + "\nuser=" + r.left + "," + r.top + "," + r.right + "," + r.bottom);
                     break;
                 }
                 // DOWN BUTTON
                 case "South": {
 //                Toast.makeText(getApplication(), "DOWN", Toast.LENGTH_SHORT).show();
-                    fp_movement(width, height, "down", Particals, height / 20);
+                    fp_movement(width, height, "down", Particles, height / 20);
 //                motion_detail.setText("\n\tMove Down" + "\n\tTop Margin = "
 //                        + user.getBounds().top);
                     break;
@@ -472,7 +439,7 @@ public class FullscreenActivity extends AppCompatActivity implements View.OnClic
                 case "West": {
 //                Toast.makeText(getApplication(), "LEFT", Toast.LENGTH_SHORT).show();
 
-                    fp_movement(width, height, "left", Particals, 7 * width / 400);
+                    fp_movement(width, height, "left", Particles, 7 * width / 400);
 //                motion_detail.setText("\n\tMove Left" + "\n\tLeft Margin = "
 //                        + user.getBounds().left);
                     break;
@@ -480,7 +447,7 @@ public class FullscreenActivity extends AppCompatActivity implements View.OnClic
                 // RIGHT BUTTON
                 case "East": {
 //                Toast.makeText(getApplication(), "RIGHT", Toast.LENGTH_SHORT).show();
-                    fp_movement(width, height, "right", Particals, 7 * width / 400);
+                    fp_movement(width, height, "right", Particles, 7 * width / 400);
 //                motion_detail.setText("\n\tMove Right" + "\n\tLeft Margin = "
 //                        + user.getBounds().left);
                     break;
@@ -491,7 +458,7 @@ public class FullscreenActivity extends AppCompatActivity implements View.OnClic
                 }
             }
 
-            List<PF> kmeans = PF.KMean(Particals);
+            List<PF> kmeans = PF.KMean(Particles);
 
             kmeans.get(0).color = Color.RED; //k
             kmeans.get(1).color = Color.BLUE; //j
@@ -508,7 +475,7 @@ public class FullscreenActivity extends AppCompatActivity implements View.OnClic
             cell.setBounds(0, 0, 0, 0);
 
 
-            PF centroid = PF.CheckConvergence(Particals);
+            PF centroid = PF.CheckConvergence(Particles);
             if (convergence) {
                 cell = Walls.check_cells(centroid, width, height);
             }
@@ -517,7 +484,7 @@ public class FullscreenActivity extends AppCompatActivity implements View.OnClic
             for (ShapeDrawable wall : walls)
                 wall.draw(canvas);
             cell.draw(canvas);
-            drawing(canvas, Particals);
+            drawing(canvas, Particles);
             drawing(canvas, kmeans);
             centroid.shapeDrawable.draw(canvas);
         }
