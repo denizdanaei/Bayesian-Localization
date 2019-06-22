@@ -42,22 +42,17 @@ public class FullscreenActivity extends AppCompatActivity implements View.OnClic
     private boolean steps;
     private int step;
     public String direction;
-
-
-    public static TextView motion_detail;
-
     private float azimuth, offset ;
-
     private SensorManager sensorManager;
     private Sensor accelerometer,mRotationSensor;
-
     public boolean activityRunning, calibration_done ;
+
+    public static TextView motion_detail;
     private Canvas canvas;
     private List<ShapeDrawable> walls, cells;
 
 
     public int width=0,height = 0;
-//    private int stepsize =80;
     int number=2000;
     PF pf;
     public List<PF> Particles =new ArrayList<>();
@@ -136,101 +131,49 @@ public class FullscreenActivity extends AppCompatActivity implements View.OnClic
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
-
-
         setContentView(R.layout.activity_fullscreen);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
         mVisible = true;
         mControlsView = findViewById(R.id.fullscreen_content_controls);
         mContentView = findViewById(R.id.canvas);
-
-        // Set up the user interaction to manually show or hide the system UI.
         mContentView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 toggle();
             }
         });
-
-        // Upon interacting with UI controls, delay any scheduled hide()
-        // operations to prevent the jarring behavior of controls going away
-        // while interacting with the UI.
-
         /*******************set the buttons**********************/
-
-        motion_detail = findViewById(R.id.textView1);
-        motion_detail.setMovementMethod(new ScrollingMovementMethod());
-
-        up = findViewById(R.id.button1);
-        up.setOnClickListener(this);
-
-        left = findViewById(R.id.button2);
-        left.setOnClickListener(this);
-
-        right = findViewById(R.id.button3);
-        right.setOnClickListener(this);
-
-        down = findViewById(R.id.button4);
-        down.setOnClickListener(this);
-
-        reset = findViewById(R.id.reset);
-        reset.setOnClickListener(this);
-
-        calibration = findViewById(R.id.calibration);
-        calibration.setOnClickListener(this);
-
+        setup_buttons();
         /*****************get the screen dimensions********************/
-
         Display display = getWindowManager().getDefaultDisplay();
         Point size = new Point();
         display.getSize(size);
         height = size.x;
         width= size.y;
-        /*****************Draw walls & particles********************/
-
         ImageView canvasView = findViewById(R.id.canvas);
         Bitmap blankBitmap = Bitmap.createBitmap(width,height, Bitmap.Config.ARGB_8888);
         canvas = new Canvas(blankBitmap);
         canvasView.setImageBitmap(blankBitmap);
+        /*****************Draw walls & particles********************/
 
         walls = Walls.build_walls(width,height);
         cells=Walls.cells(width,height);
 
-        /* create Particles */
-        for (int i=0; i<number; i++){
-            pf= new PF(width/10, height/5,1,Color.BLACK,  new ShapeDrawable(new OvalShape()),10);
+        for (int i = 0; i < number; i++) {
+            PF pf = new PF(width / 10, height / 5, 1, Color.BLACK, new ShapeDrawable(new OvalShape()), 10);
             Particles.add(pf);
         }
         /* Initial Placement*/
-        Particles =InitPF(width,height, Particles);
+        Particles =InitPF(number,width,height, Particles);
 
         canvas.drawColor(Color.WHITE);
         for(ShapeDrawable wall : walls)
             wall.draw(canvas);
         drawing(canvas, Particles);
         /*****************Initialize Sensors********************/
-        sensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
-        if (sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER) != null) {
-            // set accelerometer
-            accelerometer = sensorManager
-                    .getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
-            // register 'this' as a listener that updates values. Each time a sensor value changes,
-            // the method 'onSensorChanged()' is called.
-            sensorManager.registerListener(this, accelerometer,
-                    SensorManager.SENSOR_DELAY_NORMAL);
-        } else {
-            Toast.makeText(this, "Hardware compatibility issue", Toast.LENGTH_LONG).show();
-        }
-        if(sensorManager.getDefaultSensor(Sensor.TYPE_ROTATION_VECTOR) != null){
-            mRotationSensor = sensorManager
-                    .getDefaultSensor(Sensor.TYPE_ROTATION_VECTOR);
-            sensorManager.registerListener(this, mRotationSensor,
-                    SensorManager.SENSOR_DELAY_NORMAL);
-        }else
-        {
-            Toast.makeText(this, "Hardware compatibility issue", Toast.LENGTH_LONG).show();
-        }
+        Initialize_Sensors();
     }
 
     @Override
@@ -313,7 +256,7 @@ public class FullscreenActivity extends AppCompatActivity implements View.OnClic
             }
             case R.id.reset: {
 
-                Particles =InitPF(width,height, Particles);
+                Particles =InitPF(number,width,height, Particles);
                 break;
             }
             case R.id.calibration: {
@@ -500,4 +443,54 @@ public class FullscreenActivity extends AppCompatActivity implements View.OnClic
             centroid.shapeDrawable.draw(canvas);
         }
     }
+
+
+    private void setup_buttons(){
+        motion_detail = findViewById(R.id.textView1);
+        motion_detail.setMovementMethod(new ScrollingMovementMethod());
+
+        up = findViewById(R.id.button1);
+        up.setOnClickListener(this);
+
+        left = findViewById(R.id.button2);
+        left.setOnClickListener(this);
+
+        right = findViewById(R.id.button3);
+        right.setOnClickListener(this);
+
+        down = findViewById(R.id.button4);
+        down.setOnClickListener(this);
+
+        reset = findViewById(R.id.reset);
+        reset.setOnClickListener(this);
+
+        calibration = findViewById(R.id.calibration);
+        calibration.setOnClickListener(this);
+
+    }
+    private void Initialize_Sensors(){ sensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
+        if (sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER) != null) {
+            // set accelerometer
+            accelerometer = sensorManager
+                    .getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
+            // register 'this' as a listener that updates values. Each time a sensor value changes,
+            // the method 'onSensorChanged()' is called.
+            sensorManager.registerListener(this, accelerometer,
+                    SensorManager.SENSOR_DELAY_NORMAL);
+        } else {
+            Toast.makeText(this, "Hardware compatibility issue", Toast.LENGTH_LONG).show();
+        }
+        if(sensorManager.getDefaultSensor(Sensor.TYPE_ROTATION_VECTOR) != null){
+            mRotationSensor = sensorManager
+                    .getDefaultSensor(Sensor.TYPE_ROTATION_VECTOR);
+            sensorManager.registerListener(this, mRotationSensor,
+                    SensorManager.SENSOR_DELAY_NORMAL);
+        }else
+        {
+            Toast.makeText(this, "Hardware compatibility issue", Toast.LENGTH_LONG).show();
+        }
+
+    }
+
+
 }
