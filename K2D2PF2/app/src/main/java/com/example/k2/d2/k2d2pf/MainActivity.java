@@ -168,6 +168,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.calibration: {
                 azimuthOffset();
                 calibration_done = true;
+                aZBias = aZ;
                 break;
             }
         }
@@ -242,10 +243,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     if(azArray.get(i) >= aZBias +2){
                         steps = true;
                         step++;
-                        azArray.clear();
-                        break;
                     }
                 }
+                azArray.clear();
             }
         } else if (Sensor.TYPE_ROTATION_VECTOR == (event.sensor.getType())) {
             float rotationMatrix[] = new float[16];
