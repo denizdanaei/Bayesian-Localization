@@ -173,8 +173,8 @@ public class PF extends Walls {
         }
 
         CorrectCollision(width,height,Particals);
-//        CheckConvergence(Particals);
-//        KMean(Particals);
+//        CheckConvergence(Particles);
+//        KMean(Particles);
         }
     public static List<PF> KMean( List<PF> Particals){
 
