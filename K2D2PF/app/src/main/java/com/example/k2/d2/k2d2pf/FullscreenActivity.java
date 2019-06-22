@@ -35,37 +35,32 @@ import static com.example.k2.d2.k2d2pf.PF.*;
 
 public class FullscreenActivity extends AppCompatActivity implements View.OnClickListener,SensorEventListener {
 
+
     private Button up, left, right, down, reset, calibration;
 
     private float aX,aY,aZ =0;
-
     private boolean steps;
-
     private int step;
-
     public String direction;
+
 
     public static TextView motion_detail;
 
     private float azimuth, offset ;
 
     private SensorManager sensorManager;
-
     private Sensor accelerometer,mRotationSensor;
 
     public boolean activityRunning, calibration_done ;
-
     private Canvas canvas;
-
     private List<ShapeDrawable> walls, cells;
 
-    public int width=0,height = 0;
-    private int stepsize =80;
 
+    public int width=0,height = 0;
+//    private int stepsize =80;
     int number=2000;
     PF pf;
     public List<PF> Particles =new ArrayList<>();
-
 
     /*******************************************************/
 

@@ -65,18 +65,18 @@
                 android:layout_height="wrap_content"
                 android:text="Right" />
 
-            <TextView
-                android:id="@+id/textView1"
-                android:layout_width="227dp"
-                android:layout_height="107dp"
-                android:background="@android:color/white"
-                android:text="" />
-
             <Button
                 android:id="@+id/button1"
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"
                 android:text="Up" />
+
+            <TextView
+                android:id="@+id/textView1"
+                android:layout_width="227dp"
+                android:layout_height="279dp"
+                android:background="@android:color/white"
+                android:text="" />
 
 
         </LinearLayout>
