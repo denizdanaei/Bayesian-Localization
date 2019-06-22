@@ -6,14 +6,21 @@
     android:background="#028BB9"
     tools:context=".FullscreenActivity">
 
+
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="248dp"
+        android:layout_height="120dp"
+        android:background="@android:color/white"
+        android:text="" />
     <!-- The primary full-screen view. This can be replaced with whatever view
          is needed to present your content, e.g. VideoView, SurfaceView,
          TextureView, etc. -->
     <ImageView
         android:id="@+id/canvas"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@android:color/white"/>
+        android:layout_height="361dp"
+        android:background="@android:color/white" />
     <!-- This FrameLayout insets its children based on system windows using
          android:fitsSystemWindows. -->
     <FrameLayout
@@ -22,15 +29,17 @@
         android:fitsSystemWindows="true">
 
 
+
+
         <LinearLayout
             android:id="@+id/fullscreen_content_controls"
             style="?metaButtonBarStyle"
             android:layout_width="match_parent"
-            android:layout_height="302dp"
+            android:layout_height="wrap_content"
             android:layout_gravity="bottom|center_horizontal"
             android:background="@color/black_overlay"
             android:orientation="horizontal"
-            tools:ignore="UselessParent">
+            >
 
             <Button
                 android:id="@+id/calibration"
@@ -70,13 +79,6 @@
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"
                 android:text="Up" />
-
-            <TextView
-                android:id="@+id/textView1"
-                android:layout_width="227dp"
-                android:layout_height="279dp"
-                android:background="@android:color/white"
-                android:text="" />
 
 
         </LinearLayout>
