@@ -34,9 +34,9 @@ import static com.example.k2.d2.k2d2pf.PF.fp_movement;
 public class MainActivity extends AppCompatActivity implements SensorEventListener {
 
     private Button up, left, right, down, reset, calibration;
-    private List<ShapeDrawable> walls;
+    private List<ShapeDrawable> walls, cells;
 
-    public static TextView motion_detail;
+    public static TextView motion_detail, sensor_detail;
     private Canvas canvas;
     public int width=1080,height = 378;
     int number=2000;
@@ -58,20 +58,27 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
-        ImageView canvasView = (ImageView) findViewById(R.id.canvas);
+        ImageView canvasView = findViewById(R.id.canvas);
 
         Bitmap blankBitmap = Bitmap.createBitmap(width,height, Bitmap.Config.ARGB_8888);
         canvas = new Canvas(blankBitmap);
         canvasView.setImageBitmap(blankBitmap);
-        width=canvasView.getDrawable().getIntrinsicWidth();
-        height=canvas.getHeight();
+//        width=canvasView.getDrawable().getIntrinsicWidth();
+//        height=canvas.getHeight();
+
+        motion_detail = findViewById(R.id.textView1);
+        motion_detail.setMovementMethod(new ScrollingMovementMethod());
+
+        sensor_detail = findViewById(R.id.sensor);
+        sensor_detail.setMovementMethod(new ScrollingMovementMethod());
 
         setup_buttons();
         Initialize_Sensors();
 
         walls = Walls.build_walls(width,height);
+
         for (int i = 0; i < number; i++) {
-            PF pf = new PF(width / 10, height / 5, 1, Color.BLACK, new ShapeDrawable(new OvalShape()), 2);
+            PF pf = new PF(width / 10, height / 5, 1, Color.BLACK, new ShapeDrawable(new OvalShape()), 3);
             Particles.add(pf);
         }
         /* Initial Placement*/
@@ -80,19 +87,18 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         canvas.drawColor(Color.WHITE);
         for(ShapeDrawable wall : walls)
             wall.draw(canvas);
+;
         drawing(canvas, Particles);
     }
 
     private void setup_buttons(){
-        motion_detail = findViewById(R.id.textView1);
-        motion_detail.setMovementMethod(new ScrollingMovementMethod());
 
         up = findViewById(R.id.button1);
         up.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                fp_movement(width,height,"up", Particles, height/20);
+                fp_movement("up", Particles, height/20);
             }
         });
 
@@ -101,7 +107,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
             @Override
             public void onClick(View v) {
 
-                fp_movement(width,height,"left", Particles, 7*width/400);
+                fp_movement("left", Particles, 7*width/400);
             }
         });
         right = findViewById(R.id.button3);
@@ -109,7 +115,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
             @Override
             public void onClick(View v) {
 
-                fp_movement(width,height,"right", Particles, 7*width/400);
+                fp_movement("right", Particles, 7*width/400);
             }
         });
         down = findViewById(R.id.button4);
@@ -117,7 +123,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
             @Override
             public void onClick(View v) {
 
-                fp_movement(width,height,"down", Particles, height/20);
+                fp_movement("down", Particles, height/20);
             }
         });
         reset = findViewById(R.id.reset);
@@ -126,6 +132,8 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
             public void onClick(View v) {
 
                 Particles =InitPF(width,height, Particles);
+                calibration_done=false;
+                step=0;
             }
         });
         calibration = findViewById(R.id.calibration);
@@ -168,70 +176,6 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         offset = azimuth;
     }
 
-
-    public void onClick(View v) {
-        motion_detail.setText(null);
-        switch (v.getId()) {
-            // UP BUTTON
-            case R.id.button1: {
-                fp_movement(width,height,"up", Particles, height/20);
-                break;
-            }
-            // DOWN BUTTON
-            case R.id.button4: {
-                fp_movement(width,height,"down", Particles, height/20);
-                break;
-            }
-            // LEFT BUTTON
-            case R.id.button2: {
-
-                fp_movement(width,height,"left", Particles, 7*width/400);
-                break;
-            }
-            // RIGHT BUTTON
-            case R.id.button3: {
-                fp_movement(width,height,"right", Particles, 7*width/400);
-                break;
-            }
-            case R.id.reset: {
-
-                Particles =InitPF(width,height, Particles);
-                break;
-            }
-            case R.id.calibration: {
-                azimuthOffset();
-                calibration_done = true;
-                aZBias = aZ;
-                break;
-            }
-        }
-
-        List<PF> kmeans=PF.KMean(Particles);
-        kmeans.get(0).color=Color.RED; //k
-        kmeans.get(1).color=Color.BLUE; //j
-        kmeans.get(2).color=Color.YELLOW; //l
-        for (PF pf: kmeans){
-            pf.size=10;
-            pf.setBounds(pf);
-        }
-
-        ShapeDrawable cell =new ShapeDrawable(new RectShape());
-        cell.getPaint().setColor(Color.rgb(240, 204, 194));
-        cell.setBounds(0, 0, 0,0);
-
-        PF centroid=PF.CheckConvergence(Particles);
-        if (convergence){cell=Walls.check_cells(centroid, width,height);}
-
-        canvas.drawColor(Color.WHITE);
-        for(ShapeDrawable wall : walls)
-            wall.draw(canvas);
-        cell.draw(canvas);
-        drawing(canvas, Particles);
-        drawing(canvas, kmeans);
-        centroid.shapeDrawable.draw(canvas);
-
-    }
-
     // onResume() registers the accelerometer for listening the events
     protected void onResume() {
         super.onResume();
@@ -263,7 +207,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
     public void onSensorChanged(SensorEvent event) {
 
         if (Sensor.TYPE_ACCELEROMETER == (event.sensor.getType())) {
-            motion_detail.setText("0.0");
+//            motion_detail.setText("0.0");
 
             // get the the x,y,z values of the accelerometer
             aX = event.values[0];
@@ -294,9 +238,6 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
                 azimuth = azimuth - offset;
         }
 
-        // display the current x,y,z accelerometer values
-        motion_detail.setText( "Number : " + step + " \nsteps" + steps + "\ndir " + azimuth+"\n aX"+aX +"\n aZ"+aZ + "\nDir" + direction );
-
         if (azimuth >= 75 && azimuth < 135) {
             direction = "North";
         } else if (azimuth >= 135 && azimuth < 240) {
@@ -310,37 +251,30 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         if (steps && calibration_done) {
             steps = false;
             step++;
+
             switch (direction) {
                 // UP BUTTON
                 case "West": {
-//                Toast.makeText(getApplication(), "UP", Toast.LENGTH_SHORT).show();
-                    fp_movement(width, height, "up", Particles, height / 20);
-//                motion_detail.setText(motion_detail.getText() + "\nuser=" + r.left + "," + r.top + "," + r.right + "," + r.bottom);
+                    sensor_detail.setText("up ...loading...");
+                    fp_movement("up", Particles, height / 20);
                     break;
                 }
                 // DOWN BUTTON
                 case "East": {
-//                Toast.makeText(getApplication(), "DOWN", Toast.LENGTH_SHORT).show();
-                    fp_movement(width, height, "down", Particles, height / 20);
-//                motion_detail.setText("\n\tMove Down" + "\n\tTop Margin = "
-//                        + user.getBounds().top);
+                    sensor_detail.setText("down...loading...");
+                    fp_movement("down", Particles, height / 20);
                     break;
                 }
                 // LEFT BUTTON
                 case "South": {
-//                Toast.makeText(getApplication(), "LEFT", Toast.LENGTH_SHORT).show();
-
-                    fp_movement(width, height, "left", Particles, 7 * width / 400);
-//                motion_detail.setText("\n\tMove Left" + "\n\tLeft Margin = "
-//                        + user.getBounds().left);
+                    sensor_detail.setText("left...loading...");
+                    fp_movement( "left", Particles, 7 * width / 400);
                     break;
                 }
                 // RIGHT BUTTON
                 case "North": {
-//                Toast.makeText(getApplication(), "RIGHT", Toast.LENGTH_SHORT).show();
-                    fp_movement(width, height, "right", Particles, 7 * width / 400);
-//                motion_detail.setText("\n\tMove Right" + "\n\tLeft Margin = "
-//                        + user.getBounds().left);
+                    sensor_detail.setText("right...loading...");
+                    fp_movement( "right", Particles, 7 * width / 400);
                     break;
                 }
                 default: {
@@ -349,8 +283,11 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
                 }
             }
 
+            // display the current x,y,z accelerometer values
+
 
         }
+        sensor_detail.setText("Number : " + step + " \nsteps" + steps + "\ndir " + azimuth+"\n aX"+aX +"\n aZ"+aZ + "\nDir" + direction );
         List<PF> kmeans = PF.KMean(Particles);
 
         kmeans.get(0).color = Color.RED; //k
@@ -367,16 +304,19 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         cell.getPaint().setColor(Color.rgb(240, 204, 194));
         cell.setBounds(0, 0, 0, 0);
 
+        View v =findViewById(R.id.canvas);
+        v.invalidate();
 
         PF centroid = PF.CheckConvergence(Particles);
         if (convergence) {
-            cell = Walls.check_cells(centroid, width, height);
+            cell = Walls.check_cells(centroid);
         }
 
         canvas.drawColor(Color.WHITE);
+        cell.draw(canvas);
         for (ShapeDrawable wall : walls)
             wall.draw(canvas);
-        cell.draw(canvas);
+
         drawing(canvas, Particles);
         drawing(canvas, kmeans);
         centroid.shapeDrawable.draw(canvas);
