@@ -282,7 +282,7 @@ public class FullscreenActivity extends AppCompatActivity implements View.OnClic
         mHideHandler.postDelayed(mHideRunnable, delayMillis);
     }
 
-    public void azimuthOffset(int value){
+    public void azimuthOffset(){
         offset = azimuth;
     }
 
@@ -317,7 +317,8 @@ public class FullscreenActivity extends AppCompatActivity implements View.OnClic
                 break;
             }
             case R.id.calibration: {
-
+                azimuthOffset();
+                calibration_done = true;
                 break;
             }
         }
@@ -408,33 +409,37 @@ public class FullscreenActivity extends AppCompatActivity implements View.OnClic
             float rotationValues[] = new float[16];
             SensorManager.getOrientation(rotationMatrix, rotationValues);
             azimuth = (float) Math.toDegrees(rotationValues[0]) + 180;
+            if(azimuth - offset < 0){
+                azimuth = azimuth - offset + 360;
+            }else
+                azimuth = azimuth - offset;
         }
 
         // display the current x,y,z accelerometer values
-        motion_detail.setText( "Number : " + step + " steps" + steps + "dir " + azimuth+"\n aX"+aX +"\n aZ"+aZ );
+        motion_detail.setText( "Number : " + step + " \nsteps" + steps + "\ndir " + azimuth+"\n aX"+aX +"\n aZ"+aZ + "\nDir" + direction );
 
-        if (azimuth >= 45 && azimuth <= 150) {
+        if (azimuth >= 75 && azimuth < 135) {
             direction = "North";
-        } else if (azimuth <= 330 || azimuth >= 240) {
-            direction = "South";
-        } else if (azimuth >= 150 && azimuth <= 240) {
+        } else if (azimuth >= 135 && azimuth < 240) {
             direction = "East";
+        } else if (azimuth < 330 && azimuth >= 240) {
+            direction = "South";
         } else {
             direction = "West";
         }
 
-        if (steps) {
+        if (steps && calibration_done) {
             steps = false;
             switch (direction) {
                 // UP BUTTON
-                case "North": {
+                case "West": {
 //                Toast.makeText(getApplication(), "UP", Toast.LENGTH_SHORT).show();
                     fp_movement(width, height, "up", Particles, height / 20);
 //                motion_detail.setText(motion_detail.getText() + "\nuser=" + r.left + "," + r.top + "," + r.right + "," + r.bottom);
                     break;
                 }
                 // DOWN BUTTON
-                case "South": {
+                case "East": {
 //                Toast.makeText(getApplication(), "DOWN", Toast.LENGTH_SHORT).show();
                     fp_movement(width, height, "down", Particles, height / 20);
 //                motion_detail.setText("\n\tMove Down" + "\n\tTop Margin = "
@@ -442,7 +447,7 @@ public class FullscreenActivity extends AppCompatActivity implements View.OnClic
                     break;
                 }
                 // LEFT BUTTON
-                case "West": {
+                case "South": {
 //                Toast.makeText(getApplication(), "LEFT", Toast.LENGTH_SHORT).show();
 
                     fp_movement(width, height, "left", Particles, 7 * width / 400);
@@ -451,7 +456,7 @@ public class FullscreenActivity extends AppCompatActivity implements View.OnClic
                     break;
                 }
                 // RIGHT BUTTON
-                case "East": {
+                case "North": {
 //                Toast.makeText(getApplication(), "RIGHT", Toast.LENGTH_SHORT).show();
                     fp_movement(width, height, "right", Particles, 7 * width / 400);
 //                motion_detail.setText("\n\tMove Right" + "\n\tLeft Margin = "

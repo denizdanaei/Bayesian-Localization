@@ -242,15 +242,27 @@ public class PF extends Walls {
             pf2.x=  mean2.x;    pf2.y=mean2.y;
             pf3.x = mean3.x;    pf3.y=mean3.y;
 
-            mean1.x = Math.round(sumx1 / k);
-            mean1.y = Math.round(sumy1 / k);
-
-            mean2.x = Math.round(sumx2 / j);
-            mean2.y = Math.round(sumy2 / j);
-
-
-            mean3.x = Math.round(sumx2 / l);
-            mean3.y = Math.round(sumy2 / l);
+            if(k != 0) {
+                mean1.x = Math.round(sumx1 / k);
+                mean1.y = Math.round(sumy1 / k);
+            }else{
+                mean1.x = 0;
+                mean1.y = 0;
+            }
+            if(j != 0) {
+                mean2.x = Math.round(sumx2 / j);
+                mean2.y = Math.round(sumy2 / j);
+            }else{
+                mean2.x =0;
+                mean2.y =0;
+            }
+            if(l !=0){
+                mean3.x = Math.round(sumx2 / l);
+                mean3.y = Math.round(sumy2 / l);
+            }else{
+                mean3.x=0;
+                mean3.y=0;
+            }
 
             stopflag = !(mean1.x == pf1.x || mean1.y == pf1.y || mean2.y == pf2.y || mean2.x == pf2.x || mean3.y == pf3.y || mean3.x == pf3.x);
         }
