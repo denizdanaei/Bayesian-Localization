@@ -62,6 +62,7 @@
       <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__org_hamcrest_hamcrest_integration_1_3_jar.xml" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__org_hamcrest_hamcrest_library_1_3_jar.xml" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+<<<<<<< HEAD
       <change beforePath="$PROJECT_DIR$/.idea/caches/gradle_models.ser" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/caches/gradle_models.ser" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/local.properties" beforeDir="false" afterPath="$PROJECT_DIR$/local.properties" afterDir="false" />
@@ -73,6 +74,13 @@
       <change beforePath="$PROJECT_DIR$/../../K2D2PF/app/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../K2D2PF/app/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../K2D2PF2/app/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../K2D2PF2/app/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../K2D2PF2/app/src/main/java/com/example/k2/d2/k2d2pf/MainActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../K2D2PF2/app/src/main/java/com/example/k2/d2/k2d2pf/MainActivity.java" afterDir="false" />
+=======
+      <change beforePath="$PROJECT_DIR$/.idea/caches/build_file_checksums.ser" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/caches/build_file_checksums.ser" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/caches/gradle_models.ser" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/caches/gradle_models.ser" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../K2D2PF2/app/src/main/java/com/example/k2/d2/k2d2pf/PF.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../K2D2PF2/app/src/main/java/com/example/k2/d2/k2d2pf/PF.java" afterDir="false" />
+>>>>>>> 114040bd9ed4797dac0bec1962156d2919e23f4d
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -92,10 +100,18 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/example/k2/d2/k2d2/bayesianLocalization.java">
           <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
             <state relative-caret-position="703">
               <caret line="125" selection-start-line="125" selection-end-line="125" />
               <folding>
                 <element signature="imports" expanded="true" />
+=======
+            <state relative-caret-position="354">
+              <caret line="88" column="25" selection-start-line="88" selection-start-column="25" selection-end-line="89" selection-end-column="11" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="method#updateTables#0;class#bayesianLocalization#0" />
+>>>>>>> 114040bd9ed4797dac0bec1962156d2919e23f4d
               </folding>
             </state>
           </provider>
@@ -119,11 +135,16 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/example/k2/d2/k2d2/Tab_training.java">
           <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
             <state relative-caret-position="142">
               <caret line="106" column="130" selection-start-line="106" selection-start-column="24" selection-end-line="106" selection-end-column="130" />
+=======
+            <state relative-caret-position="506">
+              <caret line="214" lean-forward="true" selection-start-line="199" selection-end-line="214" />
+>>>>>>> 114040bd9ed4797dac0bec1962156d2919e23f4d
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="method#onCreateView#0;class#Tab_training#0" />
@@ -179,6 +200,7 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
   </component>
+<<<<<<< HEAD
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
@@ -192,6 +214,11 @@
   <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="50" />
     <option name="y" value="26" />
+=======
+  <component name="ProjectFrameBounds" extendedState="7">
+    <option name="x" value="51" />
+    <option name="y" value="27" />
+>>>>>>> 114040bd9ed4797dac0bec1962156d2919e23f4d
     <option name="width" value="925" />
     <option name="height" value="1054" />
   </component>
@@ -201,6 +228,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+<<<<<<< HEAD
       <pane id="AndroidView">
         <subPane>
           <expand>
@@ -237,12 +265,21 @@
       <pane id="Scope" />
       <pane id="ProjectPane" />
       <pane id="PackagesPane" />
+=======
+      <pane id="Scope" />
+      <pane id="ProjectPane" />
+      <pane id="PackagesPane" />
+      <pane id="AndroidView" />
+>>>>>>> 114040bd9ed4797dac0bec1962156d2919e23f4d
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="android.sdk.path" value="$USER_HOME$/Android/Sdk" />
     <property name="device.picker.selection" value="520057ffca5b941f" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="project.structure.last.edited" value="Modules" />
+    <property name="project.structure.proportion" value="0.15" />
+    <property name="project.structure.side.proportion" value="0.2" />
     <property name="settings.editor.selected.configurable" value="AndroidSdkUpdater" />
   </component>
   <component name="RunDashboard">
@@ -337,7 +374,11 @@
     <editor active="true" />
     <layout>
       <window_info id="Captures" order="0" side_tool="true" weight="0.25" />
+<<<<<<< HEAD
       <window_info content_ui="combo" id="Project" order="1" visible="true" weight="0.19664429" />
+=======
+      <window_info content_ui="combo" id="Project" order="1" visible="true" weight="0.11574328" />
+>>>>>>> 114040bd9ed4797dac0bec1962156d2919e23f4d
       <window_info id="Structure" order="2" side_tool="true" />
       <window_info id="Favorites" order="3" side_tool="true" />
       <window_info id="Build Variants" order="4" side_tool="true" />
@@ -351,10 +392,16 @@
       <window_info active="true" anchor="bottom" id="Debug" order="3" visible="true" weight="0.3286119" />
       <window_info anchor="bottom" id="Terminal" order="4" weight="0.3286119" />
       <window_info anchor="bottom" id="Event Log" order="5" side_tool="true" />
+<<<<<<< HEAD
       <window_info anchor="bottom" id="Version Control" order="6" weight="0.3286119" />
       <window_info anchor="bottom" id="Build" order="7" weight="0.23229462" />
       <window_info anchor="bottom" id="Android Profiler" order="8" />
       <window_info anchor="right" id="Preview" weight="0.3295302" />
+=======
+      <window_info anchor="bottom" id="Version Control" order="6" />
+      <window_info active="true" anchor="bottom" id="Build" order="7" visible="true" weight="0.23326133" />
+      <window_info anchor="bottom" id="Android Profiler" order="8" show_stripe_button="false" />
+>>>>>>> 114040bd9ed4797dac0bec1962156d2919e23f4d
       <window_info anchor="right" id="Device File Explorer" order="0" side_tool="true" />
       <window_info anchor="right" id="Capture Analysis" order="1" />
       <window_info anchor="right" id="Gradle" order="2" />
@@ -447,6 +494,7 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
+<<<<<<< HEAD
     <entry file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.google.code.gson/gson/2.8.2/b2da9f8444128651758719856de579eacff7f387/gson-2.8.2-sources.jar!/com/google/gson/reflect/TypeToken.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="663">
@@ -496,6 +544,23 @@
             <element signature="e#59088#59089#0" expanded="true" />
             <element signature="e#59126#59127#0" expanded="true" />
           </folding>
+=======
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/example/k2/d2/k2d2/bayesianLocalization.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="354">
+          <caret line="88" column="25" selection-start-line="88" selection-start-column="25" selection-end-line="89" selection-end-column="11" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="method#updateTables#0;class#bayesianLocalization#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/example/k2/d2/k2d2/gsonParser.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="38">
+          <caret line="2" column="13" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
+>>>>>>> 114040bd9ed4797dac0bec1962156d2919e23f4d
         </state>
       </provider>
     </entry>
@@ -530,24 +595,120 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/example/k2/d2/k2d2/Tab_training.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/example/k2/d2/k2d2/Tab_localization.java">
       <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
         <state relative-caret-position="142">
           <caret line="106" column="130" selection-start-line="106" selection-start-column="24" selection-end-line="106" selection-end-column="130" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="method#onCreateView#0;class#Tab_training#0" />
             <element signature="method#writeFile#0;class#Tab_training#0" />
+=======
+        <state relative-caret-position="494">
+          <caret line="115" selection-start-line="115" selection-end-line="115" />
+          <folding>
+            <element signature="method#onCreateView#0;class#Tab_localization#0" />
+            <element signature="method#onClick#0;class#Tab_localization#0" />
+            <element signature="method#readFile#0;class#Tab_localization#0" />
+>>>>>>> 114040bd9ed4797dac0bec1962156d2919e23f4d
           </folding>
         </state>
       </provider>
     </entry>
+<<<<<<< HEAD
     <entry file="file://$PROJECT_DIR$/src/main/java/com/example/k2/d2/k2d2/Tab_localization.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="306">
           <caret line="90" column="84" selection-start-line="90" selection-start-column="84" selection-end-line="90" selection-end-column="84" />
+=======
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/example/k2/d2/k2d2/Tab_training.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="506">
+          <caret line="214" lean-forward="true" selection-start-line="199" selection-end-line="214" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="method#onCreateView#0;class#Tab_training#0" />
+            <element signature="method#writeFile#0;class#Tab_training#0" />
+          </folding>
+>>>>>>> 114040bd9ed4797dac0bec1962156d2919e23f4d
         </state>
       </provider>
     </entry>
+  </component>
+  <component name="masterDetails">
+    <states>
+      <state key="ArtifactsStructureConfigurable.UI">
+        <settings>
+          <artifact-editor />
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="FacetStructureConfigurable.UI">
+        <settings>
+          <last-edited>Android-Gradle</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="GlobalLibrariesConfigurable.UI">
+        <settings>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="JdkListConfigurable.UI">
+        <settings>
+          <last-edited>1.8</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="ModuleStructureConfigurable.UI">
+        <settings>
+          <last-edited>app</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+                <option value="0.6" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="ProjectLibrariesConfigurable.UI">
+        <settings>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+    </states>
   </component>
 </project>

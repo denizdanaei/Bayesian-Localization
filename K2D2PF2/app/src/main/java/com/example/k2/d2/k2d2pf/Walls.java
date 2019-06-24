@@ -14,14 +14,16 @@ import static com.example.k2.d2.k2d2pf.MainActivity.motion_detail;
 public class Walls {
 
 
+    private static int height=0, width=0;
+
     public static List<ShapeDrawable> walls;
 
     public static List<ShapeDrawable> cells;
 
 
-    public static List<ShapeDrawable> build_walls(int width,int height){
+    public static List<ShapeDrawable> build_walls(int syn_width, int syn_height){
         walls = new ArrayList<>();
-
+        height=syn_height; width=syn_width;
         //outerlayer North
         ShapeDrawable North = new ShapeDrawable(new RectShape());
         North.setBounds(0, 0, width,20 );
@@ -83,7 +85,7 @@ public class Walls {
     }
 
 
-    public static List<ShapeDrawable> cells(int width,int height){
+    public static List<ShapeDrawable> cells(){
         cells = new ArrayList<>();
 
         //Cell 16
@@ -192,98 +194,104 @@ public class Walls {
         return cells;
     }
 
-    public static ShapeDrawable check_cells(PF centroid,int width,int height){
+    public static ShapeDrawable check_cells(PF centroid){
         ShapeDrawable cell =new ShapeDrawable(new RectShape());
         cell.getPaint().setColor(Color.rgb(240, 204, 194));
 
         //cell 16
-        if(centroid.x>40 && centroid.y>40 && centroid.x<width/10-10 && centroid.y<6*height/14){
-            motion_detail.setText("cell16");
-            cell.setBounds(40, 40, width/10-10,6*height/14);
+        if(centroid.x>20 && centroid.y>20 && centroid.x<width/10 && centroid.y<6*height/14){
+//            motion_detail.setText("cell16");
+            cell.setBounds(20, 20, width/10,6*height/14);
             return cell;
         }
         //cell 13
-        else if (centroid.x>width/10+10 && centroid.y>40 && centroid.x<2*width/10-10 && centroid.y<6*height/14){
-            motion_detail.setText("cell13");
-            cell.setBounds(width/10+10, 40,2*width/10-10,6*height/14);
+        else if (centroid.x>width/10 && centroid.y>20 && centroid.x<2*width/10 && centroid.y<6*height/14){
+//            motion_detail.setText("cell13");
+            cell.setBounds(width/10+10, 20,2*width/10,6*height/14);
             return cell;
         }
         //cell 11
-        else if (centroid.x>2*width/10+10 && centroid.y>40 && centroid.x<3*width/10 && centroid.y<6*height/14){
-            motion_detail.setText("cell11");
-            cell.setBounds(2*width/10+10, 40,3*width/10,6*height/14);
+        else if (centroid.x>2*width/10 && centroid.y>20 && centroid.x<3*width/10 && centroid.y<6*height/14){
+//            motion_detail.setText("cell11");
+            cell.setBounds(2*width/10+10, 20,3*width/10+10,6*height/14);
             return cell;
         }
         //cell 15
-        else if (centroid.x>40 && centroid.y>6*height/14 && centroid.x<width/10-10 && centroid.y<8*height/14){
-            motion_detail.setText("cell15");
-            cell.setBounds( 40, 6*height/14,width/10-10,8*height/14);
+        else if (centroid.x>20 && centroid.y>6*height/14 && centroid.x<width/10 && centroid.y<8*height/14){
+//            motion_detail.setText("cell15");
+            cell.setBounds( 20, 6*height/14,width/10,8*height/14);
             return cell;
         }
         //cell 12
-        else if (centroid.x>width/10+10 && centroid.y>6*height/14 && centroid.x<2*width/10-10 && centroid.y<8*height/14){
-            motion_detail.setText("cell12");
-            cell.setBounds( width/10+10, 6*height/14,2*width/10-10,8*height/14);
+        else if (centroid.x>width/10 && centroid.y>6*height/14 && centroid.x<2*width/10-10 && centroid.y<8*height/14){
+//            motion_detail.setText("cell12");
+            cell.setBounds( width/10, 6*height/14,2*width/10,8*height/14);
             return cell;
         }
         //cell 10
-        else if (centroid.x>2*width/10+10 && centroid.y>6*height/14 && centroid.x<3*width/10-10 && centroid.y<8*height/14){
-            motion_detail.setText("cell10");
-            cell.setBounds(  2*width/10+10, 6*height/14,3*width/10-10,8*height/14);
+        else if (centroid.x>2*width/10 && centroid.y>6*height/14 && centroid.x<3*width/10 && centroid.y<8*height/14){
+//            motion_detail.setText("cell10");
+            cell.setBounds(  2*width/10, 6*height/14,3*width/10,8*height/14);
             return cell;
         }
         //cell 9
-        else if (centroid.x>3*width/10+10 && centroid.y>6*height/14 && centroid.x<4*width/10-10 && centroid.y<8*height/14){
-            motion_detail.setText("cell9");
-            cell.setBounds( 3*width/10+10, 6*height/14,4*width/10-10,8*height/14);
+        else if (centroid.x>3*width/10 && centroid.y>6*height/14 && centroid.x<4*width/10 && centroid.y<8*height/14){
+//            motion_detail.setText("cell9");
+            cell.setBounds( 3*width/10, 6*height/14,4*width/10,8*height/14);
             return cell;
         }
         //cell 8
-        else if (centroid.x>4*width/10+10 && centroid.y>6*height/14 && centroid.x<5*width/10-10 && centroid.y<8*height/14){
-            motion_detail.setText("cell8");
+        else if (centroid.x>4*width/10 && centroid.y>6*height/14 && centroid.x<5*width/10 && centroid.y<8*height/14){
+//            motion_detail.setText("cell8");
             cell.setBounds(  4*width/10+10, 6*height/14,5*width/10-10,8*height/14);
             return cell;
         }
         //cell 7
-        else if (centroid.x>5*width/10+10 && centroid.y>6*height/14 && centroid.x<6*width/10-10 && centroid.y<8*height/14){
-            motion_detail.setText("cell7");
-            cell.setBounds(  5*width/10+10, 6*height/14,6*width/10-10,8*height/14);
+        else if (centroid.x>5*width/10 && centroid.y>6*height/14 && centroid.x<6*width/10 && centroid.y<8*height/14){
+//            motion_detail.setText("cell7");
+            cell.setBounds(  5*width/10, 6*height/14,6*width/10,8*height/14);
             return cell;
         }
         //cell 6
-        else if (centroid.x>6*width/10+10 && centroid.y>6*height/14 && centroid.x<7*width/10-10 && centroid.y<8*height/14){
-            motion_detail.setText("cell6");
-            cell.setBounds( 6*width/10+10, 6*height/14,7*width/10-10,8*height/14);
+        else if (centroid.x>6*width/10 && centroid.y>6*height/14 && centroid.x<7*width/10-10 && centroid.y<8*height/14){
+//            motion_detail.setText("cell6");
+            cell.setBounds( 6*width/10, 6*height/14,7*width/10,8*height/14);
             return cell;
         }
         //cell 5
-        else if (centroid.x>7*width/10+10 && centroid.y>6*height/14 && centroid.x<8*width/10-10 && centroid.y<8*height/14){
-            motion_detail.setText("cell5");
-            cell.setBounds( 7*width/10+10, 6*height/14,8*width/10-10,8*height/14);
+        else if (centroid.x>7*width/10 && centroid.y>6*height/14 && centroid.x<8*width/10 && centroid.y<8*height/14){
+//            motion_detail.setText("cell5");
+            cell.setBounds( 7*width/10, 6*height/14,8*width/10-10,8*height/14);
             return cell;
         }
         //cell 4
-        else if (centroid.x>8*width/10+10 && centroid.y>6*height/14 && centroid.x<9*width/10-10 && centroid.y<8*height/14){
-            motion_detail.setText("cell4");
-            cell.setBounds(  8*width/10+10, 6*height/14,9*width/10-10,8*height/14);
+        else if (centroid.x>8*width/10 && centroid.y>6*height/14 && centroid.x<9*width/10 && centroid.y<8*height/14){
+//            motion_detail.setText("cell4");
+            cell.setBounds(  8*width/10, 6*height/14,9*width/10,8*height/14);
             return cell;
         }
         //cell 2
-        else if (centroid.x>9*width/10+10 && centroid.y>6*height/14 && centroid.x<width-40 && centroid.y<8*height/14){
-            motion_detail.setText("cell2");
-            cell.setBounds( 9*width/10+10, 6*height/14,width-40,8*height/14);
+        else if (centroid.x>9*width/10 && centroid.y>6*height/14 && centroid.x<width-20 && centroid.y<8*height/14){
+//            motion_detail.setText("cell2");
+            cell.setBounds( 9*width/10, 6*height/14,width-20,8*height/14);
             return cell;
         }
         //cell 14
-        else if (centroid.x>40 && centroid.y>8*height/14 && centroid.x<width/10 && centroid.y<height-40){
-            motion_detail.setText("cell14");
-            cell.setBounds( 40, 8*height/14,width/10,height-40);
+        else if (centroid.x>20 && centroid.y>11*height/14 && centroid.x<width/10 && centroid.y<height-20){
+//            motion_detail.setText("cell14");
+            cell.setBounds( 20, 8*height/14,width/10,height-20);
             return cell;
         }
         //cell 1
-        else if (centroid.x>9*width/10+10 && centroid.y>8*height/14 && centroid.x<width-40 && centroid.y<height-40){
-            motion_detail.setText("cell2");
-            cell.setBounds( 9*width/10, 8*height/14,width-40,height-40);
+        else if (centroid.x>9*width/10 && centroid.y>8*height/14 && centroid.x<width-20 && centroid.y<height-20){
+//            motion_detail.setText("cell1");
+            cell.setBounds( 9*width/10, 8*height/14,width-20,height-20);
+            return cell;
+        }
+        //cell 3
+        else if (centroid.x>9*width/10-10 && centroid.y>20 && centroid.x<width-20 && centroid.y<6*height/14){
+//            motion_detail.setText("cell3");
+            cell.setBounds( 9*width/10-10, 20,width-20,6*height/14);
             return cell;
         }
 

@@ -15,7 +15,9 @@ import static com.example.k2.d2.k2d2pf.MainActivity.motion_detail;
 
 public class PF extends Walls {
 
-    public int x, y, weight, size, color;
+private static int syn_height=0, syn_width=0;
+
+    int x, y, weight, size, color;
     private static int sumx = 0, sumy = 0;
     ShapeDrawable shapeDrawable;
     private static PF centroid = new PF(0, 0, 1, Color.GREEN, new ShapeDrawable(new OvalShape()), 10);
@@ -45,13 +47,15 @@ public class PF extends Walls {
 
     public static List<PF> InitPF(int width, int height, List<PF> Particals) {
 
+        syn_height =height;
+        syn_width =width;
         Random random = new Random();
         for (PF partical : Particals) {
-            partical.x = random.nextInt(width);
-            partical.y = random.nextInt(height);
+            partical.x = random.nextInt(syn_width);
+            partical.y = random.nextInt(syn_height);
             partical.setBounds(partical);
         }
-        CorrectCollision(width, height, Particals);
+        CorrectCollision(Particals);
         return Particals;
     }
 
@@ -62,32 +66,39 @@ public class PF extends Walls {
 
     }
 
-    private static void CorrectCollision(int width, int height, List<PF> Particals) {
+    private static void CorrectCollision(List<PF> Particles) {
         Random random = new Random();
-        List<PF> Correct_PF = new ArrayList<>();
+        List<PF> not_collided = new ArrayList<>();
+        List<PF> collided = new ArrayList<>();
         PF pf;
-        int fixed_particals = 0;
+        int not_collided_pf = 0, collided_pf=0;
 
-        for (PF partical : Particals) {
-            if (!isCollision(partical) && isDisplayed(width, height, partical)) {
-                partical.weight++;
-                fixed_particals++;
-                Correct_PF.add(partical);
+        for (PF particle : Particles) {
+            if (!isCollision(particle) && isDisplayed(particle)) {
+                particle.weight++;
+                not_collided_pf++;
+                not_collided.add(particle);
             } else {
-                partical.weight = 1;
+                particle.weight = 1;
+                collided_pf++;
+                collided.add(particle);
             }
         }
-        for (PF partical : Particals) {
-            pf = Correct_PF.get(random.nextInt(fixed_particals));
-            partical.x = pf.x;
-            partical.y = pf.y;
-            partical.setBounds(partical);
+        for (PF particle : collided) {
+            pf = not_collided.get(random.nextInt(not_collided_pf));
+            particle.x = pf.x;
+            particle.y = pf.y;
+            particle.setBounds(particle);
         }
+        Particles= new ArrayList<>();
+        Particles.addAll(not_collided);
+        Particles.addAll(collided);
+
     }
 
-    private static boolean isDisplayed(int width, int height, PF Partical) {
+    private static boolean isDisplayed(PF Partical) {
 
-        if (Partical.x < width && Partical.x > 0 && Partical.y < height && Partical.y > 0) {
+        if (Partical.x < syn_width && Partical.x > 0 && Partical.y < syn_height && Partical.y > 0) {
             return true;
         }
         return false;
@@ -101,9 +112,9 @@ public class PF extends Walls {
         return false;
     }
 
-    private static boolean isCollision(ShapeDrawable first, PF Partical) {
+    private static boolean isCollision(ShapeDrawable first, PF Particle) {
         Rect firstRect = new Rect(first.getBounds());
-        return firstRect.intersect(Partical.shapeDrawable.getBounds());
+        return firstRect.intersect(Particle.shapeDrawable.getBounds());
     }
 
     public static PF CheckConvergence(List<PF> Particles) {
@@ -115,21 +126,21 @@ public class PF extends Walls {
 
         sumx /= Particles.size();
         sumy /= Particles.size();
-//        motion_detail.setText(motion_detail.getText()+"\nsum=("+sumx+","+sumy+")");
+        motion_detail.setText(motion_detail.getText()+"\ncentroid=("+sumx+","+sumy+")");
 
         int converged = 0;
         for (PF partical : Particles) {
-            if (Math.abs(partical.x - sumx) < 300 && Math.abs(partical.y - sumy) < 500) {
+            if (aBooleandistance(centroid,mean1,mean2,mean3)) { //(Math.abs(partical.x - sumx) < syn_width/10 && Math.abs(partical.y - sumy) < 6*syn_height/14)||
                 converged++;
             }
         }
 
-        motion_detail.setText(motion_detail.getText() + "\nconverged=" + converged + " centroid=(" + sumx + "," + sumy + ")\t");
+        motion_detail.setText(motion_detail.getText()+"\nconverged=" + converged + "\tSize"+Particles.size());
         centroid.x = sumx;
         centroid.y = sumy;
         centroid.setBounds(centroid);
 
-        if ((converged > (Particles.size() * 0.8)) && aBooleandistance(centroid, mean1, mean2, mean3)) {
+        if ((converged > (Particles.size() * 0.8))) {
 
             motion_detail.setText(motion_detail.getText() + "\nconverged!!!");
             convergence = true;
@@ -139,14 +150,14 @@ public class PF extends Walls {
         return centroid;
     }
 
-    public static void fp_movement(int width, int height, String direction, List<PF> Particals, int stepsize) {
+    public static void fp_movement(String direction, List<PF> Particles, int stepsize) {
 
         Random random = new Random();
 
         switch (direction) {
             case "up": {
-                for (PF partical : Particals) {
-                    int movement = random.nextInt(stepsize) * 2;
+                for (PF partical : Particles) {
+                    int movement = random.nextInt(stepsize) * 3;
                     partical.x += (int) random.nextGaussian() * (movement / 3) * (random.nextBoolean() ? -1 : 1);
                     partical.y -= movement;
                     partical.setBounds(partical);
@@ -154,8 +165,8 @@ public class PF extends Walls {
                 break;
             }
             case "down": {
-                for (PF partical : Particals) {
-                    int movement = random.nextInt(stepsize) * 2;
+                for (PF partical : Particles) {
+                    int movement = random.nextInt(stepsize) * 3;
                     partical.x += (int) random.nextGaussian() * (movement / 3) * (random.nextBoolean() ? -1 : 1);
                     partical.y += movement;
                     partical.setBounds(partical);
@@ -163,8 +174,8 @@ public class PF extends Walls {
                 break;
             }
             case "right": {
-                for (PF partical : Particals) {
-                    int movement = random.nextInt(stepsize) * 2;
+                for (PF partical : Particles) {
+                    int movement = random.nextInt(stepsize) * 3;
                     partical.x += movement;
                     partical.y += (int) random.nextGaussian() * (movement / 3) * (random.nextBoolean() ? -1 : 1);
                     partical.setBounds(partical);
@@ -172,8 +183,8 @@ public class PF extends Walls {
                 break;
             }
             case "left": {
-                for (PF partical : Particals) {
-                    int movement = random.nextInt(stepsize) * 2;
+                for (PF partical : Particles) {
+                    int movement = random.nextInt(stepsize) * 3;
                     partical.x -= movement;
                     partical.y += (int) random.nextGaussian() * (movement / 3) * (random.nextBoolean() ? -1 : 1);
                     partical.setBounds(partical);
@@ -184,7 +195,7 @@ public class PF extends Walls {
                 break;
         }
 
-        CorrectCollision(width, height, Particals);
+        CorrectCollision(Particles);
 //        CheckConvergence(Particles);
 //        KMean(Particles);
     }
@@ -204,16 +215,13 @@ public class PF extends Walls {
 
 
         boolean stopflag = true;
-        int k = 0, j = 0, l = 0;
+        int k = 1, j = 1, l = 1;
 
         while (stopflag) {
 
-            sumx1 = 0;
-            sumy1 = 0;
-            sumx2 = 0;
-            sumy2 = 0;
-            sumx3 = 0;
-            sumy3 = 0;
+            sumx1 = 0;            sumy1 = 0;
+            sumx2 = 0;            sumy2 = 0;
+            sumx3 = 0;            sumy3 = 0;
             cluster1 = new ArrayList<>();
             cluster2 = new ArrayList<>();
             cluster3 = new ArrayList<>();
@@ -224,16 +232,13 @@ public class PF extends Walls {
                 switch (distance) {
 
                     case ("cluster1"):
-
                         cluster1.add(Particals.get(i));
                         k++;
                         break;
-
                     case ("cluster2"):
                         cluster2.add(Particals.get(i));
                         j++;
                         break;
-
                     case ("cluster3"):
                         cluster3.add(Particals.get(i));
                         l++;
@@ -259,38 +264,17 @@ public class PF extends Walls {
                 sumy3 += partical.y;
             }
 
-            pf1.x = mean1.x;
-            pf1.y = mean1.y;
-            pf2.x = mean2.x;
-            pf2.y = mean2.y;
-            pf3.x = mean3.x;
-            pf3.y = mean3.y;
+            pf1.x = mean1.x;            pf1.y = mean1.y;
+            pf2.x = mean2.x;            pf2.y = mean2.y;
+            pf3.x = mean3.x;            pf3.y = mean3.y;
 
-            if(k != 0) {
-                mean1.x = Math.round(sumx1 / k);
-                mean1.y = Math.round(sumy1 / k);
-            }else{
-                mean1.x = 0;
-                mean1.y = 0;
-            }
-            if(j != 0) {
-                mean2.x = Math.round(sumx2 / j);
-                mean2.y = Math.round(sumy2 / j);
-            }else{
-                mean2.x =0;
-                mean2.y =0;
-            }
-            if(l !=0){
-                mean3.x = Math.round(sumx2 / l);
-                mean3.y = Math.round(sumy2 / l);
-            }else{
-                mean3.x=0;
-                mean3.y=0;
-            }
+                mean1.x = Math.round(sumx1 / k);               mean1.y = Math.round(sumy1 / k);
+                mean2.x = Math.round(sumx2 / j);               mean2.y = Math.round(sumy2 / j);
+                mean3.x = Math.round(sumx3 / l);               mean3.y = Math.round(sumy3 / l);
 
             stopflag = !(mean1.x == pf1.x || mean1.y == pf1.y || mean2.y == pf2.y || mean2.x == pf2.x || mean3.y == pf3.y || mean3.x == pf3.x);
         }
-        motion_detail.setText(motion_detail.getText() + "\nk=" + k + "  ,j=" + j + "    ,l=" + l);
+        motion_detail.setText( "k=" + k + "  ,j=" + j + "    ,l=" + l);
 
 
         mean1.setBounds(mean1);
@@ -345,7 +329,7 @@ public class PF extends Walls {
         int biggest_cluster = Math.max(cluster1_size, Math.max(cluster2_size, cluster3_size));
 
 //        if ((length_pf_pf1<200 && length_pf_pf2<200 && length_pf_pf3<100))
-        if ((biggest_cluster > 900 && distance < 300) || (length_pf_pf1 < 200 && length_pf_pf2 < 200 && length_pf_pf3 < 100)) {
+        if ((length_pf_pf1 <  syn_width/10 && length_pf_pf2 <  syn_width/10 && length_pf_pf3 <  syn_width/10)) {
             return true;
         } else {
             return false;

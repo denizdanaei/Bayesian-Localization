@@ -88,7 +88,7 @@ public class Tab_localization extends Fragment implements View.OnClickListener {
             location = location + 1; // adding one since this takes cell 1 as zero.
             cellnumber.setText("You are in cell " + location);
             localize.setEnabled(true);
-            Toast.makeText(getActivity().getApplicationContext(), "Localization done", Toast.LENGTH_SHORT).show();
+        Toast.makeText(getActivity().getApplicationContext(), "Localization started", Toast.LENGTH_SHORT).show();
 
     }
     /*
