@@ -80,8 +80,10 @@ public class bayesianLocalization {
     // Localizing using the current scan.
     public static int localize(List<ScanResult> scanResults){
         prior = new Float[]{(float)1/cellnum, (float)1/cellnum, (float)1/cellnum, (float)1/cellnum, (float)1/cellnum, (float)1/cellnum,
+                (float)1/cellnum, (float)1/cellnum, (float)1/cellnum, (float)1/cellnum, (float)1/cellnum, (float)1/cellnum,
                 (float)1/cellnum, (float)1/cellnum, (float)1/cellnum, (float)1/cellnum};
         posterior = new Float[]{(float)1/cellnum, (float)1/cellnum, (float)1/cellnum, (float)1/cellnum, (float)1/cellnum, (float)1/cellnum,
+                (float)1/cellnum, (float)1/cellnum, (float)1/cellnum, (float)1/cellnum, (float)1/cellnum, (float)1/cellnum,
                 (float)1/cellnum, (float)1/cellnum, (float)1/cellnum, (float)1/cellnum};
         Float[] pulled_data  = new Float[cellnum] ; // variable used to pull out our required data off of the offline table.
         Set<String> bssi = new HashSet<>();

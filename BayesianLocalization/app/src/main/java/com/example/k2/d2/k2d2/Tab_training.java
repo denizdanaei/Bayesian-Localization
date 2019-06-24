@@ -44,7 +44,7 @@ public class Tab_training extends Fragment implements View.OnClickListener {
     static Float[] prior ;
     static Float[] posterior ;
     static int numberOfLevels = 50;
-    static int rowsize = 10; //  row size for training data
+    static int rowsize = 16; //  row size for training data
     static int columnsize = numberOfLevels; // column size for training data
     static int cellnum = rowsize;
 
@@ -94,30 +94,34 @@ public class Tab_training extends Fragment implements View.OnClickListener {
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.cellscan:
-
+                cellscan.setEnabled(false);
                 wifiManager = (WifiManager) getActivity().getApplicationContext().getSystemService(Context.WIFI_SERVICE);
-                for(int count = 1; count<=10; count++) {
-                    scan_results.setText(scan_results.getText() +"\nScan "+ count +" started");
-                    wifiManager.startScan();
+                List<ScanResult> previousScanResults = wifiManager.getScanResults();
+                Toast.makeText(getActivity().getApplicationContext(), "Scan Started Please standby", Toast.LENGTH_SHORT).show();
+                for(int count = 1; count<=4; count++) {
+                    scan_results.setText("\nScan "+ count +" started");
+                    boolean scanstarted = wifiManager.startScan();
                     List<ScanResult> scanResults = wifiManager.getScanResults();
-
-
-
+                    if(!previousScanResults.toString().equals(scanResults.toString())){
+                        previousScanResults = scanResults;
+                        Toast.makeText(getActivity().getApplicationContext(), "Scan "+ count +" over", Toast.LENGTH_SHORT).show();
+                        scan_results.setText("Scan "+ count +" over");
                     for (ScanResult scanResult : scanResults) {
                         scan_results.setText(scan_results.getText() + "\n\tBSSID = "
-                                + scanResult.BSSID +"\tlevel="+scanResult.level);
+                                + scanResult.BSSID + "\tlevel=" + scanResult.level);
 
-                        if(validAP(scanResult.BSSID))
-                        {
-                            scan_results.setText(scan_results.getText() +"\nvalid");
+                        if (validAP(scanResult.BSSID)) {
+                            scan_results.setText(scan_results.getText() + "\nvalid");
                             int scanLevel = WifiManager.calculateSignalLevel(scanResult.level, numberOfLevels);
                             if (scanLevel > 25) {
                                 allItems.add(new gsonParser(scanResult.BSSID, scanLevel, cellNumber));
+                                }
                             }
                         }
-                    }
+                    }else
+                        count--;
 
-//                    scan_results.setText(scan_results.getText() +"Scan "+ count +" over");
+//
                 }
 
 //                for (gsonParser item : allItems) {
@@ -125,6 +129,7 @@ public class Tab_training extends Fragment implements View.OnClickListener {
 //                            "    level = " + item.getRSSi() + "   cellNumber = "+ item.getCellNumber());
 //                }
                 Toast.makeText(getActivity().getApplicationContext(), "Cell Scanned", Toast.LENGTH_SHORT).show();
+                cellscan.setEnabled(true);
                 break;
             case R.id.write_JSON:
                 writeFile(0); // refer function for the passing of the parameter. Writes to a JSON file based on the argument.

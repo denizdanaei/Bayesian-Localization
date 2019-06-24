@@ -1,5 +1,7 @@
 package com.example.k2.d2.k2d2;
 import android.content.Context;
+import android.hardware.Sensor;
+import android.hardware.SensorManager;
 import android.net.wifi.ScanResult;
 import android.net.wifi.WifiManager;
 import android.os.Bundle;
@@ -19,6 +21,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.k2.d2.k2d2.ui.main.SectionsPagerAdapter;
 import com.google.gson.Gson;
@@ -33,6 +36,8 @@ import java.util.HashMap;
 import java.util.List;
 
 import static android.content.Context.MODE_PRIVATE;
+import static android.content.Context.SENSOR_SERVICE;
+import static android.support.v4.content.ContextCompat.getSystemService;
 import static com.example.k2.d2.k2d2.Tab_training.pmf_data;
 
 import static com.example.k2.d2.k2d2.bayesianLocalization.localize;
@@ -61,16 +66,30 @@ public class Tab_localization extends Fragment implements View.OnClickListener {
 
     @Override
     public void onClick(View v) {
+        localize.setEnabled(false);
         cellnumber.setText("Loading...");
         wifiManager = (WifiManager) getActivity().getApplicationContext().getSystemService(Context.WIFI_SERVICE);
-        wifiManager.startScan();
+        Toast.makeText(getActivity().getApplicationContext(), "Localization started", Toast.LENGTH_SHORT).show();
+        List<ScanResult> buffercheck = wifiManager.getScanResults();
+        List<ScanResult> localize_scanResults =  null;
         readFile(1); // for debug purpose i have set this to one to read pmf_data from pmf_json file locally.
+        for (int i = 0; i < 2; i++) {
+            wifiManager.startScan();
+            localize_scanResults = wifiManager.getScanResults();
+        if(!buffercheck.toString().equals(localize_scanResults.toString())) {
+                buffercheck = localize_scanResults;
+                cellnumber.setText("Loading...");
+            }
+        else
+            i--;
+        }
 
-        List<ScanResult> localize_scanResults = wifiManager.getScanResults();
-        cellnumber.setText("Loading...");
-        int location =localize(localize_scanResults); // for localization purposes.
-        location = location +1; // adding one since this takes cell 1 as zero.
-        cellnumber.setText("You are in cell "+ location);
+            int location = localize(localize_scanResults); // for localization purposes.
+            location = location + 1; // adding one since this takes cell 1 as zero.
+            cellnumber.setText("You are in cell " + location);
+            localize.setEnabled(true);
+            Toast.makeText(getActivity().getApplicationContext(), "Localization done", Toast.LENGTH_SHORT).show();
+
     }
     /*
         Function to read JSON files.
