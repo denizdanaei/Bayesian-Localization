@@ -157,7 +157,7 @@ private static int syn_height=0, syn_width=0;
         switch (direction) {
             case "up": {
                 for (PF partical : Particles) {
-                    int movement = random.nextInt(stepsize) * 2;
+                    int movement = random.nextInt(stepsize) * 3;
                     partical.x += (int) random.nextGaussian() * (movement / 3) * (random.nextBoolean() ? -1 : 1);
                     partical.y -= movement;
                     partical.setBounds(partical);
@@ -166,7 +166,7 @@ private static int syn_height=0, syn_width=0;
             }
             case "down": {
                 for (PF partical : Particles) {
-                    int movement = random.nextInt(stepsize) * 2;
+                    int movement = random.nextInt(stepsize) * 3;
                     partical.x += (int) random.nextGaussian() * (movement / 3) * (random.nextBoolean() ? -1 : 1);
                     partical.y += movement;
                     partical.setBounds(partical);
@@ -175,7 +175,7 @@ private static int syn_height=0, syn_width=0;
             }
             case "right": {
                 for (PF partical : Particles) {
-                    int movement = random.nextInt(stepsize) * 2;
+                    int movement = random.nextInt(stepsize) * 3;
                     partical.x += movement;
                     partical.y += (int) random.nextGaussian() * (movement / 3) * (random.nextBoolean() ? -1 : 1);
                     partical.setBounds(partical);
@@ -184,7 +184,7 @@ private static int syn_height=0, syn_width=0;
             }
             case "left": {
                 for (PF partical : Particles) {
-                    int movement = random.nextInt(stepsize) * 2;
+                    int movement = random.nextInt(stepsize) * 3;
                     partical.x -= movement;
                     partical.y += (int) random.nextGaussian() * (movement / 3) * (random.nextBoolean() ? -1 : 1);
                     partical.setBounds(partical);
